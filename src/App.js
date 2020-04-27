@@ -1,18 +1,23 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
+import { connect } from 'react-redux'
 import './styles/gamefield.css'
 import Gridelement from './components/gridelement'
+import { v4 as uuidv4 } from 'uuid';
+import setGrid from './actions/setGrid'
+import setMines from './actions/setMines'
 
-function App() {
+function App(props) {
+
+  const [gridSize, changeGridsize] = useState(10)
 
   const generateGridArray = () => {
     const grid =[]
-    for(let i = 0; i < 20; i++){
+    for(let i = 0; i < gridSize; i++){
       grid.push([])
-      for(let j = 0; j < 20; j++) {
+      for(let j = 0; j < gridSize; j++) {
         grid[i].push([i,j])
       }
     } 
-    console.log(grid)
     return grid
   }
 
@@ -20,26 +25,49 @@ function App() {
     const mines = []
     
     for(let i = 0; i < amount; i++) {
-      let randomXY = [Math.floor(Math.random() * 21), Math.floor(Math.random() * 21)]  
+      let randomXY = [Math.floor(Math.random() * (gridSize + 1)), Math.floor(Math.random() * (gridSize + 1))]  
       mines.push(randomXY)
     }
     return mines
   }
 
-  generateMines()
+  const returnElements = () => {
+    return props.grid.map(elem => {
+      return elem.map(singleArr => {
+        let isMine = props.mines.filter(mine => {
+          return singleArr[0] === mine[0] && singleArr[1] === mine[1]
+        }).length !== 0
+        return <Gridelement key = {uuidv4()}
+                            pos = {singleArr}
+                            isMine = {isMine}
+                            mines = {props.mines}
+                />
+      })
+    })
+  }
 
+  useEffect(() => {
+    props.setGrid(generateGridArray())
+    props.setMines(generateMines())
+  }, [])
+  
   return (
-    <div className="game">
+    <div className="game" style={{gridTemplateColumns:`repeat(${gridSize}, 30px)`, gridTemplateRows:`repeat(${gridSize}, 30px)`}}>
       {
-        generateGridArray().map(gridelement => {
-          return generateMines().map(mine => {
-            return (
-              gridelement[0] === mine[0] && gridelement[1] === mine[1] ? <Gridelement mine={true} pos={gridelement} /> : <Gridelement mine={false} pos={gridelement} />
-          )})
-        })
+        returnElements()
       }
     </div>
   )
 }
 
-export default App;
+const mapStateToProps = state => ({
+  grid: state.grid,
+  mines: state.mines
+})
+
+const mapActionsToProps = {
+  setGrid,
+  setMines
+}
+
+export default connect(mapStateToProps, mapActionsToProps)(App)
