@@ -1,0 +1,9 @@
+{
+    "version": 3,
+    "mappings": "AAAA,AAAA,KAAK,CAAC;EACJ,gBAAgB,EAAE,IAAI;EACtB,MAAM,EAAE,eAAe;EACvB,OAAO,EAAE,IAAI;EACb,qBAAqB,EAAE,+EAA+E;EACtG,kBAAkB,EAAE,+EAA+E;EACnG,GAAG,EAAE,OAAO;CACb;;AAED,AAAA,YAAY,CAAC;EACX,gBAAgB,EAAE,QAAQ;EAC1B,KAAK,EAAE,IAAI;EACX,MAAM,EAAE,IAAI;CACb",
+    "sources": [
+        "../scss/gamefield.scss"
+    ],
+    "names": [],
+    "file": "gamefield.css"
+}
