@@ -1,60 +1,98 @@
-import React, {useState} from 'react'
+import React, {useState, useEffect} from 'react'
 import { connect } from 'react-redux'
+import setGrid from '../actions/setGrid'
+import setGameState from '../actions/setGameState'
 
 function Gridelement(props) {
 
-  const [buttonDisplay, updateButtonDisplay] = useState('')
-
-  const countMinesNearby = () => {
-    if(props.isMine) return
-    const position = props.pos
-    let minecount = 0
-    const surrounding = []
-    //Account for Rows
-    for(let i = -1; i <= 1; i++) {
-      //Account for Columns
-      for(let j = -1; j <= 1; j++) {
-        if(position[0] + i > 9 || 
-          position[1] + j > 9 || 
-          (position[0] === (position[0] + i) && position[1] === (position[1] + j)) ||
-          position[0] + i < 0 || 
-          position[1] + j < 0
-          ) continue
-        let surroundingElem = [position[0] + i, position[1] + j]
-        surrounding.push(surroundingElem)
-      }
+  const handleClick = (e) => {
+    if(props.mine) {
+      props.setGameState('lost')
+      revealElement()
+      return
     }
-
-    let mines = surrounding.map(element => {
-      return props.mines.map(mine => {
-        return element[0] === mine[0] && element[1] === mine[1]
-       })
-    })
-
-    for(let i = 0; i < mines.length; i++) {
-      mines[i].includes(true) && minecount++
+    if(props.minesAround === 0) {
+      floodFill(props.value[0], props.value[1], props.grid)
+      revealElement()
     }
-    return minecount
+    if(props.minesAround !== 0) revealElement()  
   }
 
-  const handleClick = () => {
-    if(props.isMine) return updateButtonDisplay('M')
-    else return updateButtonDisplay(countMinesNearby())
+  const revealElement = () => {
+    props.setGrid(props.grid.map(row => {
+      return row.map(cell => {
+        if(props.value[0] === cell[0] && props.value[1] === cell[1]){
+          cell[3] = true
+          return cell
+        } else return cell
+      })
+    }))
+  }
+
+  const setDisplay = () => {
+    if(props.revealed) {
+      if(props.mine) return '☀'
+      else if(props.minesAround === 0) {
+        return ''
+      } else return props.minesAround.toString()
+    }
+  }
+
+  const floodFill = (posx, posy, grid) => {
+
+      // If outside board boundaries
+      if(posx < 0 || posy < 0 || posx >= grid.length || posy >= grid.length) {
+        return
+
+      // If mine or revealed
+      } else if(grid[posx][posy][2] || grid[posx][posy][3]) {
+        return
+
+      // If has mine around return without new floodfill but mark as revealed
+      } else if(grid[posx][posy][4] !== 0){
+          grid[posx][posy][3] = true
+          props.setGrid(grid)
+      } else {
+        // Set cell as revealed
+        grid[posx][posy][3] = true
+        props.setGrid(grid)
+        // Floodfill with new values recursively
+        floodFill(posx + 1, posy, grid)
+        floodFill(posx, posy + 1, grid)
+        floodFill(posx - 1, posy, grid)
+        floodFill(posx, posy - 1, grid)
+
+        floodFill(posx - 1, posy - 1, grid)
+        floodFill(posx - 1, posy + 1, grid)
+
+        floodFill(posx + 1, posy + 1, grid)
+        floodFill(posx + 1, posy - 1, grid)
+      }
   }
 
   return (
-    <div className="gridelement">
-      <button onClick={handleClick} style={{width:'100%', height: '100%'}}>
+    <div className='gridelement' value={props.value}>
+      <button 
+        className={props.revealed ? 'revealed' : ''} 
+        style={{width:'100%', height: '100%'}} 
+        onClick={e => handleClick(e)}>
         {
-          countMinesNearby()
+          setDisplay()
         }
       </button>
     </div>
   )
 }
 
-const mapStateToProps = ({
-  
+const mapStateToProps = state => ({
+  grid: state.grid,
+  clicked: state.clicked,
+  gameState: state.gameState
 })
 
-export default connect()(Gridelement)
+const mapActionsToProps = {
+  setGrid,
+  setGameState
+}
+
+export default connect(mapStateToProps, mapActionsToProps)(Gridelement)

@@ -9,6 +9,10 @@
   margin: 0 auto;
 }
 
+button {
+  border: none;
+}
+
 .gridelement {
   background-color: darkgray;
   width: 30px;
@@ -17,4 +21,8 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
+}
+
+.revealed {
+  background-color: #6d6d6d;
 }

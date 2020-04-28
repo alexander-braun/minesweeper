@@ -2,59 +2,66 @@ import React, { useState, useEffect } from 'react'
 import { connect } from 'react-redux'
 import './styles/gamefield.css'
 import Gridelement from './components/gridelement'
-import { v4 as uuidv4 } from 'uuid';
 import setGrid from './actions/setGrid'
-import setMines from './actions/setMines'
+import setGameState from './actions/setGameState'
 
 function App(props) {
 
   const [gridSize, changeGridsize] = useState(10)
+  const probability = 0.1
 
   const generateGridArray = () => {
+
+    //create general grid with x, y coordinates
+    //determine if mine or not
+    //set revealed to false
+
     const grid =[]
     for(let i = 0; i < gridSize; i++){
       grid.push([])
       for(let j = 0; j < gridSize; j++) {
-        grid[i].push([i,j])
+        grid[i].push([i, j, Math.random() < probability, false]) // X, Y, MINE?, REVEALED?
       }
     } 
-    return grid
-  }
 
-  const generateMines = (amount = 10) => {
-    const mines = []
-    
-    for(let i = 0; i < amount; i++) {
-      let randomXY = [Math.floor(Math.random() * (gridSize + 1)), Math.floor(Math.random() * (gridSize + 1))]  
-      mines.push(randomXY)
-    }
-    return mines
-  }
+    //push number of mines to end of array
 
-  const returnElements = () => {
-    return props.grid.map(elem => {
-      return elem.map(singleArr => {
-        let isMine = props.mines.filter(mine => {
-          return singleArr[0] === mine[0] && singleArr[1] === mine[1]
-        }).length !== 0
-        return <Gridelement key = {uuidv4()}
-                            pos = {singleArr}
-                            isMine = {isMine}
-                            mines = {props.mines}
-                />
+    grid.map(row => {
+      row.map(cell => {
+        let minecounter = 0
+        for(let i = -1; i <= 1; i++) {
+          for(let j = -1; j <= 1; j++) {
+            if(cell[0] + i >= 0 && 
+              cell[1] + j >= 0 && 
+              cell[0] + i <= 9 && 
+              cell[1] + j <= 9 ) {
+              let neighbor = [cell[0] + i, cell[1] + j]
+              if(neighbor[0] === cell[0] && neighbor[1] === cell[1]) continue
+              if(grid[cell[0] + i][cell[1] + j][2]) minecounter++
+            }
+          }
+        }
+        cell.push(minecounter)
       })
     })
+    return grid
   }
 
   useEffect(() => {
     props.setGrid(generateGridArray())
-    props.setMines(generateMines())
   }, [])
   
   return (
     <div className="game" style={{gridTemplateColumns:`repeat(${gridSize}, 30px)`, gridTemplateRows:`repeat(${gridSize}, 30px)`}}>
       {
-        returnElements()
+        props.grid.map(row => {
+          return row.map(cell => {
+            return <Gridelement value={[cell[0], cell[1]]} 
+                                mine={cell[2]} 
+                                revealed={cell[3]}
+                                minesAround={cell[4]} />
+          })
+        })
       }
     </div>
   )
@@ -62,12 +69,12 @@ function App(props) {
 
 const mapStateToProps = state => ({
   grid: state.grid,
-  mines: state.mines
+  gameState: state.gameState
 })
 
 const mapActionsToProps = {
   setGrid,
-  setMines
+  setGameState
 }
 
 export default connect(mapStateToProps, mapActionsToProps)(App)
