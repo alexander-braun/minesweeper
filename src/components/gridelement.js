@@ -53,18 +53,18 @@ function Gridelement(props) {
           grid[posx][posy][3] = true
           props.setGrid(grid)
       } else {
+
         // Set cell as revealed
         grid[posx][posy][3] = true
         props.setGrid(grid)
+        
         // Floodfill with new values recursively
         floodFill(posx + 1, posy, grid)
         floodFill(posx, posy + 1, grid)
         floodFill(posx - 1, posy, grid)
         floodFill(posx, posy - 1, grid)
-
         floodFill(posx - 1, posy - 1, grid)
         floodFill(posx - 1, posy + 1, grid)
-
         floodFill(posx + 1, posy + 1, grid)
         floodFill(posx + 1, posy - 1, grid)
       }
