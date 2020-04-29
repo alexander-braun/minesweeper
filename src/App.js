@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from 'react'
 import { connect } from 'react-redux'
 import './styles/gamefield.css'
-import Gridelement from './components/gridelement'
+import Gridelement from './components/Gridelement'
 import setGrid from './actions/setGrid'
 import setGameState from './actions/setGameState'
+import Gamestat from './components/Gamestat'
 
 function App(props) {
 
@@ -33,8 +34,8 @@ function App(props) {
           for(let j = -1; j <= 1; j++) {
             if(cell[0] + i >= 0 && 
               cell[1] + j >= 0 && 
-              cell[0] + i <= 9 && 
-              cell[1] + j <= 9 ) {
+              cell[0] + i <= (gridSize - 1) && 
+              cell[1] + j <= (gridSize - 1) ) {
               let neighbor = [cell[0] + i, cell[1] + j]
               if(neighbor[0] === cell[0] && neighbor[1] === cell[1]) continue
               if(grid[cell[0] + i][cell[1] + j][2]) minecounter++
@@ -52,17 +53,20 @@ function App(props) {
   }, [])
   
   return (
-    <div className="game" style={{gridTemplateColumns:`repeat(${gridSize}, 30px)`, gridTemplateRows:`repeat(${gridSize}, 30px)`}}>
-      {
-        props.grid.map(row => {
-          return row.map(cell => {
-            return <Gridelement value={[cell[0], cell[1]]} 
-                                mine={cell[2]} 
-                                revealed={cell[3]}
-                                minesAround={cell[4]} />
+    <div className="gameboard">
+      <Gamestat />
+      <div className="game" style={{gridTemplateColumns:`repeat(${gridSize}, 30px)`, gridTemplateRows:`repeat(${gridSize}, 30px)`}}>
+        {
+          props.grid.map(row => {
+            return row.map(cell => {
+              return <Gridelement value={[cell[0], cell[1]]} 
+                                  mine={cell[2]} 
+                                  revealed={cell[3]}
+                                  minesAround={cell[4]} />
+            })
           })
-        })
-      }
+        }
+      </div>
     </div>
   )
 }

@@ -6,7 +6,7 @@ import setGameState from '../actions/setGameState'
 function Gridelement(props) {
 
   const handleClick = (e) => {
-
+    if(props.gameState === 'lost') return
     if(props.mine) {
       props.setGameState('lost')
       revealElement()
@@ -86,10 +86,17 @@ function Gridelement(props) {
     props.minesAround === 6 ? 'mint' :
     props.minesAround === 7 ? 'black' :
     'lightgrey'
+  
+  const [hasFlag, toggleFlag] = useState(false)
+  const preventDefault = e => {
+    e.preventDefault()
+    toggleFlag(!hasFlag)
+  }
 
   return (
     <div className={`gridelement ${props.revealed ? 'revealed' : ''}`} value={props.value}>
       <button 
+        onContextMenu={preventDefault}
         className={props.revealed ? `revealed ${classname}` : `${classname}`} 
         style={{width:'100%', height: '100%'}} 
         onClick={e => handleClick(e)}>
@@ -97,6 +104,9 @@ function Gridelement(props) {
           setDisplay()
         }
       </button>
+      {
+        hasFlag ? <div className="flag">`</div> : ''
+      }
       {props.mine ? <div className="white"></div> : null}
     </div>
   )

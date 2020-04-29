@@ -3,13 +3,89 @@
   src: url(../fonts/mine-sweeper.ttf);
 }
 
+@font-face {
+  font-family: 'digital';
+  src: url(../fonts/digital-7.ttf)
+}
+
+#game_header {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  padding: 5px;
+  margin-right: 10px;
+  margin-left: 10px;
+  margin-top: 10px;
+  border-right: 5px solid white;
+  border-bottom: 5px solid white;
+  border-top: 5px solid grey;
+  border-left: 5px solid grey;
+}
+
+#gameface {
+  font-size: 2.1rem;
+  border-top: 5px solid white;
+  border-left: 5px solid white;
+  border-right: 5px solid grey;
+  border-bottom: 5px solid grey;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  padding-bottom: 3px;
+}
+
+#flagcounter, #time {
+  font-family: 'digital';
+  font-size: 4rem;
+  font-weight: 400;
+  background-color: black;
+  border-top: 2px solid #808080;
+  border-left: 2px solid #808080;
+  border-right: 2px solid white;
+  border-bottom: 2px solid white;
+  line-height: .8;
+  cursor: context-menu;
+  width: 90px; 
+}
+
+#root {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.gameboard {
+  background: silver;
+  width:fit-content;
+  height: fit-content;
+  display: inline-block;
+  border-bottom: 5px solid grey;
+  border-right: 5px solid grey;
+  border-left: 5px solid white;
+  border-top: 5px solid white;
+}
+
 .game {
   background-color: grey;
-  border: 3px solid grey;
   display: grid;
   gap: 1px 1px;
   width: fit-content;
-  margin: 0 auto;
+  border-left: 5px solid grey;
+  border-top: 5px solid grey;
+  border-right: 5px solid white;
+  border-bottom: 5px solid white;
+  margin-bottom: 20px;
+  margin-left: 10px;
+  margin-right: 10px;
+  margin-top: 10px;
+}
+
+#game_header {
+  
 }
 
 button {
@@ -31,6 +107,15 @@ button {
   justify-content: center;
   align-items: center;
   cursor: pointer;
+
+}
+
+.flag {
+  font-family: 'mine-sweeper';
+  font-weight: 900;
+  font-size: 1rem;
+  position: absolute;
+  pointer-events: none;
 }
 
 .revealed {
@@ -39,8 +124,13 @@ button {
   border-left: none;
   font-weight: 900;
   font-family: 'mine-sweeper';
+  font-size: 1rem;
 }
 
+.revealed .mine {
+  font-size: 0.9rem;
+  padding: 0;
+}
 
 .blue {
   color: #0000ff;
@@ -85,7 +175,7 @@ button {
     height: 3px;
     border-radius: 50%;
     position: absolute;
-    transform: translateX(-2px) translateY(-4px);
+    transform: translateX(-3px) translateY(-4px);
     background: white;
     pointer-events: none
   }  
