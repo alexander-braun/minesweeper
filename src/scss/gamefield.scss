@@ -1,9 +1,12 @@
+@font-face {
+  font-family: "mine-sweeper";
+  src: url(../fonts/mine-sweeper.ttf);
+}
+
 .game {
   background-color: grey;
-  border: 1px solid black;
+  border: 3px solid grey;
   display: grid;
-  grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
-  grid-template-rows: 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
   gap: 1px 1px;
   width: fit-content;
   margin: 0 auto;
@@ -11,6 +14,12 @@
 
 button {
   border: none;
+  background-color: #c0c0c0;
+  border: 3px solid white;
+  border-bottom-color: #808080;
+  border-right-color: #808080;
+  font-weight: 900;
+  cursor: pointer;
 }
 
 .gridelement {
@@ -21,8 +30,63 @@ button {
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  cursor: pointer;
 }
 
 .revealed {
-  background-color: #6d6d6d;
+  border: 1px solid #808080;
+  border-top: none;
+  border-left: none;
+  font-weight: 900;
+  font-family: 'mine-sweeper';
+}
+
+
+.blue {
+  color: #0000ff;
+}
+
+.green {
+  color: #007b00;
+}
+
+.brightred {
+  color: #ff0000;
+}
+
+.darkblue {
+  color: #00007b;
+}
+
+.darkred {
+  color: #670b04;
+}
+
+.mint {
+  color: #166852;
+}
+
+.black {
+  color: #0c0304;
+}
+
+.lightgrey {
+  color: #7b7b7b,
+}
+
+.revealed.mine {
+  background-color: #ff0000;
+}
+
+.revealed {
+  .white {
+    color: white;
+    width: 3px;
+    height: 3px;
+    border-radius: 50%;
+    position: absolute;
+    transform: translateX(-2px) translateY(-4px);
+    background: white;
+    pointer-events: none
+  }  
 }

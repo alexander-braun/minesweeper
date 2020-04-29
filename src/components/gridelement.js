@@ -6,6 +6,7 @@ import setGameState from '../actions/setGameState'
 function Gridelement(props) {
 
   const handleClick = (e) => {
+
     if(props.mine) {
       props.setGameState('lost')
       revealElement()
@@ -31,10 +32,15 @@ function Gridelement(props) {
 
   const setDisplay = () => {
     if(props.revealed) {
-      if(props.mine) return '☀'
+      if(props.mine) {
+        classname = 'mine'
+        return '*'
+      } 
       else if(props.minesAround === 0) {
         return ''
-      } else return props.minesAround.toString()
+      } else {
+        return props.minesAround.toString()
+      }
     }
   }
 
@@ -57,7 +63,7 @@ function Gridelement(props) {
         // Set cell as revealed
         grid[posx][posy][3] = true
         props.setGrid(grid)
-        
+
         // Floodfill with new values recursively
         floodFill(posx + 1, posy, grid)
         floodFill(posx, posy + 1, grid)
@@ -70,16 +76,28 @@ function Gridelement(props) {
       }
   }
 
+  let classname = 
+    props.mine ? 'black mine' : 
+    props.minesAround === 1 ? 'blue' : 
+    props.minesAround === 2 ? 'green' : 
+    props.minesAround === 3 ? 'brightred' :
+    props.minesAround === 4 ? 'darkblue' :
+    props.minesAround === 5 ? 'darkred' :
+    props.minesAround === 6 ? 'mint' :
+    props.minesAround === 7 ? 'black' :
+    'lightgrey'
+
   return (
-    <div className='gridelement' value={props.value}>
+    <div className={`gridelement ${props.revealed ? 'revealed' : ''}`} value={props.value}>
       <button 
-        className={props.revealed ? 'revealed' : ''} 
+        className={props.revealed ? `revealed ${classname}` : `${classname}`} 
         style={{width:'100%', height: '100%'}} 
         onClick={e => handleClick(e)}>
         {
           setDisplay()
         }
       </button>
+      {props.mine ? <div className="white"></div> : null}
     </div>
   )
 }
