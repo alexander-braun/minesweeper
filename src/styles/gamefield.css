@@ -119,48 +119,56 @@ button {
   border-left: none;
   font-weight: 900;
   font-family: 'mine-sweeper';
-  font-size: 1rem;
 }
 
-.revealed .mine {
-  font-size: 0.9rem;
-  padding: 0;
+.blue, .green, .brightred, .darkblue, .darkred, .mint, .black, .lightgrey {
+  color: transparent;
+  font-size: 1.25rem;
 }
 
-.blue {
+.revealed .blue {
   color: #0000ff;
 }
 
-.green {
+.revealed .green {
   color: #007b00;
 }
 
-.brightred {
+.revealed .brightred {
   color: #ff0000;
 }
 
-.darkblue {
+.revealed .darkblue {
   color: #00007b;
 }
 
-.darkred {
+.revealed .darkred {
   color: #670b04;
 }
 
-.mint {
+.revealed .mint {
   color: #166852;
 }
 
-.black {
+.revealed .black {
   color: #0c0304;
+  font-size: 0.9rem;
+  padding: 0;
+  color: black;
 }
 
-.lightgrey {
+.revealed .lightgrey {
   color: #7b7b7b;
 }
 
-.clicked.revealed.mine {
+.revealed.black {
   background-color: #ff0000;
+}
+
+.revealed button {
+  font-weight: 900;
+  font-family: 'mine-sweeper';
+  border: none;
 }
 
 .revealed .white {

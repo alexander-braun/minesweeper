@@ -10,7 +10,7 @@ import grid from './reducers/grid'
 
 function App(props) {
 
-  const [gridSize, changeGridsize] = useState(30)
+  const [gridSize, changeGridsize] = useState(10)
   const probability = 0.1
 
   const generateGridArray = () => {
@@ -23,7 +23,7 @@ function App(props) {
     for(let i = 0; i < gridSize; i++){
       grid.push([])
       for(let j = 0; j < gridSize; j++) {
-        grid[i].push([i, j, Math.random() < probability, false, false]) // X, Y, MINE?, REVEALED? CLICKED?
+        grid[i].push([i, j, Math.random() < probability]) // X, Y, MINE, MINECOUNT
       }
     } 
 
@@ -51,25 +51,23 @@ function App(props) {
   }
 
   useEffect(() => {
-    props.setGrid(generateGridArray())
+    props.setGrid(generateGridArray())  
   }, [])
 
   const generateGrid = () => {
-    const gridArray = []
-    for(let i = 0; i < props.grid.length; i++) {
-      for(let j = 0; j < props.grid.length; j++) {
-        gridArray.push(
-          <Gridelement  value={[props.grid[i][j][0], props.grid[i][j][1]]} 
-                        mine={props.grid[i][j][2]} 
-                        revealed={props.grid[i][j][3]}
-                        hasFlag={props.grid[i][j][4]}
-                        minesAround={props.grid[i][j][5]} 
-                        key={uuidv4()}
-          />
-        )
+      const gridArray = []
+      for(let i = 0; i < props.grid.length; i++) {
+        for(let j = 0; j < props.grid.length; j++) {
+          gridArray.push(
+            <Gridelement  value={[props.grid[i][j][0], props.grid[i][j][1]]} 
+                          mine={props.grid[i][j][2]}
+                          minesAround={props.grid[i][j][3]} 
+                          key={uuidv4()}
+            />
+          )
+        }
       }
-    }
-    return gridArray
+    return gridArray  
   }
 
   return (
@@ -85,13 +83,11 @@ function App(props) {
 }
 
 const mapStateToProps = state => ({
-  grid: state.grid,
-  gameState: state.gameState
+  grid: state.grid
 })
 
 const mapActionsToProps = {
-  setGrid,
-  setGameState
+  setGrid
 }
 
 export default React.memo(connect(mapStateToProps, mapActionsToProps)(App))
