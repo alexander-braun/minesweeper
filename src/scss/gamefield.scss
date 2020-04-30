@@ -49,6 +49,12 @@
   line-height: .8;
   cursor: context-menu;
   width: 90px; 
+  color: #ff0000;
+}
+
+.background_timer {
+  position: absolute;
+  color: #ff000042;
 }
 
 #root {
@@ -185,4 +191,58 @@ button {
     background: white;
     pointer-events: none
   }  
+}
+
+
+.foreground_timer {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  padding: 2px;
+}
+
+.number_element {
+  width: 20.625px;
+  height: 39.375px;
+  background-size: 100% 100%;
+}
+
+.zero {
+  background-image: url('../img/d0.svg');
+}
+
+.one {
+  background-image: url('../img/d1.svg');
+}
+
+.two {
+  background-image: url('../img/d2.svg');
+}
+
+.three {
+  background-image: url('../img/d3.svg');
+}
+
+.four {
+  background-image: url('../img/d4.svg');
+}
+
+.five {
+  background-image: url('../img/d5.svg');
+}
+
+.six {
+  background-image: url('../img/d6.svg');
+}
+
+.seven {
+  background-image: url('../img/d7.svg');
+}
+
+.eight {
+  background-image: url('../img/d8.svg');
+}
+
+.nine {
+  background-image: url('../img/d9.svg');
 }

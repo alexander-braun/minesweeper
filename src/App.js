@@ -78,6 +78,7 @@ function App(props) {
           generateGrid()
         }
       </div>
+      <div className="test"></div>
     </div>
   )
 }
