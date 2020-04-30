@@ -159,7 +159,7 @@ button {
   color: #7b7b7b;
 }
 
-.revealed.mine {
+.clicked.revealed.mine {
   background-color: #ff0000;
 }
 
