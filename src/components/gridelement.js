@@ -2,45 +2,41 @@ import React, {useState,useEffect } from 'react'
 import { connect } from 'react-redux'
 import setGameState from '../actions/setGameState'
 import setRevealed from '../actions/setRevealed'
+import setRevealedArr from '../actions/setRevealedArr'
+import ff from './floodfill'
 
 function Gridelement(props) {
-
-  const [clicked, setClicked] = useState(false)
 
   const handleClick = (e) => {
     // Game already lost or won ? don't do anything
     if(props.gameState === 'lost' || props.gameState === 'win') return
 
-    props.setRevealed(props.position)
     // If game still on start now on running after first click
-    props.setGameState('running')
-
-    // Element was clicked so is revealed
-    setClicked(true)
+    props.gameState !== 'running' && props.setGameState('running')
 
     // If Gridelement is a mine set Game to lost and reveal all mines
     if(props.mine) {
+      props.setRevealed(props.position)
       props.setGameState('lost')
       revealAllMines()
       return
     }
     if(props.minesAround === 0) {
-      floodFill(props.value[0], props.value[1])
+      props.setRevealed(props.position)
+      props.setRevealedArr(ff.setAll(props.value[0], props.value[1], props.grid, props.revealed))
       return
     }
+
+    props.setRevealed(props.position)
   }
 
-  let gridEls = document.getElementsByClassName('gridelement')
   const checkForWin = () => {
-    for(let i = 0; i < gridEls.length; i++) {
-      if(!gridEls[i].classList.contains('revealed')) {
-        if(!gridEls[i].firstChild.classList.contains('black')) {
-          return false
-        }
-      }
+    if(props.revealed.length - props.minecount === countRevealed()) {
+      revealAllMines()
+      console.log(props.revealed)
+      return props.setGameState('win')  
     }
-    revealAllMines()
-    return props.setGameState('win')
+    return false
   }
   
   const revealAllMines = () => {
@@ -54,6 +50,7 @@ function Gridelement(props) {
           // If the element is not yet revealed add revealed status
           if(!currentEl.classList.contains('revealed')) {
             currentEl.classList.add('revealed')
+            props.setRevealed((i * props.grid.length) + j)
 
             // If there is no flag on the mine just put a mine as innertext
             if(currentEl.children.length === 2) {
@@ -71,43 +68,8 @@ function Gridelement(props) {
     if(props.minesAround !== 0) return props.minesAround    
   }
 
-  const floodFill = (posx, posy, grid = props.grid) => {
-    let currentDomGridEl = document.getElementById([posx,posy].toString())
-    // If outside board boundaries
-    if(posx < 0 || posy < 0 || posx >= grid.length || posy >= grid.length) {
-      return
-    // If mine
-    } else if(grid[posx][posy][2]) {
-      return
-    // If already revealed
-    } else if(currentDomGridEl.classList.contains('revealed')) {
-      return
-    // If has mine around return without new floodfill but mark as revealed
-    } else if(grid[posx][posy][3] !== 0){
-        currentDomGridEl.classList.add('revealed')
-        currentDomGridEl.firstChild.classList.add('clicked')
-        !props.revealed[(posx * props.grid.length) + posy] && props.setRevealed((posx * props.grid.length) + posy)
-    } else {
-
-      // Set cell as revealed
-      currentDomGridEl.classList.add('revealed')
-      currentDomGridEl.firstChild.classList.add('clicked')
-      !props.revealed[(posx * props.grid.length) + posy] && props.setRevealed((posx * props.grid.length) + posy)
-
-      // Floodfill with new values recursively
-      floodFill(posx + 1, posy, grid)
-      floodFill(posx, posy + 1, grid)
-      floodFill(posx - 1, posy, grid)
-      floodFill(posx, posy - 1, grid)
-      floodFill(posx - 1, posy - 1, grid)
-      floodFill(posx - 1, posy + 1, grid)
-      floodFill(posx + 1, posy + 1, grid)
-      floodFill(posx + 1, posy - 1, grid)
-    }
-  }
-
   let classname = 
-    props.mine ? clicked ? 'black clicked' : 'black' : 
+    props.mine ? 'black' : 
     props.minesAround === 1 ? 'blue' : 
     props.minesAround === 2 ? 'green' : 
     props.minesAround === 3 ? 'brightred' :
@@ -122,7 +84,7 @@ function Gridelement(props) {
     e.preventDefault()
 
     // If revealed 
-    if(props.gameState === 'lost' || props.gameState === 'win' || clicked) return
+    if(props.gameState === 'lost' || props.gameState === 'win' || props.revealed[props.position]) return
 
     // If revealed in dom
     let element = document.getElementById([props.value[0], props.value[1]].toString())
@@ -131,8 +93,20 @@ function Gridelement(props) {
     setFlag(!flag)
   }
 
+  const countRevealed = () => {
+    let counter = 0
+    for(let i = 0; i < props.revealed.length; i++) {
+      props.revealed[i] && counter++
+    }
+    return counter
+  }
+
   useEffect(() => {
-    props.gameState !== 'start' && props.gameState !== 'pause' && clicked && checkForWin()
+
+    if(props.revealed.length - props.minecount === countRevealed()) {
+      props.gameState !== 'start' && props.gameState !== 'pause' && props.revealed[props.position] && checkForWin()  
+    }
+    
   })
 
   return (
@@ -147,7 +121,7 @@ function Gridelement(props) {
         }
       </button>
       {
-        flag && !clicked ? <div className="flag">🚩</div> : ''
+        flag && !props.revealed[props.position] ? <div className="flag">🚩</div> : null
       }
       {props.mine ? <div className="white"></div> : null}
     </div>
@@ -157,12 +131,14 @@ function Gridelement(props) {
 const mapStateToProps = state => ({
   grid: state.grid,
   gameState: state.gameState,
-  revealed: state.revealed
+  revealed: state.revealed,
+  minecount: state.minecount
 })
 
 const mapActionsToProps = {
   setGameState,
-  setRevealed
+  setRevealed,
+  setRevealedArr
 }
 
 export default React.memo(connect(mapStateToProps, mapActionsToProps)(Gridelement))

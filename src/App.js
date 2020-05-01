@@ -7,23 +7,33 @@ import Gamestat from './components/Gamestate'
 import { v4 as uuidv4 } from 'uuid'
 import setRevealedArr from './actions/setRevealedArr'
 import setRevealed from './actions/setRevealed'
+import setMinecount from './actions/setMinecount'
 
 function App(props) {
 
-  const [gridSize, changeGridsize] = useState(8)
-  const probability = 0.156
+  const [gridSize, changeGridsize] = useState(10)
+
+  const probability = 0.1
 
   const generateGridArray = () => {
+
     //create general grid with x, y coordinates
     //determine if mine or not
     //set revealed to false
+
     const grid =[]
+    let minecounter = 0
+
     for(let i = 0; i < gridSize; i++){
       grid.push([])
       for(let j = 0; j < gridSize; j++) {
-        grid[i].push([i, j, Math.random() < probability]) // X, Y, MINE, MINECOUNT
+        let mine = Math.random() < probability
+        mine && minecounter++
+        grid[i].push([i, j, mine]) // X, Y, MINE, MINECOUNT
       }
     } 
+
+    props.setMinecount(minecounter)
 
     //push number of mines to end of array
     for(let i = 0; i < grid.length; i++) {
@@ -44,7 +54,6 @@ function App(props) {
       }
     }
 
-    // Setup Revealed Array
     return grid
   }
 
@@ -91,7 +100,8 @@ const mapStateToProps = state => ({
 const mapActionsToProps = {
   setGrid,
   setRevealedArr,
-  setRevealed
+  setRevealed,
+  setMinecount
 }
 
 export default React.memo(connect(mapStateToProps, mapActionsToProps)(App))
