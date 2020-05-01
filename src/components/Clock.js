@@ -7,7 +7,6 @@ function Clock(props) {
 
     useEffect(() => {
         if(props.gameState !== 'start' && props.gameState !== 'pause' && props.gameState !== 'win' && props.gameState !== 'lost'){
-            console.log(props.gameState)
             setTimeArr ()
             setTimeout(() => {
                 setTime(time += 1)

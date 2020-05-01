@@ -4,6 +4,7 @@ import setGrid from '../actions/setGrid'
 import setGameState from '../actions/setGameState'
 import Clock from './Clock'
 import Counter from './Counter'
+import setRevealedArr from '../actions/setRevealedArr'
 
 function Gamestat(props) {
 
@@ -12,6 +13,7 @@ function Gamestat(props) {
   const restartGame = () => {
     props.setGrid(props.genGrid())
     props.setGameState('start')
+    props.setRevealedArr(new Array(props.gridSize * props.gridSize).fill(false))
   }
 
   return (
@@ -30,7 +32,8 @@ const mapStateToProps = state => ({
 
 const mapActionsToProps = {
   setGrid,
-  setGameState
+  setGameState,
+  setRevealedArr
 }
 
 export default React.memo(connect(mapStateToProps, mapActionsToProps)(Gamestat))

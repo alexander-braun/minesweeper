@@ -5,18 +5,18 @@ import Gridelement from './components/Gridelement'
 import setGrid from './actions/setGrid'
 import Gamestat from './components/Gamestate'
 import { v4 as uuidv4 } from 'uuid'
+import setRevealedArr from './actions/setRevealedArr'
+import setRevealed from './actions/setRevealed'
 
 function App(props) {
 
-  const [gridSize, changeGridsize] = useState(20)
-  const probability = 0.1
+  const [gridSize, changeGridsize] = useState(8)
+  const probability = 0.156
 
   const generateGridArray = () => {
-
     //create general grid with x, y coordinates
     //determine if mine or not
     //set revealed to false
-
     const grid =[]
     for(let i = 0; i < gridSize; i++){
       grid.push([])
@@ -36,41 +36,45 @@ function App(props) {
               cell[1] + y >= 0 && 
               cell[0] + x <= (gridSize - 1) && 
               cell[1] + y <= (gridSize - 1) ) {
-              let neighbor = [cell[0] + x, cell[1] + y]
-              if(neighbor[0] === cell[0] && neighbor[1] === cell[1]) continue
-              if(grid[cell[0] + x][cell[1] + y][2]) minecounter++
+                if(grid[cell[0] + x][cell[1] + y][2]) minecounter++
             }
           }
         }
         grid[i][j].push(minecounter)
       }
     }
+
+    // Setup Revealed Array
     return grid
   }
 
   useEffect(() => {
-    props.setGrid(generateGridArray())  
+    props.setRevealedArr(new Array(gridSize * gridSize).fill(false))
+    props.setGrid(generateGridArray()) 
   }, [])
 
   const generateGrid = () => {
-      const gridArray = []
-      for(let i = 0; i < props.grid.length; i++) {
-        for(let j = 0; j < props.grid.length; j++) {
-          gridArray.push(
-            <Gridelement  value={[props.grid[i][j][0], props.grid[i][j][1]]} 
-                          mine={props.grid[i][j][2]}
-                          minesAround={props.grid[i][j][3]} 
-                          key={uuidv4()}
-            />
-          )
-        }
+    const gridArray = []
+    let counter = 0
+    for(let i = 0; i < props.grid.length; i++) {
+      for(let j = 0; j < props.grid.length; j++) {
+        gridArray.push(
+          <Gridelement  value={[props.grid[i][j][0], props.grid[i][j][1]]} 
+                        mine={props.grid[i][j][2]}
+                        minesAround={props.grid[i][j][3]} 
+                        key={uuidv4()}
+                        position={counter}
+          />
+        )
+        counter++
       }
+    }
     return gridArray  
   }
 
   return (
     <div className="gameboard">
-      <Gamestat genGrid={generateGridArray} />
+      <Gamestat genGrid={generateGridArray} gridSize={gridSize} />
       <div className="game" style={{gridTemplateColumns:`repeat(${gridSize}, 30px)`, gridTemplateRows:`repeat(${gridSize}, 30px)`}}>
         {
           generateGrid()
@@ -85,7 +89,9 @@ const mapStateToProps = state => ({
 })
 
 const mapActionsToProps = {
-  setGrid
+  setGrid,
+  setRevealedArr,
+  setRevealed
 }
 
 export default React.memo(connect(mapStateToProps, mapActionsToProps)(App))
