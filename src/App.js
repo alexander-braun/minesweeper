@@ -11,7 +11,7 @@ import setMinecount from './actions/setMinecount'
 
 function App(props) {
 
-  const [gridSize, changeGridsize] = useState(10)
+  const [gridSize, changeGridsize] = useState(8)
 
   const probability = 0.1
 

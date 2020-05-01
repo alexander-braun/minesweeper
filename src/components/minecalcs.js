@@ -1,4 +1,4 @@
-const Rsa = (() => {
+const MineCalcs = (() => {
 
     let posx, posy, grid, revealed
 
@@ -49,18 +49,34 @@ const Rsa = (() => {
         }
     }
 
+    const returnFloodFill = () => {
+        floodFill(posx, posy)
+        return revealed
+    }
+
+    const revealAllMines = () => {
+      for(let i = 0; i < grid.length; i++) {
+        for(let j = 0; j < grid.length; j++) {
+          if(grid[i][j][2]) {
+            revealed[(i * grid.length) + j] = true
+          }
+        }
+      }
+      return revealed
+    }
+
     const setAll = (posx, posy, grid, revealed) => {
         setPosx(posx)
         setPosy(posy)
         setGrid(grid)
         setRevealed(revealed)
-        floodFill(posx, posy)
-        return revealed
     }
 
     return {
-        setAll: setAll
+        setAll: setAll,
+        returnFloodFill: returnFloodFill,
+        revealAllMines: revealAllMines
     }
 })()
 
-export default Rsa
+export default MineCalcs
