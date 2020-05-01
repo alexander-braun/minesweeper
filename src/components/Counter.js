@@ -1,20 +1,14 @@
 import React, {useState, useEffect} from 'react'
-import { connect } from 'react-redux'
 
 function Clock(props) {
 
     let [time, setTime] = useState(0)
 
     useEffect(() => {
-        if(props.gameState !== 'start' && props.gameState !== 'pause' && props.gameState !== 'win' && props.gameState !== 'lost'){
-            console.log(props.gameState)
-            setTimeArr ()
-            setTimeout(() => {
-                setTime(time += 1)
-            }, 1000)    
-        } else if(props.gameState === 'start') {
-            setTime(0)
-        }
+        setTimeArr ()
+        setTimeout(() => {
+            setTime(time += 1)
+        }, 1000)
     })
 
     const setTimeArr = () => {
@@ -25,8 +19,6 @@ function Clock(props) {
             arr.unshift('zero')
         } else if (nums.length === 2) {
             arr.unshift('zero')
-        } else if (nums.length > 3) {
-            setTime(0)
         }
 
         for(let num of nums) {
@@ -85,9 +77,4 @@ function Clock(props) {
     )
 }
 
-const mapStateToProps = state => ({
-    gameState: state.gameState
-  })
-  
-
-export default React.memo(connect(mapStateToProps)(Clock))
+export default React.memo(Clock)

@@ -3,6 +3,7 @@ import { connect } from 'react-redux'
 import setGrid from '../actions/setGrid'
 import setGameState from '../actions/setGameState'
 import Clock from './Clock'
+import Counter from './Counter'
 
 function Gamestat(props) {
 
@@ -10,15 +11,12 @@ function Gamestat(props) {
 
   const restartGame = () => {
     props.setGrid(props.genGrid())
-    props.setGameState('running')
+    props.setGameState('start')
   }
 
   return (
     <div id="game_header">
-        <div id="flagcounter" className="brightred">
-          <div className="background_timer">000</div>
-          <div className="foreground_timer">010</div>
-        </div>
+        <Counter />
         <div id="gameface" onClick={restartGame}>{props.gameState === 'lost' ? faces[0] : props.gameState === 'win' ? faces[2] : faces[1]}</div>
         <Clock />
     </div>

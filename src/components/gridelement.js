@@ -8,6 +8,9 @@ function Gridelement(props) {
   const [clicked, setClicked] = useState(false)
 
   const handleClick = (e) => {
+
+    props.setGameState('running')
+
     // Game already lost or won ? don't do anything
     if(props.gameState === 'lost' || props.gameState === 'win') return
     
@@ -121,7 +124,7 @@ function Gridelement(props) {
   useEffect(() => {
     checkForWin()
   })
-
+  
   return (
     <div id={props.value.toString()} className={`gridelement ${clicked ? 'revealed' : ''}`}>
       <button 

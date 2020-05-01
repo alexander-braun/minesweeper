@@ -3,14 +3,12 @@ import { connect } from 'react-redux'
 import './styles/gamefield.css'
 import Gridelement from './components/Gridelement'
 import setGrid from './actions/setGrid'
-import setGameState from './actions/setGameState'
-import Gamestat from './components/Gamestat'
+import Gamestat from './components/Gamestate'
 import { v4 as uuidv4 } from 'uuid'
-import grid from './reducers/grid'
 
 function App(props) {
 
-  const [gridSize, changeGridsize] = useState(10)
+  const [gridSize, changeGridsize] = useState(20)
   const probability = 0.1
 
   const generateGridArray = () => {
@@ -78,7 +76,6 @@ function App(props) {
           generateGrid()
         }
       </div>
-      <div className="test"></div>
     </div>
   )
 }
