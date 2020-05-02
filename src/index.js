@@ -5,7 +5,6 @@ import Gameboard from './components/Gameboard';
 import * as serviceWorker from './serviceWorker';
 import store from './store'
 import { Provider } from 'react-redux'
-import BoardHead from './components/BoardHead';
 
 /*
 if (process.env.NODE_ENV === 'development') {
@@ -19,10 +18,7 @@ if (process.env.NODE_ENV === 'development') {
 ReactDOM.render(
   <Provider store={store}>
     <React.StrictMode>
-      <div className="board">
-        <BoardHead />
-        <Gameboard />
-      </div>
+      <Gameboard />
     </React.StrictMode>
   </Provider>,
   document.getElementById('root')

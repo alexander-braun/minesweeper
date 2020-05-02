@@ -1,4 +1,4 @@
-import React, {useState,useEffect } from 'react'
+import React from 'react'
 import { connect } from 'react-redux'
 import setGameState from '../actions/setGameState'
 import setRevealed from '../actions/setRevealed'
@@ -18,6 +18,10 @@ class Gridelement extends React.PureComponent {
     this.checkForWin = this.checkForWin.bind(this)
     this.countRevealed = this.countRevealed.bind(this)
     this.preventDefault = this.preventDefault.bind(this)
+    this.genWrapperClassname = this.genWrapperClassname.bind(this)
+    this.genButtonClassname = this.genButtonClassname.bind(this)
+    this.setDisplay = this.setDisplay.bind(this)
+    this.genFlag = this.genFlag.bind(this)
   }
 
   handleClick = (e) => {
@@ -42,7 +46,7 @@ class Gridelement extends React.PureComponent {
 
     // If no mines around do a floodfill from floodfill revealing module
     if(this.props.minesAround === 0) {
-      ff.setAll(this.props.value[0], this.props.value[1], this.props.grid, this.props.revealed)
+      ff.setAll(this.props.value[0], this.props.value[1], this.props.grid, this.props.revealed, this.props.gridL, this.props.gridH)
       this.props.setRevealedArr(ff.returnFloodFill())
       this.checkForWin()
       this.props.setRevealed(this.props.position)
@@ -61,7 +65,7 @@ class Gridelement extends React.PureComponent {
   }
 
   revealAllMines = () => {
-    ff.setAll(null, null, this.props.grid, this.props.revealed)
+    ff.setAll(null, null, this.props.grid, this.props.revealed, this.props.gridL, this.props.gridH)
     this.props.setRevealedArr(ff.revealAllMines())
   }
 
@@ -102,7 +106,7 @@ class Gridelement extends React.PureComponent {
     }
 
     this.setState({
-        flag: !this.state.flag
+      flag: !this.state.flag
     })
   }
 
@@ -172,23 +176,17 @@ class Gridelement extends React.PureComponent {
 
   render() {
     return (
-      <div id={this.props.value ? this.props.value.toString() : ''} className={this.genWrapperClassname()}>
+      <div id={this.props.value} className={this.genWrapperClassname()}>
         <button 
           onContextMenu={this.preventDefault}
           className={this.genButtonClassname()} 
           style={{width:'100%', height: '100%'}} 
-          onClick={e => this.handleClick(e)}
+          onClick={this.handleClick}
         >
-          {
-            this.props.revealed[this.props.position] && this.setDisplay()
-          }
+          { this.props.revealed[this.props.position] && this.setDisplay() }
         </button>
-        {
-            this.genFlag()
-        }
-        {
-          this.props.mine && !this.state.flag ? <div className="white"></div> : null
-        }
+        { this.genFlag() }
+        { this.props.mine && !this.state.flag ? <div className="white"></div> : null }
       </div>
     )
   }

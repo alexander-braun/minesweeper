@@ -1,14 +1,19 @@
 import React, { useState } from 'react'
 import { connect } from 'react-redux'
 import setDifficulty from '../actions/setDifficulty'
+import setGrid from '../actions/setGrid'
+import setGameState from '../actions/setGameState'
+import setRevealedArr from '../actions/setRevealedArr'
 
 function SelectMenue(props) {
 
-    const [defaultVal, setDefaultVal] = useState('game')
+    const [defaultVal] = useState('game')
 
     const handleChange = (e) => {
-        props.setDifficulty(e.target.value)
-        setDefaultVal('game')
+        let difficulty
+        e.target.value=== 'beginner' ? difficulty = 9 :
+        e.target.value === 'intermediate' ? difficulty = 16 : difficulty = 30
+        props.setDifficulty(difficulty)
     }
 
     return (
@@ -24,11 +29,16 @@ function SelectMenue(props) {
 }
 
 const mapStateToProps = state => ({
-    difficulty: state.difficulty
+    difficulty: state.difficulty,
+    grid: state.grid,
+    gameState: state.gameState
 })
 
 const mapActionsToProps = {
-    setDifficulty
+    setDifficulty,
+    setGrid,
+    setGameState,
+    setRevealedArr
 }
 
 export default React.memo(connect(mapStateToProps, mapActionsToProps)(SelectMenue))
