@@ -1,18 +1,10 @@
 import React, {useState, useEffect} from 'react'
+import { connect } from 'react-redux'
 
-function Clock(props) {
-
-    let [time, setTime] = useState(0)
-
-    useEffect(() => {
-        setTimeArr ()
-        setTimeout(() => {
-            setTime(time += 1)
-        }, 1000)
-    })
+function Counter(props) {
 
     const setTimeArr = () => {
-        let nums = time.toString().split('')
+        let nums = props.flagCount.toString().split('')
         let arr = []
         if(nums.length === 1) {
             arr.unshift('zero')
@@ -77,4 +69,8 @@ function Clock(props) {
     )
 }
 
-export default React.memo(Clock)
+const mapStateToProps = state => ({
+    flagCount: state.flagCount
+})
+
+export default React.memo(connect(mapStateToProps)(Counter))

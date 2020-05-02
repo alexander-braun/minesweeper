@@ -4,6 +4,7 @@ import setGameState from '../actions/setGameState'
 import setRevealed from '../actions/setRevealed'
 import setRevealedArr from '../actions/setRevealedArr'
 import ff from './minecalcs'
+import updateFlagcount from '../actions/updateFlagcount'
 
 class Gridelement extends React.PureComponent {
   constructor(props) {
@@ -24,10 +25,6 @@ class Gridelement extends React.PureComponent {
     // Game already lost or won ? don't do anything
     if(gamestate === 'lost' || gamestate === 'win') return
 
-    this.setState({
-      clicked: true
-    })
-
     // If game still on start now on running after first click
     gamestate !== 'running' && this.props.setGameState('running')
 
@@ -38,6 +35,10 @@ class Gridelement extends React.PureComponent {
       this.revealAllMines()
       return
     }
+
+    this.setState({
+      clicked: true
+    })
 
     // If no mines around do a floodfill from floodfill revealing module
     if(this.props.minesAround === 0) {
@@ -65,7 +66,15 @@ class Gridelement extends React.PureComponent {
   }
 
   setDisplay = () => {
-    if(this.props.mine) return '*'
+    if(this.props.gameState === 'lost' && this.props.mine) return '*'
+    if(this.state.flag && this.props.mine && this.props.revealed[this.props.position]) return ''
+    if(this.props.gameState === 'win' && this.props.mine) {
+      this.setState({
+        flag: true
+      })
+      return ''
+    } 
+    if(this.props.mine && !this.state.flag) return '*'
     if(this.props.minesAround === 0) return ''
     if(this.props.minesAround !== 0) return this.props.minesAround    
   }
@@ -73,12 +82,24 @@ class Gridelement extends React.PureComponent {
   preventDefault = e => {
     e.preventDefault()
 
+    if(this.props.flagCount <= 0) {
+      if(!this.state.flag) {
+        return
+      }
+    }
+
     // If revealed 
     if(this.props.gameState === 'lost' || this.props.gameState === 'win' || this.props.revealed[this.props.position]) return
 
     // If revealed in dom
     let element = document.getElementById([this.props.value[0], this.props.value[1]].toString())
     if(element.classList.contains('revealed')) return
+
+    if(!this.state.flag) {
+      this.props.updateFlagcount(-1)  
+    } else if(this.state.flag) {
+      this.props.updateFlagcount(1)
+    }
 
     this.setState({
         flag: !this.state.flag
@@ -94,38 +115,79 @@ class Gridelement extends React.PureComponent {
   }
 
   componentDidUpdate() {
-    this.state.clicked && this.props.gameState !== 'start' && this.props.gameState !== 'pause' && this.props.revealed[this.props.position] && this.checkForWin()  
+    this.state.clicked && 
+    this.props.gameState !== 'start' && 
+    this.props.gameState !== 'pause' && 
+    this.props.revealed[this.props.position] && this.checkForWin()  
   }
 
-  classname = 
-    this.props.mine ? 'black' : 
-    this.props.minesAround === 1 ? 'blue' : 
-    this.props.minesAround === 2 ? 'green' : 
-    this.props.minesAround === 3 ? 'brightred' :
-    this.props.minesAround === 4 ? 'darkblue' :
-    this.props.minesAround === 5 ? 'darkred' :
-    this.props.minesAround === 6 ? 'mint' :
-    this.props.minesAround === 7 ? 'black' :
-    'lightgrey'
+  genButtonColor = () => {
+    if(this.props.mine) {
+      return 'black'
+    }
+
+    switch(this.props.minesAround) {
+      case 1:
+        return 'blue'
+      case 2:
+        return 'green'
+      case 3: 
+        return 'brightred'
+      case 4: 
+        return 'darkblue'
+      case 5: 
+        return 'darkred'
+      case 6:
+        return 'mint'
+      case 7:
+        return 'black'
+      default:
+        return
+    }
+  }
+
+  genFlag = () => {
+    if(this.state.flag && !this.props.revealed[this.props.position]) {
+      return <div className="flag">🚩</div>
+    } else if(this.props.gameState === 'win' && this.props.revealed[this.props.position] && this.props.mine) {
+      return <div className="flag">🚩</div>
+    }
+  }
+
+  genButtonClassname = () => {
+    let classname = []
+    if(this.props.revealed[this.props.position]) {
+      classname.push('revealed')
+      classname.push(this.genButtonColor())
+      this.state.clicked && classname.push('clicked')
+    }
+    return classname.join(' ')
+  }
+
+  genWrapperClassname = () => {
+    if(this.props.revealed[this.props.position]){
+      return 'gridelement revealed'
+    } else return 'gridelement'
+  }
 
   render() {
     return (
-      <div id={this.props.value ? this.props.value.toString() : ''} className={`gridelement ${this.props.revealed[this.props.position] ? 'revealed' : ''}`}>
+      <div id={this.props.value ? this.props.value.toString() : ''} className={this.genWrapperClassname()}>
         <button 
           onContextMenu={this.preventDefault}
-          className={this.props.revealed[this.props.position] ? `revealed ${this.classname}` : ``} 
+          className={this.genButtonClassname()} 
           style={{width:'100%', height: '100%'}} 
           onClick={e => this.handleClick(e)}
         >
           {
-              this.props.revealed[this.props.position] && this.setDisplay()
+            this.props.revealed[this.props.position] && this.setDisplay()
           }
         </button>
         {
-          this.state.flag && !this.props.revealed[this.props.position] ? <div className="flag">🚩</div> : null
+            this.genFlag()
         }
         {
-          this.props.mine ? <div className="white"></div> : null
+          this.props.mine && !this.state.flag ? <div className="white"></div> : null
         }
       </div>
     )
@@ -136,13 +198,15 @@ const mapStateToProps = state => ({
   grid: state.grid,
   gameState: state.gameState,
   revealed: state.revealed,
-  minecount: state.minecount
+  minecount: state.minecount,
+  flagCount: state.flagCount
 })
 
 const mapActionsToProps = {
   setGameState,
   setRevealed,
-  setRevealedArr
+  setRevealedArr,
+  updateFlagcount
 }
 
 export default connect(mapStateToProps, mapActionsToProps)(Gridelement)

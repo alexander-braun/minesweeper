@@ -1,15 +1,16 @@
 import React, { useState, useEffect } from 'react'
 import { connect } from 'react-redux'
-import './styles/gamefield.css'
-import Gridelement from './components/Gridelement'
-import setGrid from './actions/setGrid'
-import Gamestat from './components/Gamestate'
+import '../styles/gamefield.css'
+import Gridelement from './Gridelement'
+import setGrid from '../actions/setGrid'
+import Gamestat from './Gamestate'
 import { v4 as uuidv4 } from 'uuid'
-import setRevealedArr from './actions/setRevealedArr'
-import setRevealed from './actions/setRevealed'
-import setMinecount from './actions/setMinecount'
+import setRevealedArr from '../actions/setRevealedArr'
+import setRevealed from '../actions/setRevealed'
+import setMinecount from '../actions/setMinecount'
+import setFlagcount from '../actions/setFlagCount'
 
-function App(props) {
+function Gameboard(props) {
 
   const [gridSize, changeGridsize] = useState(8)
 
@@ -32,6 +33,10 @@ function App(props) {
         grid[i].push([i, j, mine]) // X, Y, MINE, MINECOUNT
       }
     } 
+
+    if(minecounter !== gridSize) { 
+      return generateGridArray()
+    }
 
     props.setMinecount(minecounter)
 
@@ -81,6 +86,8 @@ function App(props) {
     return gridArray  
   }
 
+  props.setFlagcount(props.minecount)
+
   return (
     <div className="gameboard">
       <Gamestat genGrid={generateGridArray} gridSize={gridSize} />
@@ -94,14 +101,16 @@ function App(props) {
 }
 
 const mapStateToProps = state => ({
-  grid: state.grid
+  grid: state.grid,
+  minecount: state.minecount
 })
 
 const mapActionsToProps = {
   setGrid,
   setRevealedArr,
   setRevealed,
-  setMinecount
+  setMinecount,
+  setFlagcount
 }
 
-export default React.memo(connect(mapStateToProps, mapActionsToProps)(App))
+export default React.memo(connect(mapStateToProps, mapActionsToProps)(Gameboard))
