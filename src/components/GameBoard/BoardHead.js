@@ -1,9 +1,9 @@
 import React, { useState } from 'react'
 import { connect } from 'react-redux'
-import setDifficulty from '../actions/setDifficulty'
-import setGrid from '../actions/setGrid'
-import setGameState from '../actions/setGameState'
-import setRevealedArr from '../actions/setRevealedArr'
+import setDifficulty from '../../actions/setDifficulty'
+import setGrid from '../../actions/setGrid'
+import setGameState from '../../actions/setGameState'
+import setRevealedArr from '../../actions/setRevealedArr'
 
 function SelectMenue(props) {
 

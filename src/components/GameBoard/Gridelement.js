@@ -1,10 +1,10 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import setGameState from '../actions/setGameState'
-import setRevealed from '../actions/setRevealed'
-import setRevealedArr from '../actions/setRevealedArr'
+import setGameState from '../../actions/setGameState'
+import setRevealed from '../../actions/setRevealed'
+import setRevealedArr from '../../actions/setRevealedArr'
 import ff from './minecalcs'
-import updateFlagcount from '../actions/updateFlagcount'
+import updateFlagcount from '../../actions/updateFlagcount'
 import ButtonEl from './ButtonEl'
 
 class Gridelement extends React.PureComponent {
@@ -79,7 +79,7 @@ class Gridelement extends React.PureComponent {
   }
 
   setDisplay = () => {
-    if(this.props.gameState === 'lost' && this.props.mine) return '*'
+    if(this.props.gameState === 'lost' && this.props.mine) return '🦠'
     if(this.state.flag && this.props.mine && this.props.revealed[this.props.position]) return ''
     if(this.props.gameState === 'win' && this.props.mine) return ''
     if(this.props.mine && !this.state.flag) return '*'
@@ -142,10 +142,11 @@ class Gridelement extends React.PureComponent {
   }
 
   genFlag = () => {
+    //💊
     if(this.state.flag && !this.props.revealed[this.props.position]) {
-      return <div className="flag"><span role="img" aria-label="flag">🚩</span></div>
+      return <div className="flag"><span role="img" aria-label="flag">💉</span></div>
     } else if(this.props.gameState === 'win' && this.props.revealed[this.props.position] && this.props.mine) {
-      return <div className="flag"><span role="img" aria-label="flag">🚩</span></div>
+      return <div className="flag"><span role="img" aria-label="flag">💉</span></div>
     }
   }
 
@@ -178,11 +179,13 @@ class Gridelement extends React.PureComponent {
           revealed={revealed[position]}
         />
         { this.genFlag() }
-        { revealed[position] && mine && gameState !== 'win' ? <div className="white"></div> : null }
+        
       </div>
     )
   }
 }
+
+//-> OLD WHITE FOR VIRUS { revealed[position] && mine && gameState !== 'win' ? <div className="white"></div> : null }
 
 const mapStateToProps = state => ({
   gameState: state.gameState,

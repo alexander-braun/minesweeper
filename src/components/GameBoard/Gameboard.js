@@ -1,14 +1,14 @@
 import React, { useState, useEffect, useCallback, useRef } from 'react'
 import { connect } from 'react-redux'
-import '../styles/gamefield.css'
+import '../../styles/gamefield.css'
 import Gridelement from './Gridelement'
-import setGrid from '../actions/setGrid'
+import setGrid from '../../actions/setGrid'
 import Gamestat from './Gamestate'
 import { v4 as uuidv4 } from 'uuid'
-import setRevealedArr from '../actions/setRevealedArr'
-import setRevealed from '../actions/setRevealed'
-import setMinecount from '../actions/setMinecount'
-import setFlagcount from '../actions/setFlagCount'
+import setRevealedArr from '../../actions/setRevealedArr'
+import setRevealed from '../../actions/setRevealed'
+import setMinecount from '../../actions/setMinecount'
+import setFlagcount from '../../actions/setFlagCount'
 import BoardHead from './BoardHead'
 
 
@@ -133,8 +133,6 @@ function Gameboard(props) {
 
   }, [difficulty])
 
-  let cou = () => {
-    console.log(grid) }
   return (
     <div className="board">
       <BoardHead genGrid={generateGridArray}/>

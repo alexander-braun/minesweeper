@@ -1,14 +1,14 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import setGrid from '../actions/setGrid'
-import setGameState from '../actions/setGameState'
+import setGrid from '../../actions/setGrid'
+import setGameState from '../../actions/setGameState'
 import Clock from './Clock'
 import Counter from './Counter'
-import setRevealedArr from '../actions/setRevealedArr'
+import setRevealedArr from '../../actions/setRevealedArr'
 
 function Gamestat(props) {
 
-  const faces = ['☹️','🙂', '😎']
+  const faces = ['🤢','😷', '🙏']
 
   const restartGame = () => {
     props.setGameState('start')

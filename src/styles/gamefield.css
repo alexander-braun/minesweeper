@@ -8,6 +8,18 @@
   src: url(../fonts/digital-7.ttf);
 }
 
+html {
+  height: 100%;
+}
+
+#root {
+  height: 100vh;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+}
+
 #game_header {
   display: flex;
   flex-direction: row;
@@ -34,6 +46,13 @@
   justify-content: center;
   align-items: center;
   cursor: pointer;
+}
+
+#gameface:active:hover {
+  border-top: 5px solid grey;
+  border-left: 5px solid grey;
+  border-right: 5px solid white;
+  border-bottom: 5px solid white;
 }
 
 #flagcounter, #time {
@@ -71,7 +90,6 @@
   border-bottom: 5px solid grey;
   border-right: 5px solid grey;
   border-left: 5px solid white;
-  border-top: 5px solid white;
 }
 
 .game {
@@ -157,9 +175,9 @@ button {
 
 .revealed .black {
   color: #0c0304;
-  font-size: 0.9rem;
   padding: 0;
   color: black;
+  font-size: 1.2rem;
 }
 
 .revealed .lightgrey {
@@ -167,7 +185,7 @@ button {
 }
 
 .revealed.black.clicked {
-  background-color: #ff0000;
+  background-color: #00b600;
 }
 
 .revealed button {
@@ -192,6 +210,7 @@ button {
   flex-direction: row;
   justify-content: space-between;
   padding: 2px;
+  filter: hue-rotate(90deg) brightness(2);
 }
 
 .number_element {
@@ -240,14 +259,12 @@ button {
   background-image: url("../img/d9.svg");
 }
 
-.board {
-  margin-top: 20px;
-  border: 1px solid rgba(128, 128, 128, 0.425);
-}
-
 .select-menue {
-  border-bottom: 2px solid rgba(128, 128, 128, 0.2);
   padding-top: 5px;
+  background-color: silver;
+  border-right: 5px solid grey;
+  border-left: 5px solid white;
+  border-top: 5px solid white;
 }
 
 .select-css {
@@ -255,10 +272,9 @@ button {
   font-size: 12px;
   font-family: sans-serif;
   font-weight: 700;
-  color: #444;
   line-height: 1.3;
-  padding: .6em 1.4em .5em .8em;
-  width: 100px;
+  padding: .6em 1.4em .5em 11px;
+  width: 125px;
   max-width: 100%;
   box-sizing: border-box;
   margin: 0;
@@ -268,6 +284,17 @@ button {
   background-position: right .7em top 50%, 0 0;
   background-size: .65em auto, 100%;
   margin-right: auto;
+  background-color: #e2e2e2;
+  color: #00b600;
+  font-size: .8rem;
+  font-weight: 600;
+  letter-spacing: .1rem;
+  font-family: 'mine-sweeper';
+  background-image: url("data:image/svg+xml;charset=US-ASCII,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22292.4%22%20height%3D%22292.4%22%3E%3Cpath%20fill%3D%22%23007CB2%22%20d%3D%22M287%2069.4a17.6%2017.6%200%200%200-13-5.4H18.4c-5%200-9.3%201.8-12.9%205.4A17.6%2017.6%200%200%200%200%2082.2c0%205%201.8%209.3%205.4%2012.9l128%20127.9c3.6%203.6%207.8%205.4%2012.8%205.4s9.2-1.8%2012.8-5.4L287%2095c3.5-3.5%205.4-7.8%205.4-12.8%200-5-1.9-9.2-5.5-12.8z%22%2F%3E%3C%2Fsvg%3E"), linear-gradient(to bottom, #ffffff 0%, #e5e5e5 100%);
+  margin-left: 11px;
+  margin-top: 5px;
+  appearance: none;
+  padding: 10px;
 }
 
 .select-css::-ms-expand {
@@ -280,14 +307,14 @@ button {
 
 .select-css:focus {
   border-color: #aaa;
-  box-shadow: 0 0 1px 3px rgba(59, 153, 252, 0.7);
-  box-shadow: 0 0 0 3px -moz-mac-focusring;
-  color: #222;
+  color: #00b600;
   outline: none;
 }
 
 .select-css option {
   font-weight: normal;
+  padding: 15px;
+  margin-top: 10px;
 }
 
 /* Support for rtl text, explicit support for Arabic and Hebrew */
@@ -304,5 +331,38 @@ button {
 
 .select-css:disabled:hover, .select-css[aria-disabled=true] {
   border-color: #aaa;
+}
+
+.view {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: flex-start;
+  width: 100%;
+  margin-top: 20px;
+}
+
+.side {
+  width: 33vw;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+
+.board {
+  border: 1px solid rgba(128, 128, 128, 0.425);
+  width: fit-content;
+  flex: 0 0 auto;
+}
+
+.bestlist {
+  text-align: center;
+  font-weight: 400;
+  font-family: 'mine-sweeper';
+  letter-spacing: .1rem;
+  cursor: context-menu;
+  border-bottom: 4px solid #00b600;
+  width: fit-content;
 }
 /*# sourceMappingURL=gamefield.css.map */
