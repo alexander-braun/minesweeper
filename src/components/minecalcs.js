@@ -69,7 +69,6 @@ const MineCalcs = (() => {
           }
         }
       }
-      console.log(revealed)
       return revealed
     }
 

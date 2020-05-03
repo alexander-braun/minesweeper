@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useCallback, useRef } from 'react'
 import { connect } from 'react-redux'
 import '../styles/gamefield.css'
 import Gridelement from './Gridelement'
@@ -10,33 +10,21 @@ import setRevealed from '../actions/setRevealed'
 import setMinecount from '../actions/setMinecount'
 import setFlagcount from '../actions/setFlagCount'
 import BoardHead from './BoardHead'
-import setGameState from '../actions/setGameState'
+
+
 
 function Gameboard(props) {
+  let [minecounter, setMinecounter] = useState(10)
+  const { difficulty } = props
 
-  let gridSize = props.difficulty
-
-  const generateGridArray = () => {
-    let gridL
-    let gridH
-
-    if(gridSize === 9) {
-      gridL = 9
-      gridH = 9
-    } else if(gridSize === 16) {
-      gridL = 16
-      gridH = 16
-    } else if(gridSize === 30) {
-      gridL = 30
-      gridH = 16
-    }
+  let [gridL, setGridL] = useState(9)
+  let [gridH, setGridH] = useState(9)
+    
+  
+  const generateGridArray = useCallback((gridL = 9, gridH = 9) => {
 
     const grid =[]
-
-    // Minecounter according to classic ms
-    let minecounter = 0
-    gridSize === 9 ? minecounter = 10 : gridSize === 16 ? minecounter = 40 : minecounter = 99
-
+  
     //create general grid with x, y coordinates
     //determine if mine or not
     //set revealed to false
@@ -48,13 +36,15 @@ function Gameboard(props) {
       }
     }
 
+    let counter = 0
     for(let i = 0; i < minecounter; i++) {
+      counter++
       let random1 = Math.floor(Math.random() * Math.floor(gridH))
       let random2 = Math.floor(Math.random() * Math.floor(gridL))
-      grid[random1][random2][2] = true
+      if(!grid[random1][random2][2]) {
+        grid[random1][random2][2] = true
+      } else i--
     }
-
-    props.setMinecount(minecounter)
 
     //push number of mines to end of array
     for(let i = 0; i < gridH; i++) {
@@ -75,63 +65,31 @@ function Gameboard(props) {
       }
     }
     return grid
-  }
- 
-  useEffect(() => {
+  }, [minecounter])
 
-    if(gridSize === 9) {
-      setGridL(9)
-      setGridH(9)
-    } else if(gridSize === 16) {
-      setGridL(16)
-      setGridH(16)
-    } else if(gridSize === 30) {
-      setGridL(30)
-      setGridH(16)
-    }
-
-    // Determine Gridlength an -height
-    props.setGrid(generateGridArray())  
-    props.setRevealedArr(new Array(props.difficulty * props.difficulty).fill(false))  
-    props.setGameState('start')
-     
-  }, [props.difficulty, gridSize])
-
-  let [gridL, setGridL] = useState(9)
-  let [gridH, setGridH] = useState(9)
+  let grid = generateGridArray(gridL, gridH)
+  let arr = new Array(difficulty * difficulty).fill(false)
 
   const generateGrid = () => {
-    
-    let gridL
-    let gridH
-
-    if(gridSize === 9) {
-      gridL = 9
-      gridH = 9
-    } else if(gridSize === 16) {
-      gridL = 16
-      gridH = 16
-    } else if(gridSize === 30) {
-      gridL = 30
-      gridH = 16
-    }
-
-    if(props.grid.length !== gridH) return
-    if(props.grid[0].length !== gridL) return
+    if(grid === undefined) return
+    if(grid.length !== gridH) return
+    if(grid[0].length !== gridL) return
 
     const gridArray = []
     let counter = 0
-    for(let i = 0; i < gridH; i++) {
-      for(let j = 0; j < gridL; j++) {
+    for(let i = 0; i < grid.length; i++) {
+        for(let j = 0; j < grid[0].length; j++) {
         gridArray.push(
-          <Gridelement  value={[props.grid[i][j][0], props.grid[i][j][1]]} 
-                        mine={props.grid[i][j][2]}
-                        minesAround={props.grid[i][j][3]} 
-                        key={uuidv4()}
-                        position={counter}
-                        gridL={gridL}
-                        gridH={gridH}
-          />
+            <Gridelement 
+              value={[grid[i][j][0], grid[i][j][1]]} 
+              mine={grid[i][j][2]}
+              minesAround={grid[i][j][3]} 
+              key={uuidv4()}
+              position={counter}
+              gridL={grid[0].length}
+              gridH={grid.length}
+              grid={grid}
+            />
         )
         counter++
       }
@@ -139,29 +97,63 @@ function Gameboard(props) {
     return gridArray  
   }
 
-  props.setFlagcount(props.minecount)
+  useEffect(() => {
+    let counter
+    if(difficulty <= 9) {
+      setMinecounter(10)
+      counter = 10
+    } else if(difficulty <= 16) {
+      setMinecounter(40)
+      counter = 40
+    } else if(difficulty <= 30) {
+      setMinecounter(99)
+      counter = 99
+    }
 
+    props.setFlagcount(counter)
+    props.setMinecount(counter)
+
+  }, [grid])
+
+  useEffect(() => {
+    
+    if(difficulty === 9) {
+      setGridL(9)
+      setGridH(9)
+    } else if(difficulty === 16) {
+      setGridL(16)
+      setGridH(16)
+    } else if(difficulty === 30) {
+      setGridL(30)
+      setGridH(16)
+    }
+
+    props.setGrid(grid)
+    props.setRevealedArr(arr)  
+
+  }, [difficulty])
+
+  let cou = () => {
+    console.log(grid) }
   return (
     <div className="board">
       <BoardHead genGrid={generateGridArray}/>
       <div className="gameboard">
-        <Gamestat genGrid={generateGridArray} gridSize={props.difficulty} />
+        <Gamestat gridL={gridL} gridH={gridH} setGrid={setGrid} genGrid={generateGridArray} gridSize={difficulty} />
         <div className="game" style={{gridTemplateColumns:`repeat(${gridL}, 30px)`, gridTemplateRows:`repeat(${gridH}, 30px)`}}>
           {
-            generateGrid()
+            generateGrid(gridL, gridH)
           }
         </div>
       </div>
     </div>
-
   )
 }
 
 const mapStateToProps = state => ({
   grid: state.grid,
   minecount: state.minecount,
-  difficulty: state.difficulty,
-  gameState: state.gameState
+  difficulty: state.difficulty
 })
 
 const mapActionsToProps = {
@@ -169,8 +161,7 @@ const mapActionsToProps = {
   setRevealedArr,
   setRevealed,
   setMinecount,
-  setFlagcount,
-  setGameState
+  setFlagcount
 }
 
 export default React.memo(connect(mapStateToProps, mapActionsToProps)(Gameboard))

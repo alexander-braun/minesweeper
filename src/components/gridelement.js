@@ -5,6 +5,7 @@ import setRevealed from '../actions/setRevealed'
 import setRevealedArr from '../actions/setRevealedArr'
 import ff from './minecalcs'
 import updateFlagcount from '../actions/updateFlagcount'
+import ButtonEl from './ButtonEl'
 
 class Gridelement extends React.PureComponent {
   constructor(props) {
@@ -25,7 +26,13 @@ class Gridelement extends React.PureComponent {
   }
 
   handleClick = (e) => {
+
+    this.setState({
+      clicked: true
+    })
+
     let gamestate = this.props.gameState
+
     // Game already lost or won ? don't do anything
     if(gamestate === 'lost' || gamestate === 'win') return
 
@@ -35,21 +42,15 @@ class Gridelement extends React.PureComponent {
     // If Gridelement is a mine set Game to lost and reveal all mines
     if(this.props.mine) {
       this.props.setGameState('lost')
-      this.props.setRevealed(this.props.position)
       this.revealAllMines()
       return
     }
-
-    this.setState({
-      clicked: true
-    })
 
     // If no mines around do a floodfill from floodfill revealing module
     if(this.props.minesAround === 0) {
       ff.setAll(this.props.value[0], this.props.value[1], this.props.grid, this.props.revealed, this.props.gridL, this.props.gridH)
       this.props.setRevealedArr(ff.returnFloodFill())
       this.checkForWin()
-      this.props.setRevealed(this.props.position)
       return
     } else if(this.props.minesAround !== 0) {
       this.props.setRevealed(this.props.position)
@@ -57,11 +58,19 @@ class Gridelement extends React.PureComponent {
   }
 
   checkForWin = () => {
-    if(this.props.revealed.length - this.props.minecount === this.countRevealed()) {
+    if(this.props.revealed.length - this.props.mineCount === this.countRevealed()) {
       this.revealAllMines()
       return this.props.setGameState('win')  
     }
     return false
+  }
+
+  countRevealed = () => {
+    let counter = 0
+    for(let i = 0; i < this.props.revealed.length; i++) {
+        this.props.revealed[i] && counter++
+    }
+    return counter
   }
 
   revealAllMines = () => {
@@ -72,12 +81,7 @@ class Gridelement extends React.PureComponent {
   setDisplay = () => {
     if(this.props.gameState === 'lost' && this.props.mine) return '*'
     if(this.state.flag && this.props.mine && this.props.revealed[this.props.position]) return ''
-    if(this.props.gameState === 'win' && this.props.mine) {
-      this.setState({
-        flag: true
-      })
-      return ''
-    } 
+    if(this.props.gameState === 'win' && this.props.mine) return ''
     if(this.props.mine && !this.state.flag) return '*'
     if(this.props.minesAround === 0) return ''
     if(this.props.minesAround !== 0) return this.props.minesAround    
@@ -86,18 +90,13 @@ class Gridelement extends React.PureComponent {
   preventDefault = e => {
     e.preventDefault()
 
-    if(this.props.flagCount <= 0) {
-      if(!this.state.flag) {
-        return
-      }
-    }
+    if(this.props.gameState === 'lost' || this.props.gameState === 'win') return
+
+    // If no more flags left and this element doesn't have a flag to take away
+    if(this.props.flagCount <= 0 && !this.state.flag) return
 
     // If revealed 
-    if(this.props.gameState === 'lost' || this.props.gameState === 'win' || this.props.revealed[this.props.position]) return
-
-    // If revealed in dom
-    let element = document.getElementById([this.props.value[0], this.props.value[1]].toString())
-    if(element.classList.contains('revealed')) return
+    if(this.props.revealed[this.props.position]) return
 
     if(!this.state.flag) {
       this.props.updateFlagcount(-1)  
@@ -110,15 +109,7 @@ class Gridelement extends React.PureComponent {
     })
   }
 
-  countRevealed = () => {
-    let counter = 0
-    for(let i = 0; i < this.props.revealed.length; i++) {
-        this.props.revealed[i] && counter++
-    }
-    return counter
-  }
-
-  componentDidUpdate() {
+  componentDidUpdate(prevProps, prevState) {
     this.state.clicked && 
     this.props.gameState !== 'start' && 
     this.props.gameState !== 'pause' && 
@@ -152,9 +143,9 @@ class Gridelement extends React.PureComponent {
 
   genFlag = () => {
     if(this.state.flag && !this.props.revealed[this.props.position]) {
-      return <div className="flag">🚩</div>
+      return <div className="flag"><span role="img" aria-label="flag">🚩</span></div>
     } else if(this.props.gameState === 'win' && this.props.revealed[this.props.position] && this.props.mine) {
-      return <div className="flag">🚩</div>
+      return <div className="flag"><span role="img" aria-label="flag">🚩</span></div>
     }
   }
 
@@ -175,29 +166,29 @@ class Gridelement extends React.PureComponent {
   }
 
   render() {
+    const { value, revealed, mine, position, gameState} = this.props
     return (
-      <div id={this.props.value} className={this.genWrapperClassname()}>
-        <button 
-          onContextMenu={this.preventDefault}
-          className={this.genButtonClassname()} 
-          style={{width:'100%', height: '100%'}} 
-          onClick={this.handleClick}
-        >
-          { this.props.revealed[this.props.position] && this.setDisplay() }
-        </button>
+      <div id={value} className={this.genWrapperClassname()}>
+        <ButtonEl 
+          preventDefault={this.preventDefault}
+          genButtonClassname={this.genButtonClassname}
+          handleClick={this.handleClick}
+          setDisplay={this.setDisplay}
+          position={position}
+          revealed={revealed[position]}
+        />
         { this.genFlag() }
-        { this.props.mine && !this.state.flag ? <div className="white"></div> : null }
+        { revealed[position] && mine && gameState !== 'win' ? <div className="white"></div> : null }
       </div>
     )
   }
 }
 
 const mapStateToProps = state => ({
-  grid: state.grid,
   gameState: state.gameState,
   revealed: state.revealed,
-  minecount: state.minecount,
-  flagCount: state.flagCount
+  flagCount: state.flagCount,
+  mineCount: state.minecount
 })
 
 const mapActionsToProps = {

@@ -11,9 +11,10 @@ function SelectMenue(props) {
 
     const handleChange = (e) => {
         let difficulty
-        e.target.value=== 'beginner' ? difficulty = 9 :
+        e.target.value === 'beginner' ? difficulty = 9 :
         e.target.value === 'intermediate' ? difficulty = 16 : difficulty = 30
         props.setDifficulty(difficulty)
+        props.setGameState('start')
     }
 
     return (

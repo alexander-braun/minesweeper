@@ -11,8 +11,8 @@ function Gamestat(props) {
   const faces = ['☹️','🙂', '😎']
 
   const restartGame = () => {
-    props.setGrid(props.genGrid())
     props.setGameState('start')
+    props.setGrid(props.genGrid(props.gridL, props.gridH))
     props.setRevealedArr(new Array(props.gridSize * props.gridSize).fill(false))
   }
 
