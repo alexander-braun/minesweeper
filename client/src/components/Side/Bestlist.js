@@ -18,7 +18,6 @@ function Bestlist({ lvl, getPosts, posts: { posts, loading }}) {
         }).sort().slice(0, 5)
 
         // If no survivors
-        console.log(values)
         if(values[0] === undefined) return (
             <div className="no_survivors">No survivors yet for this difficulty</div>
         )
@@ -60,7 +59,7 @@ function Bestlist({ lvl, getPosts, posts: { posts, loading }}) {
 Bestlist.propTypes = {
     getPosts: PropTypes.func.isRequired,
     posts: PropTypes.object.isRequired,
-    lvl: PropTypes.string.isRequired
+    lvl: PropTypes.number.isRequired
 }
 
 const mapStateToProps = state => ({

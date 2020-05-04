@@ -39,6 +39,19 @@ class Gridelement extends React.PureComponent {
     // If game still on start now on running after first click
     gamestate !== 'running' && this.props.setGameState('running')
 
+    // Just playing audio caused bug in chrome and this solution fixed it for whatever reason :/
+    let audioNormalClick = document.getElementById('clickNormal')
+    let playPromise = audioNormalClick.play()
+    if(playPromise !== undefined) {
+      playPromise
+        .then(_=> {
+          console.log('audio played auto')
+        })
+        .catch(error => {
+          console.log('playback prevented')
+        })
+    }
+
     if(this.state.flag) {
       this.setState({
         flag: false
@@ -50,6 +63,19 @@ class Gridelement extends React.PureComponent {
     if(this.props.mine) {
       this.props.setGameState('lost')
       this.revealAllMines()
+
+      // Just playing audio caused bug in chrome and this solution fixed it for whatever reason :/
+      let audioLoose = document.getElementById('audioLoose')
+      let playPromise = audioLoose.play()
+      if(playPromise !== undefined) {
+        playPromise
+          .then(_=> {
+            console.log('audio played auto')
+          })
+          .catch(error => {
+            console.log('playback prevented')
+          })
+      }
       return
     }
 
@@ -69,6 +95,19 @@ class Gridelement extends React.PureComponent {
   checkForWin = () => {
     if(this.props.revealed.length - this.props.mineCount === this.countRevealed()) {
       this.revealAllMines()
+
+      // Just playing audio caused bug in chrome and this solution fixed it for whatever reason :/
+      let audioWin = document.getElementById('winsound')
+      let playPromise = audioWin.play()
+      if(playPromise !== undefined) {
+        playPromise
+          .then(_=> {
+            console.log('audio played auto')
+          })
+          .catch(error => {
+            console.log('playback prevented')
+          })
+      }
       return this.props.setGameState('win')  
     }
     return false
@@ -107,6 +146,19 @@ class Gridelement extends React.PureComponent {
     // If revealed 
 
     if(this.props.revealed[this.props.position]) return
+
+    // Just playing audio caused bug in chrome and this solution fixed it for whatever reason :/
+    let audioFlagClick = document.getElementById('clickFlag')
+    let playPromise = audioFlagClick.play()
+    if(playPromise !== undefined) {
+      playPromise
+        .then(_=> {
+          console.log('audio played auto')
+        })
+        .catch(error => {
+          console.log('playback prevented')
+        })
+    }
 
     if(!this.state.flag) {
       this.props.updateFlagcount(-1)  
@@ -189,6 +241,10 @@ class Gridelement extends React.PureComponent {
           revealed={revealed[position]}
         />
         { this.genFlag() }
+        <audio id="clickNormal" src="./sounds/click.wav"></audio>
+        <audio id="clickFlag" src="./sounds/flag.wav"></audio>
+        <audio id="winsound" src="./sounds/gameWin.wav"></audio>
+        <audio id="audioLoose" src="./sounds/gameOver.wav"></audio>
       </div>
     )
   }
