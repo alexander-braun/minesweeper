@@ -228,6 +228,15 @@ class Gridelement extends React.PureComponent {
     } else return 'gridelement'
   }
 
+  componentDidUpdate() {
+    if(this.state.flag && this.props.revealed[this.props.position]) {
+      this.setState({
+        flag: false
+      })
+      this.props.updateFlagcount(1)
+    }
+  }
+
   render() {
     const { value, revealed, position } = this.props
     return (
