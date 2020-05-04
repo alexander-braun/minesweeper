@@ -353,6 +353,7 @@ button {
   border: 1px solid rgba(128, 128, 128, 0.425);
   width: fit-content;
   flex: 0 0 auto;
+  //margin-bottom: 10vh;
 }
 
 .bestlist {
@@ -422,7 +423,7 @@ button {
   text-align: center;
   width: fit-content;
   letter-spacing: .5rem;
-  border-bottom: 4px solid #00b600;
+  border-bottom: 6px solid #00b600;
   justify-self: center;
   align-self: center;
 }
@@ -469,6 +470,7 @@ button {
   border-left: 4px solid white;
   border-bottom: 4px solid grey;
   border-right: 4px solid grey;
+  margin-left: 10px;
 }
 
 .form_buttons {
@@ -480,4 +482,26 @@ button {
   font-size: .8rem;
   letter-spacing: .3rem;
   text-align: center;
+}
+
+@media only screen and (max-width: 1400px) {
+  .side {
+    width: 50vw;
+  }
+}
+
+
+@media only screen and (max-width: 1000px) {
+  .view {
+    flex-direction: column;
+  }
+  .board {
+    margin-bottom: 5vh;
+  }
+  .side {
+    border-left: none;
+    border-top: 12px dashed #00b600;
+    margin-left: 0;
+    padding-top: 5vh;
+  }
 }

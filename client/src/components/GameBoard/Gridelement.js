@@ -241,10 +241,6 @@ class Gridelement extends React.PureComponent {
           revealed={revealed[position]}
         />
         { this.genFlag() }
-        <audio id="clickNormal" src="./sounds/click.wav"></audio>
-        <audio id="clickFlag" src="./sounds/flag.wav"></audio>
-        <audio id="winsound" src="./sounds/gameWin.wav"></audio>
-        <audio id="audioLoose" src="./sounds/gameOver.wav"></audio>
       </div>
     )
   }
