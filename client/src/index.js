@@ -1,7 +1,11 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
+import 'react-app-polyfill/ie9'
+import 'react-app-polyfill/stable'
+import "core-js/stable"
+
+import React from 'react'
+import ReactDOM from 'react-dom'
 import './index.css';
-import * as serviceWorker from './serviceWorker';
+import * as serviceWorker from './serviceWorker'
 import store from './store'
 import { Provider } from 'react-redux'
 import App from './App'

@@ -408,6 +408,7 @@ button {
   font-size: .65rem;
   font-weight: 200;
   letter-spacing: .2rem;
+  color: rgb(199, 16, 16);
 }
 
 .header {
@@ -472,4 +473,11 @@ button {
 
 .form_buttons {
   margin-top: 10px;
+}
+
+.no_survivors {
+  font-family: 'mine-sweeper';
+  font-size: .8rem;
+  letter-spacing: .3rem;
+  text-align: center;
 }

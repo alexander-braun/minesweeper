@@ -17,6 +17,12 @@ function Bestlist({ lvl, getPosts, posts: { posts, loading }}) {
             if(post['lvl'] === String(lvl)) return post['time']
         }).sort().slice(0, 5)
 
+        // If no survivors
+        console.log(values)
+        if(values[0] === undefined) return (
+            <div className="no_survivors">No survivors yet for this difficulty</div>
+        )
+
         // Create the survivorlist 
         let survivors = []
         for(let value of values) {
