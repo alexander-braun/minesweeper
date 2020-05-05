@@ -262,7 +262,8 @@ button {
   display: flex;
   align-items: center;
   justify-content: center;
-  margin-bottom: 10vh;
+  margin-bottom: 5vh;
+
   button {
     margin-left: 2vw;
     font-family: 'mine-sweeper';
@@ -276,6 +277,7 @@ button {
     padding-bottom: 10px;
     text-align: center;
   }
+  
   button.selected{
     color: #00b600;
     border-bottom: 3px dashed white;
