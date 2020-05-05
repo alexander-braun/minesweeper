@@ -2,19 +2,20 @@ import React from 'react'
 import { connect } from 'react-redux'
 import Gameboard from './components/GameBoard/Gameboard'
 import Side from './components/Side/Side'
+import Difficulty from './components/Side/Difficulty'
 
 function Gamestat(props) {
-
   return (
     <React.Fragment>
-      <div className="header">Corona-sweeper</div>
+      {/*<div className="header">Corona-sweeper</div>*/}
       <div className="view">
+        <Difficulty />
         <Gameboard />
         <Side />
       </div>
-      <audio id="clickNormal" src="./sounds/click.wav"></audio>
-      <audio id="clickFlag" src="./sounds/flag.wav"></audio>
-      <audio id="winsound" src="./sounds/gameWin.wav"></audio>
+      <audio id="audioClickNormal" src="./sounds/click.wav"></audio>
+      <audio id="audioClickFlag" src="./sounds/flag.wav"></audio>
+      <audio id="audioWin" src="./sounds/gameWin.wav"></audio>
       <audio id="audioLoose" src="./sounds/gameOver.wav"></audio>
     </React.Fragment>
     )

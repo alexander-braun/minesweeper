@@ -70,7 +70,10 @@ html {
 
 #root {
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
 }
 
 .gameboard {
@@ -252,8 +255,30 @@ button {
 }
 
 .select-menue {
-  padding-top: 5px;
-  background-color: silver;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 10vh;
+}
+
+.select-menue button {
+  margin-left: 2vw;
+  font-family: 'mine-sweeper';
+  letter-spacing: .4rem;
+  font-size: 1rem;
+  color: white;
+  background-color: transparent;
+  border: none;
+  width: fit-content;
+  padding: 0;
+  padding-bottom: 10px;
+  text-align: center;
+}
+
+.select-menue button.selected {
+  color: #00b600;
+  border-bottom: 3px dashed white;
 }
 
 .select-css {
@@ -328,8 +353,7 @@ button {
   flex-wrap: wrap;
   justify-content: center;
   align-items: center;
-  width: 100%;
-  margin-top: 20px;
+  width: fit-content;
 }
 
 .side {
@@ -339,10 +363,9 @@ button {
   justify-content: flex-start;
   align-items: center;
   color: white;
-  height: 100%;
-  border-left: 12px dashed #00b600;
-  margin-left: 5vw;
-  margin-top: 5vh;
+  margin-left: 1vw;
+  padding-top: 5vh;
+  margin-bottom: 5vh;
 }
 
 .board {
@@ -409,17 +432,19 @@ button {
 .header {
   color: white;
   font-family: 'mine-sweeper';
-  font-size: 3rem;
+  font-size: 2.5rem;
   width: 100%;
-  text-align: center;
   margin-bottom: 10vh;
-  margin-top: 5vh;
-  text-align: center;
   width: fit-content;
   letter-spacing: .5rem;
-  border-bottom: 6px solid #00b600;
   justify-self: center;
   align-self: center;
+  justify-content: center;
+  align-items: center;
+  margin-top: 20px;
+  text-align: center;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 .submit_form {
@@ -482,10 +507,10 @@ button {
 @media only screen and (max-width: 1400px) {
   .side {
     border-left: none;
-    border-top: 12px dashed #00b600;
     margin-left: 0;
     padding-top: 5vh;
     width: 90vw;
+    margin-bottom: 10vh;
   }
   .view {
     flex-direction: column;
@@ -496,5 +521,15 @@ button {
   .list {
     width: 90vw;
   }
+}
+
+.MuiSvgIcon-root {
+  width: 2em !important;
+  height: 2em !important;
+}
+
+.makeStyles-root-1 {
+  margin-left: 2vw;
+  margin-bottom: .5rem;
 }
 /*# sourceMappingURL=gamefield.css.map */

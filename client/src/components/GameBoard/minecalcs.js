@@ -26,10 +26,7 @@ const MineCalcs = (() => {
         revealed = val
     }
 
-    let counter = 0
     const floodFill = (posx, posy) => {
-      console.log(counter)
-      console.log(posx, posy)
       // If outside board boundaries
       if(posx < 0 || posy < 0 || posx >= gridH || posy >= gridL) {
         return
@@ -42,12 +39,12 @@ const MineCalcs = (() => {
       // If has mine around return without new floodfill but mark as revealed
       } else if(grid[posx][posy][3] !== 0){
         revealed[(posx * gridL) + posy] = true
-        counter++
         return
       } else {
+        
         // Set cell as revealed
         revealed[(posx * gridL) + posy] = true
-        counter++
+
         // Floodfill with new values recursively
         floodFill(posx + 1, posy) // nach unten
         floodFill(posx - 1, posy) // nach oben

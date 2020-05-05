@@ -8,6 +8,7 @@ import flagCount from './flagCount'
 import difficulty from './difficulty'
 import posts from './posts'
 import time from './time'
+import sound from './sound'
 
 export default combineReducers({
     grid,
@@ -18,5 +19,6 @@ export default combineReducers({
     flagCount,
     difficulty,
     posts,
-    time
+    time,
+    sound
 })

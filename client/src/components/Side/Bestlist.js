@@ -11,14 +11,15 @@ function Bestlist({ lvl, getPosts, posts: { posts, loading }}) {
     }, [getPosts])
 
     const generateSurvivors = () => {
-
+        if(posts.length === 0) return
         // Get all times and sort them but only if lvl is the same as current difficulty
         let values = Object.values(posts).map(post => {
             if(post['lvl'] === String(lvl)) return post['time']
+            else return null
         }).sort().slice(0, 5)
 
         // If no survivors
-        if(values[0] === undefined) return (
+        if(values[0] === undefined || values[0] === null) return (
             <div className="no_survivors">No survivors yet for this difficulty</div>
         )
 
@@ -36,7 +37,8 @@ function Bestlist({ lvl, getPosts, posts: { posts, loading }}) {
                             <div className="time">{posts[index]['time']}<span style={{fontSize:'.5rem', marginLeft:'2px', color:'#c71010'}}>s</span></div>
                         </div>
                     )
-                }
+                    return null
+                } else return null
             })
         }
         return survivors
@@ -45,7 +47,7 @@ function Bestlist({ lvl, getPosts, posts: { posts, loading }}) {
     return (
         <React.Fragment>
             <div className="bestlist">
-            🤘🤘🤘 Survivors 🤘🤘🤘
+            <span role="img" aria-label="rock-emoji">🤘🤘🤘</span> Survivors <span role="img" aria-label="rock-emoji">🤘🤘🤘</span>
             </div>
             <div className="list">
                 {

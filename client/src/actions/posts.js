@@ -24,6 +24,10 @@ export const getPosts = () => async dispatch => {
 }
 
 export const addPost = formData => async dispatch => {
+    if(formData['user'].length > 10) return
+    if(formData['lvl'].length > 3) return
+    if(formData['time'].length > 4) return
+    
     const config = {
         headers: {
             'Content-Type': 'application/json'

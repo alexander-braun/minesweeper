@@ -7,6 +7,23 @@ import ff from './minecalcs'
 import updateFlagcount from '../../actions/updateFlagcount'
 import ButtonEl from './ButtonEl'
 
+const audioPlay = (audioName, sound) => {
+  if(!sound) return
+  // Just playing audio caused bug in chrome and this solution fixed it for whatever reason :/
+  let audio = document.getElementById(audioName)
+  let playPromise = audio.play()
+  if(playPromise !== undefined) {
+    playPromise
+      .then(_=> {
+        console.log('audio played auto')
+      })
+      .catch(error => {
+        console.log('playback prevented')
+      })
+  }
+  return
+}
+
 class Gridelement extends React.PureComponent {
   constructor(props) {
     super(props)
@@ -39,19 +56,6 @@ class Gridelement extends React.PureComponent {
     // If game still on start now on running after first click
     gamestate !== 'running' && this.props.setGameState('running')
 
-    // Just playing audio caused bug in chrome and this solution fixed it for whatever reason :/
-    let audioNormalClick = document.getElementById('clickNormal')
-    let playPromise = audioNormalClick.play()
-    if(playPromise !== undefined) {
-      playPromise
-        .then(_=> {
-          console.log('audio played auto')
-        })
-        .catch(error => {
-          console.log('playback prevented')
-        })
-    }
-
     if(this.state.flag) {
       this.setState({
         flag: false
@@ -63,51 +67,27 @@ class Gridelement extends React.PureComponent {
     if(this.props.mine) {
       this.props.setGameState('lost')
       this.revealAllMines()
-
-      // Just playing audio caused bug in chrome and this solution fixed it for whatever reason :/
-      let audioLoose = document.getElementById('audioLoose')
-      let playPromise = audioLoose.play()
-      if(playPromise !== undefined) {
-        playPromise
-          .then(_=> {
-            console.log('audio played auto')
-          })
-          .catch(error => {
-            console.log('playback prevented')
-          })
-      }
+      audioPlay('audioLoose', this.props.sound)
       return
     }
 
     // If no mines around do a floodfill from floodfill revealing module
     if(this.props.minesAround === 0) {
+      audioPlay('audioClickNormal', this.props.sound)
       ff.setAll(this.props.value[0], this.props.value[1], this.props.grid, this.props.revealed, this.props.gridL, this.props.gridH)
-      console.log('call floodfill')
       this.props.setRevealedArr(ff.returnFloodFill())
       this.checkForWin()
       return
-
     } else if(this.props.minesAround !== 0) {
+      audioPlay('audioClickNormal', this.props.sound)
       this.props.setRevealed(this.props.position)
     }
   }
 
   checkForWin = () => {
     if(this.props.revealed.length - this.props.mineCount === this.countRevealed()) {
+      audioPlay('audioWin', this.props.sound)
       this.revealAllMines()
-
-      // Just playing audio caused bug in chrome and this solution fixed it for whatever reason :/
-      let audioWin = document.getElementById('winsound')
-      let playPromise = audioWin.play()
-      if(playPromise !== undefined) {
-        playPromise
-          .then(_=> {
-            console.log('audio played auto')
-          })
-          .catch(error => {
-            console.log('playback prevented')
-          })
-      }
       return this.props.setGameState('win')  
     }
     return false
@@ -144,21 +124,9 @@ class Gridelement extends React.PureComponent {
     if(this.props.flagCount <= 0 && !this.state.flag) return
 
     // If revealed 
-
     if(this.props.revealed[this.props.position]) return
 
-    // Just playing audio caused bug in chrome and this solution fixed it for whatever reason :/
-    let audioFlagClick = document.getElementById('clickFlag')
-    let playPromise = audioFlagClick.play()
-    if(playPromise !== undefined) {
-      playPromise
-        .then(_=> {
-          console.log('audio played auto')
-        })
-        .catch(error => {
-          console.log('playback prevented')
-        })
-    }
+    audioPlay('audioClickFlag', this.props.sound)
 
     if(!this.state.flag) {
       this.props.updateFlagcount(-1)  
@@ -228,15 +196,6 @@ class Gridelement extends React.PureComponent {
     } else return 'gridelement'
   }
 
-  componentDidUpdate() {
-    if(this.state.flag && this.props.revealed[this.props.position]) {
-      this.setState({
-        flag: false
-      })
-      this.props.updateFlagcount(1)
-    }
-  }
-
   render() {
     const { value, revealed, position } = this.props
     return (
@@ -261,7 +220,8 @@ const mapStateToProps = state => ({
   gameState: state.gameState,
   revealed: state.revealed,
   flagCount: state.flagCount,
-  mineCount: state.minecount
+  mineCount: state.minecount,
+  sound: state.sound
 })
 
 const mapActionsToProps = {

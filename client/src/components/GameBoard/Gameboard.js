@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useCallback, useRef } from 'react'
+import React, { useState, useEffect, useCallback } from 'react'
 import { connect } from 'react-redux'
 import '../../styles/gamefield.css'
 import Gridelement from './Gridelement'
@@ -36,9 +36,7 @@ function Gameboard(props) {
       }
     }
 
-    let counter = 0
     for(let i = 0; i < minecounter; i++) {
-      counter++
       let random1 = Math.floor(Math.random() * Math.floor(gridH))
       let random2 = Math.floor(Math.random() * Math.floor(gridL))
       if(!grid[random1][random2][2]) {
@@ -136,7 +134,6 @@ function Gameboard(props) {
   return (
     <div className="board">
       <div className="gameboard">
-        <BoardHead genGrid={generateGridArray}/>
         <Gamestat gridL={gridL} gridH={gridH} setGrid={setGrid} genGrid={generateGridArray} gridSize={difficulty} />
         <div className="game" style={{gridTemplateColumns:`repeat(${gridL}, 30px)`, gridTemplateRows:`repeat(${gridH}, 30px)`}}>
           {

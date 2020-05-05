@@ -1,8 +1,6 @@
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 import { connect } from 'react-redux'
-import { getPosts } from '../../actions/posts'
 import PropTypes from 'prop-types'
-import { v4 as uuidv4 } from 'uuid'
 import { addPost } from '../../actions/posts'
 import setGameState from '../../actions/setGameState'
 
@@ -17,7 +15,7 @@ function SubmitTime({ addPost, time, lvl, posts, setGameState }) {
     return (
         <React.Fragment>
             <div className="bestlist">
-                Submit Time!
+                Submit Your Time!
             </div>
             <div className="post-form">
                 <form className="submit_form" onSubmit={ e=> {
@@ -38,6 +36,7 @@ function SubmitTime({ addPost, time, lvl, posts, setGameState }) {
                         required
                         value={text}
                         onChange={e => setText(e.target.value)}
+                        maxlength="10"
                     >
                     </textarea>
                     <div className="form_buttons">
@@ -51,7 +50,8 @@ function SubmitTime({ addPost, time, lvl, posts, setGameState }) {
 }
 
 SubmitTime.propTypes = {
-    addPosts: PropTypes.func.isRequired
+    addPost: PropTypes.func.isRequired,
+    setGameState: PropTypes.func.isRequired
 }
 
 const mapStateToProps = state => ({
