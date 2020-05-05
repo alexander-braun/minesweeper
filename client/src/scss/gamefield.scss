@@ -261,14 +261,13 @@ button {
   display: flex;
   align-items: center;
   justify-content: center;
-  margin-bottom: 5vh;
 
   button {
     margin-left: 1vw;
     margin-right: 1vw;
     font-family: 'mine-sweeper';
     letter-spacing: .4rem;
-    font-size: .9rem;
+    font-size: .8rem;
     color: white;
     background-color: transparent;
     border: none;
@@ -469,7 +468,7 @@ button {
 .header {
   color: rgb(255, 255, 255);
   font-family: 'mine-sweeper';
-  font-size: 2rem;
+  font-size: 2.2rem;
   width: 100%;
   margin-bottom: 3vh;
   width: -moz-fit-content;
@@ -561,14 +560,15 @@ button {
 }
 
 .MuiSvgIcon-root {
-  width: 2em !important;
-  height: 2em !important;
+  width: 1.5em !important;
+  height: 1.5em !important;
   &:hover {
     cursor: pointer;
   }
 }
 
 .makeStyles-root-1 {
-  margin-left: 2vw;
+  margin-left: 1vw;
+  margin-right: 1vw;
   margin-bottom: .5rem;
 }

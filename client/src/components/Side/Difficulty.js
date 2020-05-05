@@ -5,9 +5,10 @@ import setGrid from '../../actions/setGrid'
 import setGameState from '../../actions/setGameState'
 import setRevealedArr from '../../actions/setRevealedArr'
 import VolumeOffIcon from '@material-ui/icons/VolumeOff'
-import VolumeUpIcon from '@material-ui/icons/VolumeUp';
-import { makeStyles } from '@material-ui/core/styles';
+import VolumeUpIcon from '@material-ui/icons/VolumeUp'
+import { makeStyles } from '@material-ui/core/styles'
 import setSound from '../../actions/setSound'
+import GitHubIcon from '@material-ui/icons/GitHub'
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -17,7 +18,6 @@ const useStyles = makeStyles((theme) => ({
 
 function SelectMenue(props) {
     const classes = useStyles()
-    const [defaultVal] = useState('game')
     const [sound, switchSound] = useState(true)
 
     const handleSound = () => {
@@ -58,6 +58,7 @@ function SelectMenue(props) {
             <div id="sound_icon" className={classes.root} onClick={handleSound}>
                 {soundIcon()}
             </div>
+            <a href="https://github.com/alexander-braun/coronasweeper" target="blank" className={classes.root}><GitHubIcon /></a>
         </div>
     )
 }
