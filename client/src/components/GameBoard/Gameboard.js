@@ -11,9 +11,9 @@ import setMinecount from '../../actions/setMinecount'
 import setFlagcount from '../../actions/setFlagCount'
 
 
-function Gameboard(props) {
+function Gameboard({difficulty, grid, minecount, setGrid, setRevealedArr, setRevealed, setMinecount, setFlagcount}) {
   let [minecounter, setMinecounter] = useState(10)
-  const { difficulty } = props
+  const diff = difficulty
 
   let [gridL, setGridL] = useState(9)
   let [gridH, setGridH] = useState(9)
@@ -21,24 +21,24 @@ function Gameboard(props) {
   
   const generateGridArray = useCallback((gridL = 9, gridH = 9) => {
 
-    const grid =[]
+    const newGrid =[]
   
     //create general grid with x, y coordinates
     //determine if mine or not
     //set revealed to false
 
     for(let i = 0; i < gridH; i++){
-      grid.push([])
+      newGrid.push([])
       for(let j = 0; j < gridL; j++) {
-        grid[i].push([i, j, false]) // X, Y, MINE, MINECOUNT
+        newGrid[i].push([i, j, false]) // X, Y, MINE, MINECOUNT
       }
     }
 
     for(let i = 0; i < minecounter; i++) {
       let random1 = Math.floor(Math.random() * Math.floor(gridH))
       let random2 = Math.floor(Math.random() * Math.floor(gridL))
-      if(!grid[random1][random2][2]) {
-        grid[random1][random2][2] = true
+      if(!newGrid[random1][random2][2]) {
+        newGrid[random1][random2][2] = true
       } else i--
     }
 
@@ -48,43 +48,43 @@ function Gameboard(props) {
         let minecount = 0
         for(let x = -1; x <= 1; x++) {
           for(let y = -1; y <= 1; y++) {
-            let cell = grid[i][j]
+            let cell = newGrid[i][j]
             if(cell[0] + x >= 0 && 
               cell[1] + y >= 0 && 
               cell[0] + x <= (gridH - 1) && 
               cell[1] + y <= (gridL - 1) ) {
-                if(grid[cell[0] + x][cell[1] + y][2]) minecount++
+                if(newGrid[cell[0] + x][cell[1] + y][2]) minecount++
             }
           }
         }
-        grid[i][j].push(minecount)
+        newGrid[i][j].push(minecount)
       }
     }
-    return grid
+    return newGrid
   }, [minecounter])
 
-  let grid = generateGridArray(gridL, gridH)
-  let arr = new Array(difficulty * difficulty).fill(false)
+  let [newGrid] = useState(generateGridArray(gridL, gridH))
+  let arr = new Array(diff * diff).fill(false)
 
   const generateGrid = () => {
-    if(grid === undefined) return
-    if(grid.length !== gridH) return
-    if(grid[0].length !== gridL) return
+    if(newGrid === undefined) return
+    if(newGrid.length !== gridH) return
+    if(newGrid[0].length !== gridL) return
 
     const gridArray = []
     let counter = 0
-    for(let i = 0; i < grid.length; i++) {
-        for(let j = 0; j < grid[0].length; j++) {
+    for(let i = 0; i < newGrid.length; i++) {
+        for(let j = 0; j < newGrid[0].length; j++) {
         gridArray.push(
             <Gridelement 
-              value={[grid[i][j][0], grid[i][j][1]]} 
-              mine={grid[i][j][2]}
-              minesAround={grid[i][j][3]} 
+              value={[newGrid[i][j][0], newGrid[i][j][1]]} 
+              mine={newGrid[i][j][2]}
+              minesAround={newGrid[i][j][3]} 
               key={uuidv4()}
               position={counter}
-              gridL={grid[0].length}
-              gridH={grid.length}
-              grid={grid}
+              gridL={newGrid[0].length}
+              gridH={newGrid.length}
+              grid={newGrid}
             />
         )
         counter++
@@ -95,46 +95,45 @@ function Gameboard(props) {
 
   useEffect(() => {
     let counter
-    if(difficulty <= 9) {
+    if(diff <= 9) {
       setMinecounter(10)
       counter = 10
-    } else if(difficulty <= 16) {
+    } else if(diff <= 16) {
       setMinecounter(40)
       counter = 40
-    } else if(difficulty <= 30) {
+    } else if(diff <= 30) {
       setMinecounter(99)
       counter = 99
     }
 
-    props.setFlagcount(counter)
-    props.setMinecount(counter)
+    setGrid(newGrid)
+    setFlagcount(counter)
+    setMinecount(counter)
+    setRevealedArr(arr) 
 
-  }, [grid])
+  }, [grid, diff, setFlagcount, setMinecount, arr, setRevealedArr, newGrid, setGrid])
 
   useEffect(() => {
     
-    if(difficulty === 9) {
+    if(diff === 9) {
       setGridL(9)
       setGridH(9)
-    } else if(difficulty === 16) {
+    } else if(diff === 16) {
       setGridL(16)
       setGridH(16)
-    } else if(difficulty === 30) {
+    } else if(diff === 30) {
       setGridL(30)
       setGridH(16)
     }
 
-    props.setGrid(grid)
-    props.setRevealedArr(arr)  
-
-  }, [difficulty])
+  }, [diff, setGrid, setRevealedArr])
 
 
 
   return (
       <div className="board">
         <div className="gameboard">
-          <Gamestat gridL={gridL} gridH={gridH} setGrid={setGrid} genGrid={generateGridArray} gridSize={difficulty} />
+          <Gamestat gridL={gridL} gridH={gridH} setGrid={setGrid} genGrid={generateGridArray} gridSize={diff} />
           <div className="game" style={{gridTemplateColumns:`repeat(${gridL}, 30px)`, gridTemplateRows:`repeat(${gridH}, 30px)`}}>
             {
               generateGrid(gridL, gridH)

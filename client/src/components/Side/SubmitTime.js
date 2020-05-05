@@ -36,7 +36,7 @@ function SubmitTime({ addPost, time, lvl, posts, setGameState }) {
                         required
                         value={text}
                         onChange={e => setText(e.target.value)}
-                        maxlength="10"
+                        maxLength="10"
                     >
                     </textarea>
                     <div className="form_buttons">

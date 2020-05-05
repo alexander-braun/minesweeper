@@ -264,6 +264,10 @@ button {
   margin-bottom: 10vh;
 }
 
+.select-menue button.selected {
+  color: #00b600;
+}
+
 .select-menue button {
   margin-left: 1vw;
   margin-right: 1vw;
@@ -279,8 +283,8 @@ button {
   text-align: center;
 }
 
-.select-menue button.selected {
-  color: #00b600;
+.select-menue button:hover {
+  color: #c71010;
 }
 
 .select-css {
