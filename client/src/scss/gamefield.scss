@@ -279,7 +279,6 @@ button {
 
   button.selected{
     color: #00b600;
-    border-bottom: 3px dashed white;
   }
 }
 
@@ -390,7 +389,7 @@ button {
   //border-bottom: 4px solid #00b600;
   width: fit-content;
   padding-bottom: 5px;
-  letter-spacing: 5px;
+  letter-spacing: .3rem;
 }
 
 .list{
@@ -402,10 +401,6 @@ button {
   overflow-y: scroll;
   
   max-height: 400px;
-}
-
-.list::-webkit-scrollbar {
-  
 }
 
 /* width */
@@ -422,6 +417,7 @@ button {
 /* Handle */
 .list::-webkit-scrollbar-thumb {
   background: #00b600; 
+  background: linear-gradient(140deg, #00b600 0%, rgba(255,0,0,1) 100%);
   border-radius: 15px;
 }
 

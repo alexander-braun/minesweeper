@@ -278,7 +278,6 @@ button {
 
 .select-menue button.selected {
   color: #00b600;
-  border-bottom: 3px dashed white;
 }
 
 .select-css {
@@ -384,7 +383,7 @@ button {
   cursor: context-menu;
   width: fit-content;
   padding-bottom: 5px;
-  letter-spacing: 5px;
+  letter-spacing: .3rem;
 }
 
 .list {
@@ -411,6 +410,7 @@ button {
 /* Handle */
 .list::-webkit-scrollbar-thumb {
   background: #00b600;
+  background: linear-gradient(140deg, #00b600 0%, red 100%);
   border-radius: 15px;
 }
 

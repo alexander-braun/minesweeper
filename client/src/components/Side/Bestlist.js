@@ -47,7 +47,7 @@ function Bestlist({ lvl, getPosts, posts: { posts, loading }}) {
     return (
         <React.Fragment>
             <div className="bestlist">
-            <span role="img" aria-label="rock-emoji">🤘🤘🤘</span> Survivors <span role="img" aria-label="rock-emoji">🤘🤘🤘</span>
+            <span role="img" aria-label="rock-emoji">🔥🔥🔥</span> Survivors <span role="img" aria-label="rock-emoji">🔥🔥🔥</span>
             </div>
             <div className="list">
                 {
