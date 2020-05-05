@@ -15,7 +15,7 @@ function SubmitTime({ addPost, time, lvl, posts, setGameState }) {
     return (
         <React.Fragment>
             <div className="bestlist">
-                Submit Your Time!
+                Submit Your Score!
             </div>
             <div className="post-form">
                 <form className="submit_form" onSubmit={ e=> {

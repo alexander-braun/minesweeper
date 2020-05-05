@@ -9,8 +9,6 @@ import setRevealedArr from '../../actions/setRevealedArr'
 import setRevealed from '../../actions/setRevealed'
 import setMinecount from '../../actions/setMinecount'
 import setFlagcount from '../../actions/setFlagCount'
-import BoardHead from './BoardHead'
-
 
 
 function Gameboard(props) {
@@ -131,17 +129,19 @@ function Gameboard(props) {
 
   }, [difficulty])
 
+
+
   return (
-    <div className="board">
-      <div className="gameboard">
-        <Gamestat gridL={gridL} gridH={gridH} setGrid={setGrid} genGrid={generateGridArray} gridSize={difficulty} />
-        <div className="game" style={{gridTemplateColumns:`repeat(${gridL}, 30px)`, gridTemplateRows:`repeat(${gridH}, 30px)`}}>
-          {
-            generateGrid(gridL, gridH)
-          }
+      <div className="board">
+        <div className="gameboard">
+          <Gamestat gridL={gridL} gridH={gridH} setGrid={setGrid} genGrid={generateGridArray} gridSize={difficulty} />
+          <div className="game" style={{gridTemplateColumns:`repeat(${gridL}, 30px)`, gridTemplateRows:`repeat(${gridH}, 30px)`}}>
+            {
+              generateGrid(gridL, gridH)
+            }
+          </div>
         </div>
       </div>
-    </div>
   )
 }
 
