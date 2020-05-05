@@ -9,6 +9,7 @@ function Gamestat(props) {
     <React.Fragment>
       {/*<div className="header">Corona-sweeper</div>*/}
       <div className="view">
+        <div className="header">Corona-Sweeper</div>
         <Difficulty />
         <Gameboard />
         <Side />

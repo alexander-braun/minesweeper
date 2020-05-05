@@ -11,7 +11,7 @@ function SubmitTime({ addPost, time, lvl, posts, setGameState }) {
     const handleClick = () => {
         setGameState('start')
     }
-
+    
     return (
         <React.Fragment>
             <div className="bestlist">

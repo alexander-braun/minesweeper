@@ -11,7 +11,6 @@
 html {
   height: 100%;
   background-color: #050505;
-  //background-image: url(../coronavirus.jpg);
 }
 
 #game_header {
@@ -265,10 +264,11 @@ button {
   margin-bottom: 5vh;
 
   button {
-    margin-left: 2vw;
+    margin-left: 1vw;
+    margin-right: 1vw;
     font-family: 'mine-sweeper';
     letter-spacing: .4rem;
-    font-size: 1rem;
+    font-size: .9rem;
     color: white;
     background-color: transparent;
     border: none;
@@ -277,7 +277,7 @@ button {
     padding-bottom: 10px;
     text-align: center;
   }
-  
+
   button.selected{
     color: #00b600;
     border-bottom: 3px dashed white;
@@ -400,12 +400,41 @@ button {
   flex-direction: column;
   align-items: center;
   margin-top: 3vh;
+  overflow-y: scroll;
+  
+  max-height: 400px;
+}
+
+.list::-webkit-scrollbar {
+  
+}
+
+/* width */
+.list::-webkit-scrollbar {
+  width: 20px;
+}
+
+/* Track */
+.list::-webkit-scrollbar-track {
+  box-shadow: inset 0 0 5px #00b600; 
+  border-radius: 15px;
+}
+ 
+/* Handle */
+.list::-webkit-scrollbar-thumb {
+  background: #00b600; 
+  border-radius: 15px;
+}
+
+/* Handle on hover */
+.list::-webkit-scrollbar-thumb:hover {
+  background: #b30000; 
 }
 
 .recordholder {
   display: flex;
   flex-direction: row;
-  width: 80%;
+  width: 90%;
   justify-content: space-between;
   //border-bottom: 3px dashed #00b600;
 }
@@ -440,13 +469,12 @@ button {
 .header {
   color: rgb(255, 255, 255);
   font-family: 'mine-sweeper';
-  font-size: 2.5rem;
+  font-size: 2rem;
   width: 100%;
-  margin-bottom: 10vh;
+  margin-bottom: 3vh;
   width: -moz-fit-content;
   width: fit-content;
-  letter-spacing: .5rem;
-  //border-bottom: 6px solid #00b600;
+  letter-spacing: 1.5rem;
   justify-self: center;
   align-self: center;
   justify-content: center;
@@ -535,7 +563,9 @@ button {
 .MuiSvgIcon-root {
   width: 2em !important;
   height: 2em !important;
-
+  &:hover {
+    cursor: pointer;
+  }
 }
 
 .makeStyles-root-1 {

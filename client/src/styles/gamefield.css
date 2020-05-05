@@ -263,10 +263,11 @@ button {
 }
 
 .select-menue button {
-  margin-left: 2vw;
+  margin-left: 1vw;
+  margin-right: 1vw;
   font-family: 'mine-sweeper';
   letter-spacing: .4rem;
-  font-size: 1rem;
+  font-size: .9rem;
   color: white;
   background-color: transparent;
   border: none;
@@ -393,12 +394,36 @@ button {
   flex-direction: column;
   align-items: center;
   margin-top: 3vh;
+  overflow-y: scroll;
+  max-height: 400px;
+}
+
+/* width */
+.list::-webkit-scrollbar {
+  width: 20px;
+}
+
+/* Track */
+.list::-webkit-scrollbar-track {
+  box-shadow: inset 0 0 5px #00b600;
+  border-radius: 15px;
+}
+
+/* Handle */
+.list::-webkit-scrollbar-thumb {
+  background: #00b600;
+  border-radius: 15px;
+}
+
+/* Handle on hover */
+.list::-webkit-scrollbar-thumb:hover {
+  background: #b30000;
 }
 
 .recordholder {
   display: flex;
   flex-direction: row;
-  width: 80%;
+  width: 90%;
   justify-content: space-between;
 }
 
@@ -432,11 +457,11 @@ button {
 .header {
   color: white;
   font-family: 'mine-sweeper';
-  font-size: 2.5rem;
+  font-size: 2rem;
   width: 100%;
-  margin-bottom: 10vh;
+  margin-bottom: 3vh;
   width: fit-content;
-  letter-spacing: .5rem;
+  letter-spacing: 1.5rem;
   justify-self: center;
   align-self: center;
   justify-content: center;
@@ -526,6 +551,10 @@ button {
 .MuiSvgIcon-root {
   width: 2em !important;
   height: 2em !important;
+}
+
+.MuiSvgIcon-root:hover {
+  cursor: pointer;
 }
 
 .makeStyles-root-1 {

@@ -16,7 +16,7 @@ function Bestlist({ lvl, getPosts, posts: { posts, loading }}) {
         let values = Object.values(posts).map(post => {
             if(post['lvl'] === String(lvl)) return post['time']
             else return null
-        }).sort().slice(0, 5)
+        }).sort().slice(0)
 
         // If no survivors
         if(values[0] === undefined || values[0] === null) return (
