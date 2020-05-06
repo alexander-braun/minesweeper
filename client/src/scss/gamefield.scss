@@ -378,15 +378,12 @@ button {
   color: white;
   margin-left: 1vw;
   padding-top: 5vh;
-  margin-bottom: 5vh;
 }
 
 .board {
   border: 1px solid rgba(128, 128, 128, 0.425);
   width: fit-content;
   flex: 0 0 auto;
-  //margin-bottom: 10vh;
-  margin-top: 5vh;
 }
 
 .bestlist {
@@ -548,13 +545,13 @@ button {
   text-align: center;
 }
 
-@media only screen and (max-width: 1400px) {
+@media only screen and (max-width: 1500px) {
   .side {
     border-left: none;
     margin-left: 0;
     padding-top: 5vh;
-    width: 90vw;
-    margin-bottom: 10vh;
+    width: 50vw;
+    margin-bottom: 20vh
   }
   .view {
     flex-direction: column;
@@ -563,7 +560,10 @@ button {
     margin-bottom: 5vh;
   }
   .list {
-    width: 90vw;
+    width: 50vw;
+  }
+  .select-menue {
+    flex-direction: column;
   }
 }
 
