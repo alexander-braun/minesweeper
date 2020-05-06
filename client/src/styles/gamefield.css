@@ -551,6 +551,7 @@ button {
   }
   .view {
     flex-direction: column;
+    margin-top: 10vh;
   }
   .board {
     margin-bottom: 5vh;
