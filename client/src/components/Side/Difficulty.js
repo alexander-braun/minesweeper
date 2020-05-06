@@ -58,7 +58,7 @@ function SelectMenue(props) {
             <div id="sound_icon" className={classes.root} onClick={handleSound}>
                 {soundIcon()}
             </div>
-            <a href="https://github.com/alexander-braun/coronasweeper" target="blank" className={classes.root}><GitHubIcon /></a>
+            <a href="https://github.com/alexander-braun/coronasweeper" target="blank" className={classes.root} id="github_icon"><GitHubIcon /></a>
         </div>
     )
 }

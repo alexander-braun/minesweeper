@@ -429,6 +429,7 @@ button {
   flex-direction: row;
   width: 90%;
   justify-content: space-between;
+  margin: 5px;
 }
 
 .username {
@@ -533,6 +534,11 @@ button {
   font-size: .8rem;
   letter-spacing: .3rem;
   text-align: center;
+}
+
+#sound_icon, #github_icon {
+  margin-left: 1vw;
+  margin-right: 1vw;
 }
 
 @media only screen and (max-width: 1500px) {
