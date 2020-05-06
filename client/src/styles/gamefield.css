@@ -541,6 +541,10 @@ button {
   margin-right: 1vw;
 }
 
+.leftlist {
+  display: inline-block;
+}
+
 @media only screen and (max-width: 1500px) {
   .side {
     border-left: none;
