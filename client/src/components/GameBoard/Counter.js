@@ -1,10 +1,12 @@
-import React from 'react'
-import { connect } from 'react-redux'
+import React, { useEffect, useState, useCallback } from 'react'
+import { useSelector } from 'react-redux'
 
 function Counter(props) {
 
-    const setTimeArr = () => {
-        let nums = props.flagCount.toString().split('')
+    let flagCount = useSelector(state => state.flagCount)
+
+    const setTimeArr = useCallback(() => {
+        let nums = flagCount.toString().split('')
         let arr = []
         if(nums.length === 1) {
             arr.unshift('zero')
@@ -49,6 +51,7 @@ function Counter(props) {
                     break
             }
         }
+
         return (
             <React.Fragment>
                 <div className={arr[0] + ' number_element'}></div>
@@ -56,21 +59,26 @@ function Counter(props) {
                 <div className={arr[2] + ' number_element'}></div>
             </React.Fragment>
         )
-    }
+    }, [flagCount])
+
+    let [timeArr, setArr] = useState(setTimeArr())
+
+    let revealed = useSelector(state => state.revealed)
+
+    useEffect(() => {
+        setArr(setTimeArr())
+    }, [revealed, flagCount, setTimeArr])
 
     return (
         <div id="time" className="brightred">
             <div className="foreground_timer">
                 {
-                    setTimeArr()
+                    timeArr
                 }
             </div>
         </div>
     )
 }
 
-const mapStateToProps = state => ({
-    flagCount: state.flagCount
-})
 
-export default React.memo(connect(mapStateToProps)(Counter))
+export default React.memo(Counter)

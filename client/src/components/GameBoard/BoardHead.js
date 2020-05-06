@@ -31,7 +31,6 @@ function SelectMenue(props) {
 
 const mapStateToProps = state => ({
     difficulty: state.difficulty,
-    grid: state.grid,
     gameState: state.gameState
 })
 

@@ -110,7 +110,7 @@ class Gridelement extends React.PureComponent {
     if(this.props.gameState === 'lost' && this.props.mine) return '🦠'
     if(this.state.flag && this.props.mine && this.props.revealed[this.props.position]) return ''
     if(this.props.gameState === 'win' && this.props.mine) return ''
-    if(this.props.mine && !this.state.flag) return '*'
+    if(this.props.mine && !this.state.flag) return '🦠'
     if(this.props.minesAround === 0) return ''
     if(this.props.minesAround !== 0) return this.props.minesAround    
   }
@@ -140,6 +140,15 @@ class Gridelement extends React.PureComponent {
   }
 
   componentDidUpdate(prevProps, prevState) {
+    // Not enough flag when floodfill bugfix
+    if(this.state.flag && this.props.revealed[this.props.position]) {
+      this.setState({
+        flag: false
+      })
+      this.props.updateFlagcount(1)
+    }
+
+    //only check for win if the element is clicked
     this.state.clicked && 
     this.props.gameState !== 'start' && 
     this.props.gameState !== 'pause' && 
