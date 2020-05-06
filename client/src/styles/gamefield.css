@@ -370,7 +370,6 @@ button {
   align-items: center;
   color: white;
   margin-left: 1vw;
-  padding-top: 5vh;
 }
 
 .board {
@@ -430,6 +429,7 @@ button {
   width: 90%;
   justify-content: space-between;
   margin: 5px;
+  min-height: 50px;
 }
 
 .username {
@@ -561,7 +561,7 @@ button {
     margin-bottom: 5vh;
   }
   .list {
-    width: 50vw;
+    width: 40vw;
   }
   .select-menue {
     flex-direction: column;

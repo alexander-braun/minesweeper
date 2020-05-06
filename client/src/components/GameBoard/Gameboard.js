@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react'
-import { connect } from 'react-redux'
 import '../../styles/gamefield.css'
 import Gridelement from './Gridelement'
 import setGrid from '../../actions/setGrid'
@@ -83,19 +82,16 @@ const generateGrid = (grid) => {
 
 function Gameboard(props) {
   let [minecounter, setMinecounter] = useState(10)
-  
-  const difficulty = useSelector(state => state.difficulty)
-  const dispatch = useDispatch()
-
   let [gridL, setGridL] = useState(9)
   let [gridH, setGridH] = useState(9)
+  const difficulty = useSelector(state => state.difficulty)
+  const dispatch = useDispatch()
   let [arr, setArr] = useState(new Array(difficulty * difficulty).fill(false))
-
   let grid = generateGridArray(gridL, gridH, minecounter)
 
-  
-
   const setCounter = () => {
+    if(!difficulty) return
+    
     if(difficulty <= 9) {
       return 10
     } else if(difficulty <= 16) {
@@ -108,7 +104,6 @@ function Gameboard(props) {
   let [counter, setCount] = useState(setCounter())
 
   useEffect(() => {
-    
     dispatch(setFlagcount(setCounter()))
     dispatch(setMinecount(setCounter()))
 
@@ -154,15 +149,4 @@ function Gameboard(props) {
   )
 }
 
-const mapStateToProps = state => ({
-  minecount: state.minecount,
-  difficulty: state.difficulty
-})
-
-const mapActionsToProps = {
-  setRevealedArr,
-  setMinecount,
-  setFlagcount
-}
-
-export default React.memo(connect(mapStateToProps, mapActionsToProps)(Gameboard))
+export default React.memo(Gameboard)
