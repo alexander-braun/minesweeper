@@ -564,6 +564,10 @@ button {
   }
   .select-menue {
     flex-direction: column;
+    margin-top: 10vh;
+  }
+  .difficulty_select, #sound_icon {
+    margin-bottom: 1vh;
   }
 }
 
