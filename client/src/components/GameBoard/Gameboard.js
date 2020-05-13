@@ -118,7 +118,7 @@ function Gameboard(props) {
   }, [difficulty, dispatch, gridL, gridH])
 
   useEffect(() => {
-    
+    const windowWidth = window.innerWidth
     if(difficulty === 9) {
       setGridL(9)
       setGridH(9)
@@ -126,11 +126,12 @@ function Gameboard(props) {
     } else if(difficulty === 16) {
       setGridL(16)
       setGridH(16)
-      updateGridsize('25px')
+      windowWidth < 1200 ? updateGridsize('23px') : updateGridsize('30px')
     } else if(difficulty === 30) {
       setGridL(30)
       setGridH(16)
       updateGridsize('20px')
+      windowWidth < 1200 ? updateGridsize('20px') : updateGridsize('30px')
     }
 
     dispatch(setRevealedArr(arr))

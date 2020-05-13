@@ -209,7 +209,7 @@ class Gridelement extends React.PureComponent {
     const gridDimensions = {
       width: gridSize,
       height: gridSize,
-      fontSize: gridSize === '20px' ? '.8rem' : gridSize === '25px' ? '1.1rem' : '1.25rem'
+      fontSize: gridSize === '20px' ? '.8rem' : gridSize === '23px' ? '1.1rem' : '1.25rem'
     }
     return (
       <div id={value} style={gridDimensions} className={this.genWrapperClassname()}>
