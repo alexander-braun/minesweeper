@@ -15,7 +15,6 @@ const audioPlay = (audioName, sound) => {
   if(playPromise !== undefined) {
     playPromise
       .then(_=> {
-        console.log('audio played auto')
       })
       .catch(error => {
         console.log('playback prevented')
@@ -206,9 +205,14 @@ class Gridelement extends React.PureComponent {
   }
 
   render() {
-    const { value, revealed, position } = this.props
+    const { value, revealed, position, gridSize } = this.props
+    const gridDimensions = {
+      width: gridSize,
+      height: gridSize,
+      fontSize: gridSize === '20px' ? '.8rem' : gridSize === '25px' ? '1.1rem' : '1.25rem'
+    }
     return (
-      <div id={value} className={this.genWrapperClassname()}>
+      <div id={value} style={gridDimensions} className={this.genWrapperClassname()}>
         <ButtonEl 
           preventDefault={this.preventDefault}
           genButtonClassname={this.genButtonClassname}
@@ -216,6 +220,7 @@ class Gridelement extends React.PureComponent {
           setDisplay={this.setDisplay}
           position={position}
           revealed={revealed[position]}
+          gridDimensions={gridDimensions}
         />
         { this.genFlag() }
       </div>
@@ -230,7 +235,8 @@ const mapStateToProps = state => ({
   revealed: state.revealed,
   flagCount: state.flagCount,
   mineCount: state.minecount,
-  sound: state.sound
+  sound: state.sound,
+  difficulty: state.difficulty
 })
 
 const mapActionsToProps = {

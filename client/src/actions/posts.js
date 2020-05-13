@@ -39,7 +39,6 @@ export const addPost = formData => async dispatch => {
             type: ADD_POST,
             payload: res.data
         })
-
     } catch (error) {
         dispatch({
             type: POST_ERROR,

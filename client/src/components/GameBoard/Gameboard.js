@@ -55,7 +55,7 @@ const generateGridArray = (gridL = 9, gridH = 9, minecounter = 10) => {
   return grid
 }
 
-const generateGrid = (grid) => {
+const generateGrid = (grid, gridSize) => {
   if(grid === undefined) return
 
   const gridArray = []
@@ -72,6 +72,7 @@ const generateGrid = (grid) => {
             gridL={grid[0].length}
             gridH={grid.length}
             grid={grid}
+            gridSize={gridSize}
           />
       )
       counter++
@@ -102,6 +103,7 @@ function Gameboard(props) {
   }
 
   let [counter, setCount] = useState(setCounter())
+  let [gridSize, updateGridsize] = useState()
 
   useEffect(() => {
     dispatch(setFlagcount(setCounter()))
@@ -115,18 +117,20 @@ function Gameboard(props) {
 
   }, [difficulty, dispatch, gridL, gridH])
 
-
   useEffect(() => {
     
     if(difficulty === 9) {
       setGridL(9)
       setGridH(9)
+      updateGridsize('30px')
     } else if(difficulty === 16) {
       setGridL(16)
       setGridH(16)
+      updateGridsize('25px')
     } else if(difficulty === 30) {
       setGridL(30)
       setGridH(16)
+      updateGridsize('20px')
     }
 
     dispatch(setRevealedArr(arr))
@@ -134,14 +138,13 @@ function Gameboard(props) {
   }, [difficulty, dispatch, arr, grid, minecounter])
 
 
-
   return (
       <div className="board">
         <div className="gameboard">
           <Gamestat counter={counter} setArr={setArr} gridL={gridL} gridH={gridH} setGrid={setGrid} genGrid={generateGridArray} gridSize={difficulty} />
-          <div className="game" style={{gridTemplateColumns:`repeat(${gridL}, 30px)`, gridTemplateRows:`repeat(${gridH}, 30px)`}}>
+          <div className="game" style={{gridTemplateColumns:`repeat(${gridL}, ${gridSize})`, gridTemplateRows:`repeat(${gridH}, ${gridSize})`}}>
             {
-              generateGrid(grid)
+              generateGrid(grid, gridSize)
             }
           </div>
         </div>

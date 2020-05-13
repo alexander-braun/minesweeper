@@ -5,10 +5,9 @@ const Post = require('../../models/posts')
 
 // @route       POST api/posts
 // @description Create a post
-// @access      Private
+// @access      Public
 
 router.post('/', async (req, res) => { 
-    console.log(req.body)
     try{
         const newPost = new Post({
             user: req.body.user,

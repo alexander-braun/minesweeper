@@ -1,6 +1,5 @@
 import { GET_POSTS, POST_ERROR, ADD_POST } from '../actions/constants'
 
-
 const initialState = {
     posts: [],
     post: null,
