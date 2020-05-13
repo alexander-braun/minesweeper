@@ -1,27 +1,30 @@
 import React, {useState, useEffect} from 'react'
 import { connect } from 'react-redux'
 import setTimeRed from '../../actions/setTime'
+import setGameState from '../../actions/setGameState'
 
-function Clock(props) {
+function Clock({gameState, setTimeRed, setGameState}) {
 
     let [time, setTime] = useState(0)
 
     useEffect(() => {
-        if(props.gameState === 'running'){
+        if(gameState === 'running'){
             setTimeArr ()
             setTimeout(() => {
                 setTime(time += 1)
             }, 1000)    
-        } else if(props.gameState === 'win') {
-            props.setTimeRed(time)
-        } else if(props.gameState === 'start') {
+        } else if(gameState === 'win') {
+            setTimeRed(time)
+        } else if(gameState === 'start') {
             setTime(0)
         }
-    })
+    }, [time, gameState])
 
     const setTimeArr = () => {
+        // Get the time into an array and unshift 0's in front of it until 3 places are filled
         let nums = time.toString().split('')
         let arr = []
+
         if(nums.length === 1) {
             arr.unshift('zero')
             arr.unshift('zero')
@@ -29,44 +32,16 @@ function Clock(props) {
             arr.unshift('zero')
         } else if (nums.length > 3) {
             setTime(0)
+            setGameState('lost')
         }
 
-        for(let num of nums) {
-            switch(num) {
-                case '0':
-                    arr.push('zero')
-                    break
-                case '1':
-                    arr.push('one')
-                    break
-                case '2':
-                    arr.push('two')
-                    break
-                case '3':
-                    arr.push('three')
-                    break
-                case '4':
-                    arr.push('four')
-                    break
-                case '5':
-                    arr.push('five')
-                    break
-                case '6':
-                    arr.push('six')
-                    break
-                case '7':
-                    arr.push('seven')
-                    break
-                case '8':
-                    arr.push('eight')
-                    break
-                case '9':
-                    arr.push('nine')
-                    break
-                default:
-                    break
-            }
+        // Push the appropriate number into the array, numbers written out are
+        // classnames for the background
+        let numEquivalent = ['zero', 'one', 'two', 'three', 'four', 'five', 'six', 'seven', 'eight', 'nine']
+        for(let i = 0; i < nums.length; i++) {
+            arr.push(numEquivalent[nums[i]])
         }
+
         return (
             <React.Fragment>
                 <div className={arr[0] + ' number_element'}></div>
@@ -92,7 +67,8 @@ const mapStateToProps = state => ({
 })
 
 const mapAcitonsToProps = {
-    setTimeRed
+    setTimeRed,
+    setGameState
 }
   
 

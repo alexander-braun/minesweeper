@@ -7,9 +7,12 @@ import ff from './minecalcs'
 import updateFlagcount from '../../actions/updateFlagcount'
 import ButtonEl from './ButtonEl'
 
+
+// Used to generate All sounds in the game
 const audioPlay = (audioName, sound) => {
   if(!sound) return
-  // Just playing audio caused bug in chrome and this solution fixed it for whatever reason :/
+
+  // Just playing audio caused bug in chrome and this solution fixed it
   let audio = document.getElementById(audioName)
   let playPromise = audio.play()
   if(playPromise !== undefined) {
@@ -41,6 +44,7 @@ class Gridelement extends React.PureComponent {
     this.genFlag = this.genFlag.bind(this)
   }
 
+  // Handles all left clicks
   handleClick = (e) => {
 
     this.setState({
@@ -52,9 +56,10 @@ class Gridelement extends React.PureComponent {
     // Game already lost or won ? don't do anything
     if(gamestate === 'lost' || gamestate === 'win') return
 
-    // If game still on start now on running after first click
+    // If game still on start, set it to running
     gamestate !== 'running' && this.props.setGameState('running')
 
+    // If there is a flag on this position take it away from state obj and update flagcount
     if(this.state.flag) {
       this.setState({
         flag: false
@@ -70,7 +75,7 @@ class Gridelement extends React.PureComponent {
       return
     }
 
-    // If no mines around do a floodfill from floodfill revealing module
+    // If no mines around do a floodfill and check for win
     if(this.props.minesAround === 0) {
       audioPlay('audioClickNormal', this.props.sound)
       ff.setAll(this.props.value[0], this.props.value[1], this.props.grid, this.props.revealed, this.props.gridL, this.props.gridH)
@@ -92,6 +97,7 @@ class Gridelement extends React.PureComponent {
     return false
   }
 
+  // Counts all gridelements that have the property revealed on them 
   countRevealed = () => {
     let counter = 0
     for(let i = 0; i < this.props.revealed.length; i++) {
@@ -100,6 +106,7 @@ class Gridelement extends React.PureComponent {
     return counter
   }
 
+  // If the user clicks on a mine...
   revealAllMines = () => {
     ff.setAll(null, null, this.props.grid, this.props.revealed, this.props.gridL, this.props.gridH)
     this.props.setRevealedArr(ff.revealAllMines())
@@ -114,6 +121,7 @@ class Gridelement extends React.PureComponent {
     if(this.props.minesAround !== 0) return this.props.minesAround    
   }
 
+  // Handles all right clicks
   preventDefault = e => {
     e.preventDefault()
 
@@ -127,19 +135,23 @@ class Gridelement extends React.PureComponent {
 
     audioPlay('audioClickFlag', this.props.sound)
 
+    // If there is already a flag take the flag away and update flagcount
     if(!this.state.flag) {
       this.props.updateFlagcount(-1)  
     } else if(this.state.flag) {
       this.props.updateFlagcount(1)
     }
 
+    // ..update state flag count
     this.setState({
       flag: !this.state.flag
     })
   }
 
   componentDidUpdate(prevProps, prevState) {
-    // Not enough flag when floodfill bugfix
+
+    // Floodfill reveales also elements marked with a flag 
+    // This prevents the flagcount from beeing too low after it
     if(this.state.flag && this.props.revealed[this.props.position]) {
       this.setState({
         flag: false
@@ -159,32 +171,17 @@ class Gridelement extends React.PureComponent {
       return 'black'
     }
 
-    switch(this.props.minesAround) {
-      case 1:
-        return 'blue'
-      case 2:
-        return 'green'
-      case 3: 
-        return 'brightred'
-      case 4: 
-        return 'darkblue'
-      case 5: 
-        return 'darkred'
-      case 6:
-        return 'mint'
-      case 7:
-        return 'black'
-      default:
-        return
-    }
+    // minecount determines color
+    const colors = ['blue', 'green', 'brightred', 'darkblue', 'darkred', 'mint', 'black']
+    return colors[this.props.minesAround]
   }
 
   genFlag = () => {
-    //💉
-    if(this.state.flag && !this.props.revealed[this.props.position]) {
-      return <div className="flag"><span role="img" aria-label="flag">💊</span></div>
-    } else if(this.props.gameState === 'win' && this.props.revealed[this.props.position] && this.props.mine) {
-      return <div className="flag"><span role="img" aria-label="flag">💊</span></div>
+    // Return a flag if state.flag OR if game is won and there is a mine here
+    if(
+      this.state.flag && !this.props.revealed[this.props.position] ||
+      this.props.gameState === 'win' && this.props.revealed[this.props.position] && this.props.mine) {
+        return <div className="flag"><span role="img" aria-label="flag">💊</span></div>
     }
   }
 
@@ -227,8 +224,6 @@ class Gridelement extends React.PureComponent {
     )
   }
 }
-
-//-> OLD WHITE FOR VIRUS { revealed[position] && mine && gameState !== 'win' ? <div className="white"></div> : null }
 
 const mapStateToProps = state => ({
   gameState: state.gameState,

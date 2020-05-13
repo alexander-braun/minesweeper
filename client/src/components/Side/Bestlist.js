@@ -12,6 +12,7 @@ function Bestlist({ lvl, getPosts, posts: { posts, loading }}) {
 
     const generateSurvivors = () => {
         if(posts.length === 0) return
+        
         // Get all times and sort them but only if lvl is the same as current difficulty
         let values = Object.values(posts).map(post => {
             if(post['lvl'] === String(lvl)) return post['time']

@@ -6,7 +6,7 @@ import setFlagcount from '../../actions/setFlagCount'
 import { useDispatch } from 'react-redux'
 import { useSelector } from 'react-redux'
 
-function Gamestat({ gridSize, counter, setArr }) {
+function Gamestat({ gridSize, counter, setArr, gridL, gridH }) {
 
   const faces = ['🤢','😷', '🙏']
 
@@ -15,7 +15,7 @@ function Gamestat({ gridSize, counter, setArr }) {
 
   const restartGame = () => {
     dispatch(setGameState('start'))
-    setArr(new Array(gridSize * gridSize).fill(false))
+    setArr(new Array(gridL * gridH).fill(false))
     dispatch(setFlagcount(counter))
   }
 

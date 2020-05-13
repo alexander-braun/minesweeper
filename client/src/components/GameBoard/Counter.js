@@ -1,11 +1,12 @@
 import React, { useEffect, useState, useCallback } from 'react'
 import { useSelector } from 'react-redux'
 
-function Counter(props) {
+function Counter() {
 
     let flagCount = useSelector(state => state.flagCount)
+    let revealed = useSelector(state => state.revealed)
 
-    const setTimeArr = useCallback(() => {
+    const setCountArr = useCallback(() => {
         let nums = flagCount.toString().split('')
         let arr = []
         if(nums.length === 1) {
@@ -15,41 +16,9 @@ function Counter(props) {
             arr.unshift('zero')
         }
 
-        for(let num of nums) {
-            switch(num) {
-                case '0':
-                    arr.push('zero')
-                    break
-                case '1':
-                    arr.push('one')
-                    break
-                case '2':
-                    arr.push('two')
-                    break
-                case '3':
-                    arr.push('three')
-                    break
-                case '4':
-                    arr.push('four')
-                    break
-                case '5':
-                    arr.push('five')
-                    break
-                case '6':
-                    arr.push('six')
-                    break
-                case '7':
-                    arr.push('seven')
-                    break
-                case '8':
-                    arr.push('eight')
-                    break
-                case '9':
-                    arr.push('nine')
-                    break
-                default:
-                    break
-            }
+        let numEquivalent = ['zero', 'one', 'two', 'three', 'four', 'five', 'six', 'seven', 'eight', 'nine']
+        for(let i = 0; i < nums.length; i++) {
+            arr.push(numEquivalent[nums[i]])
         }
 
         return (
@@ -61,13 +30,11 @@ function Counter(props) {
         )
     }, [flagCount])
 
-    let [timeArr, setArr] = useState(setTimeArr())
-
-    let revealed = useSelector(state => state.revealed)
+    let [timeArr, setArr] = useState(setCountArr())
 
     useEffect(() => {
-        setArr(setTimeArr())
-    }, [revealed, flagCount, setTimeArr])
+        setArr(setCountArr())
+    }, [revealed, flagCount, setCountArr])
 
     return (
         <div id="time" className="brightred">

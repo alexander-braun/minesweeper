@@ -21,12 +21,4 @@ function SoundOnOff(props) {
     )
 }
 
-const mapStateToProps = state => ({
-
-})
-
-const mapActionsToProps = {
-
-}
-
 export default React.memo(connect(mapStateToProps, mapActionsToProps)(SoundOnOff))

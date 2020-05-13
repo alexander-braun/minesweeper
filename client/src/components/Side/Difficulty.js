@@ -35,18 +35,21 @@ function SelectMenue(props) {
         let difficulty
         e.target.value === 'beginner' ? difficulty = 9 :
         e.target.value === 'intermediate' ? difficulty = 16 : difficulty = 30
+
         props.setDifficulty(difficulty)
         props.setGameState('start')
 
         let buttons = document.getElementsByClassName('difficulty_select')
+        let element = document.getElementById(`${e.target.value}_button`)
 
+        // Remove all selected classes
         for(let button of buttons) {
             if(button !== null && button.classList) {
                 button.classList.contains('selected') && button.classList.remove('selected')
             }
         }
 
-        let element = document.getElementById(`${e.target.value}_button`)
+        // ...and add it back for the selected element
         element.classList.add('selected')
     }
 

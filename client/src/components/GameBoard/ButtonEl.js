@@ -1,6 +1,5 @@
 import React from 'react'
 
-
 function ButtonEl(props) {
     return (
         <React.Fragment>
@@ -10,7 +9,7 @@ function ButtonEl(props) {
                 style={{width:'100%', height: '100%'}} 
                 onClick={props.handleClick}
             >
-                { props.revealed && props.setDisplay() }
+                {props.revealed && props.setDisplay()}
             </button>
         </React.Fragment>
     )
