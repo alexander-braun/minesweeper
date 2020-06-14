@@ -3,6 +3,7 @@ import { connect } from 'react-redux'
 import { getPosts } from '../../actions/posts'
 import PropTypes from 'prop-types'
 import { v4 as uuidv4 } from 'uuid'
+import { BestlistContainer, BestlistSurvivors } from '../styles/elements'
 
 function Bestlist({ lvl, getPosts, posts: { posts, loading }}) {
 
@@ -47,14 +48,16 @@ function Bestlist({ lvl, getPosts, posts: { posts, loading }}) {
 
     return (
         <React.Fragment>
-            <div className="bestlist">
-            <span role="img" aria-label="rock-emoji">🔥🔥🔥</span><span>Survivors</span><span role="img" aria-label="rock-emoji">🔥🔥🔥</span>
-            </div>
-            <div className="list">
+            <BestlistContainer>
+                <span role="img" aria-label="rock-emoji">🔥🔥🔥</span>
+                <span>Survivors</span>
+                <span role="img" aria-label="rock-emoji">🔥🔥🔥</span>
+            </BestlistContainer>
+            <BestlistSurvivors>
                 {
                     generateSurvivors()
                 }
-            </div>
+            </BestlistSurvivors>
         </React.Fragment>
     )
 }
