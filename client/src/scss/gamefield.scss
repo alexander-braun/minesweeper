@@ -22,17 +22,6 @@ html {
   // This defines what 1rem is
   font-size: 62.5%; //1 rem = 10px; 10px/16px = 62.5%
 
-  @include respond(tab-land) { // width < 1200?
-      font-size: 56.25%; //1 rem = 9px, 9/16 = 50%
-  }
-
-  @include respond(tab-port) { // width < 900?
-      font-size: 50%; //1 rem = 8px, 8/16 = 50%
-  }
-  
-  @include respond(big-desktop) {
-      font-size: 75%; //1rem = 12, 12/16
-  }
 }
 
 #game_header {
@@ -275,39 +264,7 @@ button {
   background-image: url('../img/d9.svg');
 }
 
-.select-menue {
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-  flex-wrap: wrap;
-  align-items: center;
-  justify-content: center;
-  margin-bottom: 5vh;
 
-  button.selected{
-    color: #00b600;
-  }
-
-  button {
-    margin-left: 1vw;
-    margin-right: 1vw;
-    font-family: 'mine-sweeper';
-    letter-spacing: .3rem;
-    font-size: .6rem;
-    color: white;
-    background-color: transparent;
-    border: none;
-    width: fit-content;
-    padding: 0;
-    margin-bottom: 1rem;
-    text-align: center;
-    transition-duration: 200ms;
-    
-    &:hover {
-      color: rgb(199, 16, 16)
-    }
-  }
-}
 
 .view {
   display: flex;

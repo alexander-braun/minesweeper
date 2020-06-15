@@ -8,9 +8,18 @@
   src: url(../fonts/digital-7.ttf);
 }
 
+*,
+*::after,
+*::before {
+  margin: 0;
+  padding: 0;
+  box-sizing: inherit;
+}
+
 html {
   height: 100%;
   background-color: #050505;
+  font-size: 62.5%;
 }
 
 #game_header {
@@ -249,40 +258,6 @@ button {
 
 .nine {
   background-image: url("../img/d9.svg");
-}
-
-.select-menue {
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-  flex-wrap: wrap;
-  align-items: center;
-  justify-content: center;
-  margin-bottom: 5vh;
-}
-
-.select-menue button.selected {
-  color: #00b600;
-}
-
-.select-menue button {
-  margin-left: 1vw;
-  margin-right: 1vw;
-  font-family: 'mine-sweeper';
-  letter-spacing: .3rem;
-  font-size: .6rem;
-  color: white;
-  background-color: transparent;
-  border: none;
-  width: fit-content;
-  padding: 0;
-  margin-bottom: 1rem;
-  text-align: center;
-  transition-duration: 200ms;
-}
-
-.select-menue button:hover {
-  color: #c71010;
 }
 
 .view {

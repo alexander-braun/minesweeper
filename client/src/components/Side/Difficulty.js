@@ -9,6 +9,7 @@ import VolumeUpIcon from '@material-ui/icons/VolumeUp'
 import { makeStyles } from '@material-ui/core/styles'
 import setSound from '../../actions/setSound'
 import GitHubIcon from '@material-ui/icons/GitHub'
+import { SelectMenueWrapper, SelectButton } from '../styles/elements'
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -54,15 +55,15 @@ function SelectMenue(props) {
     }
 
     return (
-        <div className="select-menue">
-            <button className="difficulty_select selected" value="beginner" id="beginner_button" onClick={e=> handleChange(e)}>Beginner</button>
-            <button className="difficulty_select" value="intermediate" id="intermediate_button" onClick={e=> handleChange(e)}>Intermediate</button>
-            <button className="difficulty_select" value="expert" id="expert_button" onClick={e=> handleChange(e)}>Expert</button>
+        <SelectMenueWrapper className="select-menue">
+            <SelectButton className="difficulty_select selected" value="beginner" id="beginner_button" onClick={e=> handleChange(e)}>Beginner</SelectButton>
+            <SelectButton className="difficulty_select" value="intermediate" id="intermediate_button" onClick={e=> handleChange(e)}>Intermediate</SelectButton>
+            <SelectButton className="difficulty_select" value="expert" id="expert_button" onClick={e=> handleChange(e)}>Expert</SelectButton>
             <div id="sound_icon" className={classes.root} onClick={handleSound}>
                 {soundIcon()}
             </div>
             <a href="https://github.com/alexander-braun/coronasweeper" target="blank" className={classes.root} id="github_icon"><GitHubIcon /></a>
-        </div>
+        </SelectMenueWrapper>
     )
 }
 

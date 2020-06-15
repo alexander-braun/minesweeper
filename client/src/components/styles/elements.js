@@ -10,7 +10,7 @@ export const Header = styled.div`
 
   color: rgb(255, 255, 255);
   font-family: 'mine-sweeper';
-  font-size: 1.5rem;
+  font-size: 1.75rem;
   letter-spacing: .3rem;
 
   align-items: center;
@@ -32,7 +32,7 @@ export const View = styled.div`
   width: fit-content;
 `
 
-export const BestlistContainer = styled.div`
+export const BestlistHeading = styled.div`
   text-align: center;
   font-weight: 400;
   font-size: 15px;
@@ -82,3 +82,43 @@ export const BestlistSurvivors = styled.div`
     max-width: 30vw
   }
 `
+
+export const SelectMenueWrapper = styled.div`
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 5vh;
+
+    @media only screen and (min-width: 1200px) {
+      flex-direction: row;
+      margin-bottom: 8vh;
+    }
+`
+
+export const SelectButton = styled.button`
+    margin-left: 1vw;
+    margin-right: 1vw;
+    font-family: 'mine-sweeper';
+    letter-spacing: .3rem;
+    font-size: 1rem;
+    color: white;
+    background-color: transparent;
+    border: none;
+    width: fit-content;
+    padding: 0;
+    margin-bottom: 1rem;
+    text-align: center;
+    transition-duration: 200ms;
+
+    :hover {
+      color: rgb(199, 16, 16)
+    }
+
+    .selected {
+      color: #00b600;
+    }
+`
+
