@@ -1,7 +1,6 @@
 import React, { useState } from 'react'
 import { connect } from 'react-redux'
 import setDifficulty from '../../actions/setDifficulty'
-import setGrid from '../../actions/setGrid'
 import setGameState from '../../actions/setGameState'
 import setRevealedArr from '../../actions/setRevealedArr'
 import VolumeOffIcon from '@material-ui/icons/VolumeOff'
@@ -26,41 +25,39 @@ function SelectMenue(props) {
         props.setSound(!sound)
     }
 
-    const soundIcon = () => {
-        if(sound) {
-            return <VolumeUpIcon />
-        } else return <VolumeOffIcon />
-    }
-
     const handleChange = (e) => {
         let difficulty
         e.target.value === 'beginner' ? difficulty = 9 :
         e.target.value === 'intermediate' ? difficulty = 16 : difficulty = 30
-
         props.setDifficulty(difficulty)
         props.setGameState('start')
-
-        let buttons = document.getElementsByClassName('difficulty_select')
-        let element = document.getElementById(`${e.target.value}_button`)
-
-        // Remove all selected classes
-        for(let button of buttons) {
-            if(button !== null && button.classList) {
-                button.classList.contains('selected') && button.classList.remove('selected')
-            }
-        }
-
-        // ...and add it back for the selected element
-        element.classList.add('selected')
     }
 
     return (
         <SelectMenueWrapper className="select-menue">
-            <SelectButton className="difficulty_select selected" value="beginner" id="beginner_button" onClick={e=> handleChange(e)}>Beginner</SelectButton>
-            <SelectButton className="difficulty_select" value="intermediate" id="intermediate_button" onClick={e=> handleChange(e)}>Intermediate</SelectButton>
-            <SelectButton className="difficulty_select" value="expert" id="expert_button" onClick={e=> handleChange(e)}>Expert</SelectButton>
+            <SelectButton 
+                value="beginner" 
+                onClick={e=> handleChange(e)}
+                selected={props.difficulty === 9}
+            >
+                Beginner
+            </SelectButton>
+            <SelectButton 
+                value="intermediate"
+                onClick={e=> handleChange(e)}
+                selected={props.difficulty === 16}
+            >
+                Intermediate
+            </SelectButton>
+            <SelectButton 
+                value="expert"
+                onClick={e=> handleChange(e)}
+                selected={props.difficulty === 30}
+            >
+                Expert
+            </SelectButton>
             <div id="sound_icon" className={classes.root} onClick={handleSound}>
-                {soundIcon()}
+                {sound ? <VolumeUpIcon /> : <VolumeOffIcon />}
             </div>
             <a href="https://github.com/alexander-braun/coronasweeper" target="blank" className={classes.root} id="github_icon"><GitHubIcon /></a>
         </SelectMenueWrapper>
@@ -68,14 +65,11 @@ function SelectMenue(props) {
 }
 
 const mapStateToProps = state => ({
-    difficulty: state.difficulty,
-    grid: state.grid,
-    gameState: state.gameState
+    difficulty: state.difficulty
 })
 
 const mapActionsToProps = {
     setDifficulty,
-    setGrid,
     setGameState,
     setRevealedArr,
     setSound

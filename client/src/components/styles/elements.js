@@ -1,4 +1,4 @@
-import styled from 'styled-components'
+import styled, { css } from 'styled-components'
 
 
 export const Header = styled.div`
@@ -84,41 +84,41 @@ export const BestlistSurvivors = styled.div`
 `
 
 export const SelectMenueWrapper = styled.div`
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-    flex-wrap: wrap;
-    align-items: center;
-    justify-content: center;
-    margin-bottom: 5vh;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 5vh;
 
-    @media only screen and (min-width: 1200px) {
-      flex-direction: row;
-      margin-bottom: 8vh;
-    }
+  @media only screen and (min-width: 1200px) {
+    flex-direction: row;
+    margin-bottom: 8vh;
+  }
 `
 
 export const SelectButton = styled.button`
-    margin-left: 1vw;
-    margin-right: 1vw;
-    font-family: 'mine-sweeper';
-    letter-spacing: .3rem;
-    font-size: 1rem;
-    color: white;
-    background-color: transparent;
-    border: none;
-    width: fit-content;
-    padding: 0;
-    margin-bottom: 1rem;
-    text-align: center;
-    transition-duration: 200ms;
+  margin-left: 1vw;
+  margin-right: 1vw;
+  font-family: 'mine-sweeper';
+  letter-spacing: .3rem;
+  font-size: 1rem;
+  color: white;
+  background-color: transparent;
+  border: none;
+  width: fit-content;
+  padding: 0;
+  margin-bottom: 1rem;
+  text-align: center;
+  transition-duration: 200ms;
 
-    :hover {
-      color: rgb(199, 16, 16)
-    }
+  :hover {
+    color: rgb(199, 16, 16)
+  }
 
-    .selected {
-      color: #00b600;
-    }
+  ${props => props.selected && css`
+    color: #00b600;
+  `}
 `
 
