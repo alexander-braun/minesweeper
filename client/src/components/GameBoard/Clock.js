@@ -2,6 +2,7 @@ import React, {useState, useEffect} from 'react'
 import { connect } from 'react-redux'
 import setTimeRed from '../../actions/setTime'
 import setGameState from '../../actions/setGameState'
+import { TimeAndMinecountWrapper, Timer, TimerNumber } from '../styles/elements'
 
 function Clock({gameState, setTimeRed, setGameState}) {
 
@@ -44,21 +45,21 @@ function Clock({gameState, setTimeRed, setGameState}) {
 
         return (
             <React.Fragment>
-                <div className={arr[0] + ' number_element'}></div>
-                <div className={arr[1] + ' number_element'}></div>
-                <div className={arr[2] + ' number_element'}></div>
+                <TimerNumber numb={arr[0]}></TimerNumber>
+                <TimerNumber numb={arr[1]}></TimerNumber>
+                <TimerNumber numb={arr[2]}></TimerNumber>
             </React.Fragment>
         )
     }
 
     return (
-        <div id="time" className="brightred">
-            <div className="foreground_timer">
+        <TimeAndMinecountWrapper>
+            <Timer>
                 {
                     setTimeArr()
                 }
-            </div>
-        </div>
+            </Timer>
+        </TimeAndMinecountWrapper>
     )
 }
 

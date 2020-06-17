@@ -9,6 +9,7 @@ import setMinecount from '../../actions/setMinecount'
 import setFlagcount from '../../actions/setFlagCount'
 import { useSelector } from 'react-redux'
 import { useDispatch } from 'react-redux'
+import { GameboardWrapper, GameboardEl, Gamefield } from '../styles/elements'
 
 const generateGridArray = (gridL = 9, gridH = 9, minecounter = 10) => {
 
@@ -148,16 +149,27 @@ function Gameboard(props) {
 
 
   return (
-      <div className="board">
-        <div className="gameboard">
-          <Gamestate counter={counter} setArr={setArr} gridL={gridL} gridH={gridH} setGrid={setGrid} genGrid={generateGridArray} gridSize={difficulty} />
-          <div className="game" style={{gridTemplateColumns:`repeat(${gridL}, ${gridSize})`, gridTemplateRows:`repeat(${gridH}, ${gridSize})`}}>
+      <GameboardWrapper>
+        <GameboardEl>
+          <Gamestate 
+            counter={counter} 
+            setArr={setArr} 
+            gridL={gridL} 
+            gridH={gridH} 
+            setGrid={setGrid} 
+            genGrid={generateGridArray} 
+            gridSize={difficulty} />
+          <Gamefield 
+            gridL={gridL}
+            gridSize={gridSize}
+            gridH={gridH}
+          >
             {
               generateGrid(grid, gridSize)
             }
-          </div>
-        </div>
-      </div>
+          </Gamefield>
+        </GameboardEl>
+      </GameboardWrapper>
   )
 }
 

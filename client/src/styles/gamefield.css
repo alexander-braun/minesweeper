@@ -285,9 +285,6 @@ button {
   border: 1px solid rgba(128, 128, 128, 0.425);
   width: fit-content;
   flex: 0 0 auto;
-  margin-bottom: 10vh;
-  margin-left: 5vw;
-  margin-right: 2vw;
 }
 
 .bestlist {

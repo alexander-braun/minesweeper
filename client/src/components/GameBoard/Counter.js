@@ -1,5 +1,6 @@
 import React, { useEffect, useState, useCallback } from 'react'
 import { useSelector } from 'react-redux'
+import { TimeAndMinecountWrapper, Timer, TimerNumber } from '../styles/elements'
 
 function Counter() {
 
@@ -23,9 +24,9 @@ function Counter() {
 
         return (
             <React.Fragment>
-                <div className={arr[0] + ' number_element'}></div>
-                <div className={arr[1] + ' number_element'}></div>
-                <div className={arr[2] + ' number_element'}></div>
+                <TimerNumber numb={arr[0]}></TimerNumber>
+                <TimerNumber numb={arr[1]}></TimerNumber>
+                <TimerNumber numb={arr[2]}></TimerNumber>
             </React.Fragment>
         )
     }, [flagCount])
@@ -37,13 +38,13 @@ function Counter() {
     }, [revealed, flagCount, setCountArr])
 
     return (
-        <div id="time" className="brightred">
-            <div className="foreground_timer">
+        <TimeAndMinecountWrapper>
+            <Timer>
                 {
                     timeArr
                 }
-            </div>
-        </div>
+            </Timer>
+        </TimeAndMinecountWrapper>
     )
 }
 

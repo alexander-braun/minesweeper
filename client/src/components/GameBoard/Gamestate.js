@@ -5,8 +5,9 @@ import Counter from './Counter'
 import setFlagcount from '../../actions/setFlagCount'
 import { useDispatch } from 'react-redux'
 import { useSelector } from 'react-redux'
+import { GameHeader, Face } from '../styles/elements'
 
-function Gamestat({ gridSize, counter, setArr, gridL, gridH }) {
+function Gamestat({ counter, setArr, gridL, gridH }) {
 
   const faces = ['🤢','😷', '🙏']
 
@@ -20,11 +21,15 @@ function Gamestat({ gridSize, counter, setArr, gridL, gridH }) {
   }
 
   return (
-    <div id="game_header">
+    <GameHeader>
         <Counter />
-        <div id="gameface" onClick={restartGame}>{gameState === 'lost' ? faces[0] : gameState === 'win' ? faces[2] : faces[1]}</div>
+        <Face
+          onClick={restartGame}
+        >
+          {gameState === 'lost' ? faces[0] : gameState === 'win' ? faces[2] : faces[1]}
+        </Face>
         <Clock />
-    </div>
+    </GameHeader>
   )
 }
 
