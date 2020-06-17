@@ -6,6 +6,7 @@ import setRevealedArr from '../../actions/setRevealedArr'
 import ff from './minecalcs'
 import updateFlagcount from '../../actions/updateFlagcount'
 import ButtonEl from './ButtonEl'
+import { GridelementWrapper } from '../styles/elements'
 
 
 // Used to generate All sounds in the game
@@ -38,8 +39,6 @@ class Gridelement extends React.PureComponent {
     this.checkForWin = this.checkForWin.bind(this)
     this.countRevealed = this.countRevealed.bind(this)
     this.preventDefault = this.preventDefault.bind(this)
-    this.genWrapperClassname = this.genWrapperClassname.bind(this)
-    this.genButtonClassname = this.genButtonClassname.bind(this)
     this.setDisplay = this.setDisplay.bind(this)
     this.genFlag = this.genFlag.bind(this)
   }
@@ -185,42 +184,27 @@ class Gridelement extends React.PureComponent {
     }
   }
 
-  genButtonClassname = () => {
-    let classname = []
-    if(this.props.revealed[this.props.position]) {
-      classname.push('revealed')
-      classname.push(this.genButtonColor())
-      this.state.clicked && classname.push('clicked')
-    }
-    return classname.join(' ')
-  }
-
-  genWrapperClassname = () => {
-    if(this.props.revealed[this.props.position]){
-      return 'gridelement revealed'
-    } else return 'gridelement'
-  }
-
   render() {
-    const { value, revealed, position, gridSize } = this.props
-    const gridDimensions = {
-      width: gridSize,
-      height: gridSize,
-      fontSize: gridSize === '20px' ? '.8rem' : gridSize === '23px' ? '1.1rem' : '1.25rem'
-    }
+    const { revealed, position, gridSize } = this.props
+
     return (
-      <div id={value} style={gridDimensions} className={this.genWrapperClassname()}>
+      <GridelementWrapper 
+        revealed={revealed[position]} 
+        propWidth={gridSize} 
+        propHeight={gridSize} 
+        propFontSize={gridSize === '20px' ? 'small' : gridSize === '23px' ? 'medium' : 'large'}
+      >
         <ButtonEl 
           preventDefault={this.preventDefault}
-          genButtonClassname={this.genButtonClassname}
+          genButtonColor={this.genButtonColor}
           handleClick={this.handleClick}
           setDisplay={this.setDisplay}
-          position={position}
           revealed={revealed[position]}
-          gridDimensions={gridDimensions}
         />
-        { this.genFlag() }
-      </div>
+        { 
+          this.genFlag() 
+        }
+      </GridelementWrapper>
     )
   }
 }

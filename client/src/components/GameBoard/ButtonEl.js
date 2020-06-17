@@ -1,17 +1,16 @@
 import React from 'react'
+import { GridelementButton } from '../styles/elements'
 
 function ButtonEl(props) {
     return (
-        <React.Fragment>
-            <button 
-                onContextMenu={props.preventDefault}
-                className={props.genButtonClassname()} 
-                style={{width:'100%', height: '100%'}} 
-                onClick={props.handleClick}
-            >
-                {props.revealed && props.setDisplay()}
-            </button>
-        </React.Fragment>
+        <GridelementButton
+            onContextMenu={props.preventDefault}
+            onClick={props.handleClick}
+            revealed={props.revealed}
+            propColor={props.genButtonColor()}
+        >
+            {props.revealed && props.setDisplay()}
+        </GridelementButton>
     )
 }
 

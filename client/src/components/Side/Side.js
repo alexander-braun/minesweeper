@@ -1,30 +1,25 @@
 import React from 'react'
 import Bestlist from './Bestlist'
-import { connect } from 'react-redux'
 import SubmitTime from './SubmitTime'
+import { Sidewrapper } from '../styles/elements'
+import { useSelector } from 'react-redux'
 
-function Side(props) {
-
+function Side() {
+    const gameState = useSelector(state => state.gameState)
     const genSide = () => {
-        if(props.gameState === 'win') {
+        if(gameState === 'win') {
             return (
-                <div className="side">
+                <Sidewrapper>
                     <SubmitTime />
-                </div>
+                </Sidewrapper>
             )
         } else return (
-            <div className="side">
+            <Sidewrapper>
                 <Bestlist />
-            </div>
+            </Sidewrapper>
         )
     }
-
     return genSide()
 }
 
-const mapStateToProps = state => ({
-    time: state.time,
-    gameState: state.gameState
-})
-
-export default React.memo(connect(mapStateToProps)(Side))
+export default Side

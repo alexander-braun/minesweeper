@@ -122,3 +122,180 @@ export const SelectButton = styled.button`
   `}
 `
 
+export const BestlistSubmitHeading = styled.div`
+  text-align: center;
+  font-weight: 400;
+  font-size: 15px;
+  font-family: 'mine-sweeper';
+  letter-spacing: .1rem;
+  cursor: context-menu;
+  max-width: 100vw;
+  padding-bottom: 5px;
+  letter-spacing: .3rem;
+  margin: 0 auto;
+
+  @media only screen and (min-width: 1200px) {
+    max-width: 30vw;
+    font-size: 20px;
+  }
+` 
+
+export const BestlistSubmitFormwrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+`
+
+export const Sidewrapper = styled.div`
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  color: white;
+  margin-left: 2vw;
+  margin-bottom: 10vh;
+  margin-right: 5vw;
+
+  @media only screen and (min-width: 1200px) {
+    max-width: 30vw;
+  }
+`
+export const RecordholderWrapper = styled.div`
+  display: flex;
+  flex-direction: row;
+  width: 90%;
+  justify-content: space-between;
+  margin: 5px;
+  min-height: 50px;
+`
+
+export const RecordholderName = styled.div`
+  display: inline-block;
+`
+
+export const RecordholderTime = styled.div`
+  margin: 10px;
+  font-family: 'mine-sweeper';
+  font-size: .65rem;
+  letter-spacing: .2rem;
+`
+
+export const RecordholderTimeSign = styled.span`
+  font-size: .5rem; 
+  margin-left: 2px; 
+  color: #c71010;
+`
+
+export const RecordholderUsername = styled.div`
+  margin: 10px;
+  font-weight: 900;
+  font-family: 'mine-sweeper';
+  font-size: .7rem;
+  text-decoration: underline;
+  margin-bottom: 0px;
+  letter-spacing: .2rem;
+`
+
+export const RecordholderDifficulty = styled.div`
+  margin: 10px;
+  margin-top: 5px;
+  font-family: 'mine-sweeper';
+  font-size: .65rem;
+  font-weight: 200;
+  letter-spacing: .2rem;
+  color: rgb(199, 16, 16);
+`
+
+export const NoRecordholderWrapper = styled.div`
+  font-family: 'mine-sweeper';
+  font-size: .8rem;
+  letter-spacing: .3rem;
+  text-align: center;
+`
+
+export const GridelementWrapper = styled.div`
+  background-color: darkgray;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+
+  ${props => props.revealed && css`
+    border: 1px solid #808080;
+    border-top: none;
+    border-left: none;
+    font-weight: 900;
+    font-family: 'mine-sweeper';
+  `} 
+
+  ${props => props.propWidth && css`
+    width: ${props => props.propWidth};
+  `}
+
+  ${props => props.propHeight && css`
+    height: ${props => props.propHeight};
+  `}
+
+  ${props => props.propFontSize === 'small' && css`
+    font-size: 1rem;
+  `}
+
+  ${props => props.propFontSize === 'medium' && css`
+    font-size: 1.25rem;
+  `}
+
+  ${props => props.propFontSize === 'large' && css`
+    font-size: 1.5rem;
+  `}
+`
+
+export const GridelementButton = styled.button`
+  border: none;
+  background-color: #c0c0c0;
+  border: 3px solid white;
+  border-bottom-color: #808080;
+  border-right-color: #808080;
+  font-weight: 900;
+  cursor: pointer;
+  color: transparent;
+  font-size: inherit;
+  width: 100%;
+  height: 100%;
+
+  ${props => props.revealed && css`
+    font-weight: 900;
+    font-family: 'mine-sweeper';
+    border: none;
+  `}
+
+  ${props => props.propColor === 'blue' && css`
+      color: #0000ff;
+  `}
+
+  ${props => props.propColor === 'green' && css`
+    color: #007b00;
+  `}
+
+  ${props => props.propColor === 'brightred' && css`
+    color: #ff0000;
+  `}
+
+  ${props => props.propColor === 'darkblue' && css`
+    color: #00007b;
+  `}
+
+  ${props => props.propColor === 'darkred' && css`
+    color: #670b04;
+  `}
+
+  ${props => props.propColor === 'mint' && css`
+    color: #166852;
+  `}
+
+  ${props => props.propColor === 'black' && css`
+    color: black;
+  `}
+`

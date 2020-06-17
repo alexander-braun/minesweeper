@@ -3,7 +3,17 @@ import { connect } from 'react-redux'
 import { getPosts } from '../../actions/posts'
 import PropTypes from 'prop-types'
 import { v4 as uuidv4 } from 'uuid'
-import { BestlistHeading, BestlistSurvivors } from '../styles/elements'
+import { 
+    BestlistHeading, 
+    BestlistSurvivors, 
+    RecordholderWrapper, 
+    RecordholderName, 
+    RecordholderTime, 
+    RecordholderTimeSign, 
+    RecordholderUsername,
+    RecordholderDifficulty,
+    NoRecordholderWrapper
+} from '../styles/elements'
 
 function Bestlist({ lvl, getPosts, posts: { posts, loading }}) {
 
@@ -22,7 +32,7 @@ function Bestlist({ lvl, getPosts, posts: { posts, loading }}) {
 
         // If no survivors
         if(values[0] === undefined || values[0] === null) return (
-            <div className="no_survivors">No survivors yet for this difficulty</div>
+            <NoRecordholderWrapper>No survivors yet for this difficulty</NoRecordholderWrapper>
         )
 
         // Create the survivorlist 
@@ -31,13 +41,22 @@ function Bestlist({ lvl, getPosts, posts: { posts, loading }}) {
             Object.keys(posts).map(index => {
                 if(posts[index]['time'] === value) {
                     survivors.push(
-                        <div className="recordholder" key={uuidv4()}>
-                            <div className="leftlist">
-                                <div className="username">{values.indexOf(posts[index]['time']) + 1 + '.' + posts[index]['user']}</div>
-                                <div className="difficulty">{`Lvl ${posts[index]['lvl']}`}</div>
-                            </div>
-                            <div className="time">{posts[index]['time']}<span style={{fontSize:'.5rem', marginLeft:'2px', color:'#c71010'}}>s</span></div>
-                        </div>
+                        <RecordholderWrapper key={uuidv4()}>
+                            <RecordholderName>
+                                <RecordholderUsername>
+                                    {values.indexOf(posts[index]['time']) + 1 + '.' + posts[index]['user']}
+                                </RecordholderUsername>
+                                <RecordholderDifficulty>
+                                    {`Lvl ${posts[index]['lvl']}`}
+                                </RecordholderDifficulty>
+                            </RecordholderName>
+                            <RecordholderTime>
+                                {posts[index]['time']}
+                                <RecordholderTimeSign>
+                                    s
+                                </RecordholderTimeSign>
+                            </RecordholderTime>
+                        </RecordholderWrapper>
                     )
                     return null
                 } else return null

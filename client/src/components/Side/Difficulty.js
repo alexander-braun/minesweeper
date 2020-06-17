@@ -2,22 +2,13 @@ import React, { useState } from 'react'
 import { connect } from 'react-redux'
 import setDifficulty from '../../actions/setDifficulty'
 import setGameState from '../../actions/setGameState'
-import setRevealedArr from '../../actions/setRevealedArr'
 import VolumeOffIcon from '@material-ui/icons/VolumeOff'
 import VolumeUpIcon from '@material-ui/icons/VolumeUp'
-import { makeStyles } from '@material-ui/core/styles'
 import setSound from '../../actions/setSound'
 import GitHubIcon from '@material-ui/icons/GitHub'
 import { SelectMenueWrapper, SelectButton } from '../styles/elements'
 
-const useStyles = makeStyles((theme) => ({
-    root: {
-        color: 'white'
-    },
-}));
-
 function SelectMenue(props) {
-    const classes = useStyles()
     const [sound, switchSound] = useState(true)
 
     const handleSound = () => {
@@ -56,10 +47,12 @@ function SelectMenue(props) {
             >
                 Expert
             </SelectButton>
-            <div id="sound_icon" className={classes.root} onClick={handleSound}>
+            <div id="sound_icon" style={{color: 'white'}} onClick={handleSound}>
                 {sound ? <VolumeUpIcon /> : <VolumeOffIcon />}
             </div>
-            <a href="https://github.com/alexander-braun/coronasweeper" target="blank" className={classes.root} id="github_icon"><GitHubIcon /></a>
+            <a href="https://github.com/alexander-braun/coronasweeper" target="blank" style={{color: 'white'}} id="github_icon">
+                <GitHubIcon />
+            </a>
         </SelectMenueWrapper>
     )
 }
@@ -71,7 +64,6 @@ const mapStateToProps = state => ({
 const mapActionsToProps = {
     setDifficulty,
     setGameState,
-    setRevealedArr,
     setSound
 }
 

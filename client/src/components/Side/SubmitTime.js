@@ -3,8 +3,9 @@ import { connect } from 'react-redux'
 import PropTypes from 'prop-types'
 import { addPost } from '../../actions/posts'
 import setGameState from '../../actions/setGameState'
+import { BestlistSubmitHeading, BestlistSubmitFormwrapper } from '../styles/elements'
 
-function SubmitTime({ addPost, time, lvl, posts, setGameState }) {
+function SubmitTime({ addPost, time, lvl, setGameState }) {
 
     const [text, setText] = useState('')
 
@@ -14,10 +15,10 @@ function SubmitTime({ addPost, time, lvl, posts, setGameState }) {
     
     return (
         <React.Fragment>
-            <div className="bestlist">
+            <BestlistSubmitHeading>
                 Submit Your Score!
-            </div>
-            <div className="post-form">
+            </BestlistSubmitHeading>
+            <BestlistSubmitFormwrapper>
                 <form className="submit_form" onSubmit={ e=> {
                     e.preventDefault()
                     addPost({ 
@@ -44,7 +45,7 @@ function SubmitTime({ addPost, time, lvl, posts, setGameState }) {
                         <button className="return_survivors" onClick={handleClick}>No Thanks!</button>
                     </div>
                 </form>
-            </div>
+            </BestlistSubmitFormwrapper>
         </React.Fragment>
     )
 }
