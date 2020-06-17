@@ -178,8 +178,9 @@ class Gridelement extends React.PureComponent {
   genFlag = () => {
     // Return a flag if state.flag OR if game is won and there is a mine here
     if(
-      this.state.flag && !this.props.revealed[this.props.position] ||
-      this.props.gameState === 'win' && this.props.revealed[this.props.position] && this.props.mine) {
+      (this.state.flag && !this.props.revealed[this.props.position]) ||
+      (this.props.gameState === 'win' && this.props.revealed[this.props.position] && this.props.mine)
+      ) {
         return <FlagElement><span role="img" aria-label="flag">💊</span></FlagElement>
     }
   }

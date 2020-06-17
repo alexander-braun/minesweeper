@@ -319,15 +319,15 @@ export const GridelementWrapper = styled.div`
   `}
 
   ${props => props.propFontSize === 'small' && css`
-    font-size: 1rem;
+    font-size: 1.4rem;
   `}
 
   ${props => props.propFontSize === 'medium' && css`
-    font-size: 1.25rem;
+    font-size: 1.5rem;
   `}
 
   ${props => props.propFontSize === 'large' && css`
-    font-size: 1.5rem;
+    font-size: 1.9rem;
   `}
 `
 
@@ -516,7 +516,6 @@ export const TimerNumber = styled.div`
   ${props => props.numb === 'nine' && css`
     background-image: url(${img9});
   `}
-  ${props => console.log(props)}
 `
 
 export const FlagElement = styled.div`
