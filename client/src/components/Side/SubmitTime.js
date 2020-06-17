@@ -3,7 +3,7 @@ import { connect } from 'react-redux'
 import PropTypes from 'prop-types'
 import { addPost } from '../../actions/posts'
 import setGameState from '../../actions/setGameState'
-import { BestlistSubmitHeading, BestlistSubmitFormwrapper } from '../styles/elements'
+import { BestlistSubmitHeading, BestlistSubmitFormwrapper, SubmitForm, SubmitFormButtonWrapper, SubmitButton } from '../styles/elements'
 
 function SubmitTime({ addPost, time, lvl, setGameState }) {
 
@@ -19,7 +19,7 @@ function SubmitTime({ addPost, time, lvl, setGameState }) {
                 Submit Your Score!
             </BestlistSubmitHeading>
             <BestlistSubmitFormwrapper>
-                <form className="submit_form" onSubmit={ e=> {
+                <SubmitForm onSubmit={ e=> {
                     e.preventDefault()
                     addPost({ 
                         "user": text,
@@ -40,11 +40,11 @@ function SubmitTime({ addPost, time, lvl, setGameState }) {
                         maxLength="20"
                     >
                     </textarea>
-                    <div className="form_buttons">
-                        <input type="submit" className="submitbutton" value="Submit"></input>
-                        <button className="return_survivors" onClick={handleClick}>No Thanks!</button>
-                    </div>
-                </form>
+                    <SubmitFormButtonWrapper>
+                        <SubmitButton type="submit" value="Submit">Submit!</SubmitButton>
+                        <SubmitButton onClick={handleClick}>No Thanks!</SubmitButton>
+                    </SubmitFormButtonWrapper>
+                </SubmitForm>
             </BestlistSubmitFormwrapper>
         </React.Fragment>
     )

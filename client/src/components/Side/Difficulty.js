@@ -25,7 +25,7 @@ function SelectMenue(props) {
     }
 
     return (
-        <SelectMenueWrapper className="select-menue">
+        <SelectMenueWrapper>
             <SelectButton 
                 value="beginner" 
                 onClick={e=> handleChange(e)}

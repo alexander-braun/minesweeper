@@ -12,10 +12,7 @@ import img9 from '../../img/d9.svg'
 
 export const Header = styled.div`
   width: fit-content;
-  margin-bottom: 2rem;
-  margin-top: 5rem;
-  margin-left: auto;
-  margin-right: auto;
+  margin: 5rem auto 7rem auto;
 
   color: rgb(255, 255, 255);
   font-family: 'mine-sweeper';
@@ -25,26 +22,31 @@ export const Header = styled.div`
   align-items: center;
   text-align: center;
 
+  @media only screen and (min-width: 700px) {
+    font-size: 3rem;
+    margin-top: 12rem;
+  }
+
   @media only screen and (min-width: 1200px) {
-    font-size: 2.5rem;
+    font-size: 4.5rem;
     margin-bottom: 1rem;
-    margin-top: 5rem;
+    margin-top: 10rem;
   }
 `
 
 export const View = styled.div`
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   flex-wrap: wrap;
   justify-content: center;
   align-items: center;
-  width: fit-content;
+  width: 100%;
 `
 
 export const BestlistHeading = styled.div`
   text-align: center;
   font-weight: 400;
-  font-size: 15px;
+  font-size: 1.5rem;
   font-family: 'mine-sweeper';
   letter-spacing: .1rem;
   cursor: context-menu;
@@ -53,6 +55,10 @@ export const BestlistHeading = styled.div`
   letter-spacing: .3rem;
   margin: 0 auto;
 
+  @media only screen and (min-width: 700px) {
+    font-size: 2.5rem;
+  }
+
   @media only screen and (min-width: 1200px) {
     max-width: 30vw;
     font-size: 20px;
@@ -60,11 +66,11 @@ export const BestlistHeading = styled.div`
 `
 
 export const BestlistSurvivors = styled.div`
-  width: 90vw;
+  width: 95vw;
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin-top: 3vh;
+  margin-top: 3rem;
   overflow-y: scroll;
   max-height: 400px;
 
@@ -87,8 +93,12 @@ export const BestlistSurvivors = styled.div`
     background: #b30000; 
   }
 
+  @media only screen and (min-width: 700px) {
+    width: 70vw;
+  }
+
   @media only screen and (min-width: 1200px) {
-    max-width: 30vw
+    max-width: 40vw
   }
 `
 
@@ -99,36 +109,66 @@ export const SelectMenueWrapper = styled.div`
   flex-wrap: wrap;
   align-items: center;
   justify-content: center;
-  margin-bottom: 5vh;
+  margin-bottom: 10rem;
+
+  * {
+    margin: .75rem 0;
+  }
+
+  svg {
+    font-size: 2.5rem;
+    line-height: 1;
+    margin: 0;
+  }
+
+  @media only screen and (min-width: 700px) {
+    * {
+      margin: 1.5rem 1rem;
+    }
+
+    svg {
+      font-size: 4rem;
+    }
+  }
 
   @media only screen and (min-width: 1200px) {
     flex-direction: row;
     margin-bottom: 8vh;
+
+    svg {
+      font-size: 3rem;
+    }
   }
 `
 
 export const SelectButton = styled.button`
-  margin-left: 1vw;
-  margin-right: 1vw;
   font-family: 'mine-sweeper';
   letter-spacing: .3rem;
-  font-size: 1rem;
+  font-size: 1.25em;
   color: white;
   background-color: transparent;
   border: none;
   width: fit-content;
   padding: 0;
-  margin-bottom: 1rem;
   text-align: center;
   transition-duration: 200ms;
 
   :hover {
-    color: rgb(199, 16, 16)
+    color: rgb(199, 16, 16);
+    cursor: pointer;
   }
 
   ${props => props.selected && css`
     color: #00b600;
   `}
+
+  @media only screen and (min-width: 700px) {
+    font-size: 1.75rem;
+  }
+
+  @media only screen and (min-width: 1200px) {
+    font-size: 1.5rem;
+  }
 `
 
 export const BestlistSubmitHeading = styled.div`
@@ -144,7 +184,6 @@ export const BestlistSubmitHeading = styled.div`
   margin: 0 auto;
 
   @media only screen and (min-width: 1200px) {
-    max-width: 30vw;
     font-size: 20px;
   }
 ` 
@@ -163,12 +202,20 @@ export const Sidewrapper = styled.div`
   justify-content: flex-start;
   align-items: center;
   color: white;
-  margin-left: 2vw;
-  margin-bottom: 10vh;
-  margin-right: 5vw;
+  margin-left: auto;
+  margin-bottom: 10rem;
+  margin-right: auto;
+
+  @media only screen and (min-width: 700px) {
+    max-width: 70vw;
+    margin-right: 5rem;
+    margin-left: 5rem;
+  }
 
   @media only screen and (min-width: 1200px) {
-    max-width: 30vw;
+    max-width: 90vw;
+    margin: 0 auto;
+    margin-bottom: 10rem;
   }
 `
 export const RecordholderWrapper = styled.div`
@@ -176,8 +223,11 @@ export const RecordholderWrapper = styled.div`
   flex-direction: row;
   width: 90%;
   justify-content: space-between;
-  margin: 5px;
   min-height: 50px;
+
+  @media only screen and (min-width: 700px) {
+    margin-bottom: 2rem;
+  }
 `
 
 export const RecordholderName = styled.div`
@@ -187,34 +237,54 @@ export const RecordholderName = styled.div`
 export const RecordholderTime = styled.div`
   margin: 10px;
   font-family: 'mine-sweeper';
-  font-size: .65rem;
+  font-size: 1rem;
   letter-spacing: .2rem;
+
+  @media only screen and (min-width: 700px) {
+    font-size: 1.5rem;
+  }
+
+  @media only screen and (min-width: 1200px) {
+    font-size: 1.5rem;
+  }
 `
 
 export const RecordholderTimeSign = styled.span`
-  font-size: .5rem; 
+  font-size: .75rem; 
   margin-left: 2px; 
   color: #c71010;
+
+  @media only screen and (min-width: 700px) {
+    font-size: 1.25rem;
+  }
 `
 
 export const RecordholderUsername = styled.div`
   margin: 10px;
   font-weight: 900;
   font-family: 'mine-sweeper';
-  font-size: .7rem;
+  font-size: 1rem;
   text-decoration: underline;
   margin-bottom: 0px;
   letter-spacing: .2rem;
+
+  @media only screen and (min-width: 700px) {
+    font-size: 1.5rem;
+  }
 `
 
 export const RecordholderDifficulty = styled.div`
   margin: 10px;
   margin-top: 5px;
   font-family: 'mine-sweeper';
-  font-size: .65rem;
+  font-size: .85rem;
   font-weight: 200;
-  letter-spacing: .2rem;
+  letter-spacing: .1rem;
   color: rgb(199, 16, 16);
+
+  @media only screen and (min-width: 700px) {
+    font-size: 1.25rem;
+  }
 `
 
 export const NoRecordholderWrapper = styled.div`
@@ -312,6 +382,7 @@ export const GameboardWrapper = styled.div`
   border: 1px solid hsla(0,0%,50.2%,.425);
   width: fit-content;
   flex: 0 0 auto;
+  margin-bottom: 10rem;
 `
 
 export const GameboardEl = styled.div`
@@ -446,4 +517,54 @@ export const TimerNumber = styled.div`
     background-image: url(${img9});
   `}
   ${props => console.log(props)}
+`
+
+export const FlagElement = styled.div`
+  font-family: 'mine-sweeper';
+  font-weight: 900;
+  font-size: 80%;
+  position: absolute;
+  pointer-events: none;
+`
+
+export const SubmitForm = styled.form`
+  width: 30vw;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+  margin: 0 auto;
+  margin-top: 2rem;
+  width: fit-content;
+  
+  textarea {
+    width: 100%;
+    padding: 0;
+    border: none;
+    resize: none;
+    font-size: 2rem;
+  }
+`
+
+export const SubmitFormButtonWrapper = styled.div`
+  margin-top: 10px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  width: 100%;
+`
+
+export const SubmitButton = styled.button`
+  font-weight: 600;
+  font-family: 'mine-sweeper';
+  background-color: rgb(192, 192, 192);
+  border-top: 4px solid white;
+  border-left: 4px solid white;
+  border-bottom: 4px solid grey;
+  border-right: 4px solid grey;
+  padding: 5px 15px;
+
+  :last-child {
+    margin-left: 10px;
+  }
 `

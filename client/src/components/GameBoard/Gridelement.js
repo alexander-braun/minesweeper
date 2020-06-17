@@ -6,7 +6,7 @@ import setRevealedArr from '../../actions/setRevealedArr'
 import ff from './minecalcs'
 import updateFlagcount from '../../actions/updateFlagcount'
 import ButtonEl from './ButtonEl'
-import { GridelementWrapper } from '../styles/elements'
+import { GridelementWrapper, FlagElement } from '../styles/elements'
 
 
 // Used to generate All sounds in the game
@@ -180,7 +180,7 @@ class Gridelement extends React.PureComponent {
     if(
       this.state.flag && !this.props.revealed[this.props.position] ||
       this.props.gameState === 'win' && this.props.revealed[this.props.position] && this.props.mine) {
-        return <div className="flag"><span role="img" aria-label="flag">💊</span></div>
+        return <FlagElement><span role="img" aria-label="flag">💊</span></FlagElement>
     }
   }
 
