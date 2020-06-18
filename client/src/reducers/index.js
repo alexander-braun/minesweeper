@@ -9,6 +9,7 @@ import difficulty from './difficulty'
 import posts from './posts'
 import time from './time'
 import sound from './sound'
+import modal from './modal'
 
 export default combineReducers({
     grid,
@@ -20,5 +21,6 @@ export default combineReducers({
     difficulty,
     posts,
     time,
-    sound
+    sound,
+    modal
 })

@@ -3,7 +3,6 @@ import styled, { css } from 'styled-components'
 export const BestlistHeading = styled.div`
   text-align: center;
   font-weight: 400;
-  font-size: 1.5rem;
   font-family: 'mine-sweeper';
   letter-spacing: .1rem;
   cursor: context-menu;
@@ -11,14 +10,19 @@ export const BestlistHeading = styled.div`
   padding-bottom: 5px;
   letter-spacing: .3rem;
   margin: 0 auto;
+  color: white;
+  margin-bottom: 5rem;
+  font-size: 2.5rem;
+  margin-top: 10rem;
 
   @media only screen and (min-width: 700px) {
-    font-size: 2.5rem;
+    font-size: 3.5rem;
+    margin-bottom: 5rem;
   }
 
   @media only screen and (min-width: 1200px) {
-    max-width: 30vw;
-    font-size: 20px;
+    font-size: 4.5rem;
+    margin-bottom: 5rem;
   }
 `
 
@@ -27,9 +31,9 @@ export const BestlistSurvivors = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin-top: 3rem;
   overflow-y: scroll;
-  max-height: 400px;
+  max-height: 50rem;
+  margin-left: 20px;
 
   ${props => props.survivorsExist === false && css`
     overflow-y: hidden;
@@ -40,26 +44,74 @@ export const BestlistSurvivors = styled.div`
   }
 
   ::-webkit-scrollbar-track {
-    box-shadow: inset 0 0 5px #00b600; 
-    border-radius: 15px;
+    box-shadow: inset 0 0 5px white; 
   }
 
   ::-webkit-scrollbar-thumb {
-    background: #00b600; 
-    background: linear-gradient(140deg, #00b600 0%, rgba(255,0,0,1) 100%);
-    border-radius: 15px;
+    background: white; 
   }
 
   ::-webkit-scrollbar-thumb:hover {
-    background: #b30000; 
+    background: white; 
   }
 
   @media only screen and (min-width: 700px) {
-    width: 70vw;
+    max-width: 80vw;
+    max-height: 60rem;
   }
 
   @media only screen and (min-width: 1200px) {
-    max-width: 40vw
+    max-width: 60vw;
+    max-height: 60rem;
+  }
+
+  @media only screen and (min-width: 1500px) {
+    max-width: 40vw;
+    max-height: 60rem;
+  }
+`
+
+export const Modal = styled.div`
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 2;
+  background-color: black;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+`
+
+export const ToggleModalButton = styled.button`
+  font-weight: 600;
+  font-family: 'mine-sweeper';
+  padding: 5px 5px;
+  letter-spacing: .2rem;
+  color: white;
+  background-color: transparent;
+  border: none;
+  font-size: 1rem;
+  position: absolute;
+  top: 0;
+  right: 0;
+  margin-right: 1rem;
+  margin-top: 1.5rem;
+  cursor: pointer;
+  color: #c71010;
+
+  @media only screen and (min-width: 700px) {
+    font-size: 1.5rem;
+    margin-right: 2rem;
+    margin-top: 2rem;
+  }
+
+  @media only screen and (min-width: 1200px) {
+    font-size: 2rem;
+    margin-right: 3rem;
+    margin-top: 3rem;
   }
 `
 
@@ -93,25 +145,29 @@ export const RecordholderWrapper = styled.div`
   width: 90%;
   justify-content: space-between;
   min-height: 50px;
-
-  @media only screen and (min-width: 700px) {
-    margin-bottom: 2rem;
-  }
-`
-
-export const RecordholderName = styled.div`
-  display: block;
-  height: fit-content;
 `
 
 export const RecordholderTime = styled.div`
-  margin: 10px;
   font-family: 'mine-sweeper';
-  font-size: 1rem;
+  font-size: 1.5rem;
   letter-spacing: .2rem;
+  color: #c71010;
 
   @media only screen and (min-width: 700px) {
-    font-size: 1.5rem;
+    font-size: 2rem;
+  }
+
+  @media only screen and (min-width: 1200px) {
+    font-size: 2rem;
+  }
+`
+
+export const RecordholderTimeSign = styled.span`
+  font-size: .75rem; 
+  margin-left: 2px; 
+
+  @media only screen and (min-width: 700px) {
+    font-size: 1rem;
   }
 
   @media only screen and (min-width: 1200px) {
@@ -119,40 +175,36 @@ export const RecordholderTime = styled.div`
   }
 `
 
-export const RecordholderTimeSign = styled.span`
-  font-size: .75rem; 
-  margin-left: 2px; 
-  color: #c71010;
+export const RecordholderRank = styled.div`
+  font-weight: 900;
+  font-family: 'mine-sweeper';
+  font-size: 1.5rem;
+  letter-spacing: .2rem;
+  color: #00b600;
 
   @media only screen and (min-width: 700px) {
-    font-size: 1.25rem;
+    font-size: 2rem;
+  }
+
+  @media only screen and (min-width: 1200px) {
+    font-size: 2rem;
   }
 `
 
 export const RecordholderUsername = styled.div`
-  margin: 10px;
   margin-bottom: 0;
   font-weight: 900;
   font-family: 'mine-sweeper';
-  font-size: 1rem;
-  text-decoration: underline;
+  font-size: 1.5rem;
   letter-spacing: .2rem;
+  color: white;
 
   @media only screen and (min-width: 700px) {
-    font-size: 1.5rem;
+    font-size: 2rem;
   }
-`
 
-export const RecordholderDifficulty = styled.div`
-  margin: 10px;
-  font-family: 'mine-sweeper';
-  font-size: .85rem;
-  font-weight: 200;
-  letter-spacing: .1rem;
-  color: rgb(199, 16, 16);
-
-  @media only screen and (min-width: 700px) {
-    font-size: 1.25rem;
+  @media only screen and (min-width: 1200px) {
+    font-size: 2rem;
   }
 `
 
@@ -161,9 +213,14 @@ export const NoRecordholderWrapper = styled.div`
   font-size: 1rem;
   letter-spacing: .1rem;
   text-align: center;
+  color: #00b600;
 
   @media only screen and (min-width: 700px) {
     font-size: 1.25rem;
+  }
+
+  @media only screen and (min-width: 1200px) {
+    font-size: 2rem;
   }
 `
 

@@ -1,21 +1,23 @@
 import React, { useEffect, useState } from 'react'
 import { connect } from 'react-redux'
 import { getPosts } from '../../actions/posts'
+import toggleModal from '../../actions/toggleModal'
 import PropTypes from 'prop-types'
 import { v4 as uuidv4 } from 'uuid'
 import { 
     BestlistHeading, 
     BestlistSurvivors, 
     RecordholderWrapper, 
-    RecordholderName, 
     RecordholderTime, 
     RecordholderTimeSign, 
     RecordholderUsername,
-    RecordholderDifficulty,
-    NoRecordholderWrapper
+    NoRecordholderWrapper,
+    RecordholderRank,
+    ToggleModalButton,
+    Modal
 } from './styles/elements'
 
-function Bestlist({ lvl, getPosts, posts: { posts, loading }}) {
+function Bestlist({modal, toggleModal, lvl, getPosts, posts: { posts, loading }}) {
 
     useEffect(() => {
         getPosts()
@@ -55,14 +57,10 @@ function Bestlist({ lvl, getPosts, posts: { posts, loading }}) {
                     usedUniqueTimes.push(value)
                     survivors.push(
                         <RecordholderWrapper key={uuidv4()}>
-                            <RecordholderName>
-                                <RecordholderUsername>
-                                    {uniqueValues.indexOf(posts[index]['time']) + 1 + '.' + posts[index]['user']}
-                                </RecordholderUsername>
-                                <RecordholderDifficulty>
-                                    {`Lvl ${posts[index]['lvl']}`}
-                                </RecordholderDifficulty>
-                            </RecordholderName>
+                            <RecordholderRank>{uniqueValues.indexOf(posts[index]['time']) + 1 + '.'}</RecordholderRank>
+                            <RecordholderUsername>
+                                {posts[index]['user']}
+                            </RecordholderUsername>
                             <RecordholderTime>
                                 {posts[index]['time']}
                                 <RecordholderTimeSign>
@@ -78,20 +76,19 @@ function Bestlist({ lvl, getPosts, posts: { posts, loading }}) {
         return survivors
     }
 
-    return (
-        <React.Fragment>
-            <BestlistHeading>
-                <span role="img" aria-label="fire-emoji">&#128293;&#128293;&#128293;</span>
-                <span>Survivors</span>
-                <span role="img" aria-label="fire-emoji">&#128293;&#128293;&#128293;</span>
-            </BestlistHeading>
+    return modal ? (
+        <Modal>
+            <BestlistHeading>Survivors</BestlistHeading>
             <BestlistSurvivors survivorsExist={survivorsExist}>
                 {
                     generateSurvivors()
                 }
             </BestlistSurvivors>
-        </React.Fragment>
-    )
+            <ToggleModalButton onClick={() => toggleModal(!modal)}>
+                CLOSE X
+            </ToggleModalButton>
+        </Modal>
+    ) : null
 }
 
 Bestlist.propTypes = {
@@ -102,11 +99,13 @@ Bestlist.propTypes = {
 
 const mapStateToProps = state => ({
     posts: state.posts,
-    lvl: state.difficulty
+    lvl: state.difficulty,
+    modal: state.modal
 })
 
 const mapActionToProps = {
-    getPosts
+    getPosts,
+    toggleModal
 }
 
 export default React.memo(connect(mapStateToProps, mapActionToProps)(Bestlist))

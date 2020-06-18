@@ -5,6 +5,7 @@ import setGameState from '../../actions/setGameState'
 import VolumeOffIcon from '@material-ui/icons/VolumeOff'
 import VolumeUpIcon from '@material-ui/icons/VolumeUp'
 import setSound from '../../actions/setSound'
+import toggleModal from '../../actions/toggleModal'
 import GitHubIcon from '@material-ui/icons/GitHub'
 import { SelectMenueWrapper, SelectButton } from './styles/elements'
 
@@ -47,6 +48,14 @@ function SelectMenue(props) {
             >
                 Expert
             </SelectButton>
+            <SelectButton 
+                value="survivors"
+                onClick={() => {
+                    props.toggleModal(!props.modal)
+                }}
+            >
+                Survivors
+            </SelectButton>
             <div id="sound_icon" style={{color: 'white'}} onClick={handleSound}>
                 {sound ? <VolumeUpIcon /> : <VolumeOffIcon />}
             </div>
@@ -58,13 +67,15 @@ function SelectMenue(props) {
 }
 
 const mapStateToProps = state => ({
-    difficulty: state.difficulty
+    difficulty: state.difficulty,
+    modal: state.modal
 })
 
 const mapActionsToProps = {
     setDifficulty,
     setGameState,
-    setSound
+    setSound,
+    toggleModal
 }
 
 export default React.memo(connect(mapStateToProps, mapActionsToProps)(SelectMenue))

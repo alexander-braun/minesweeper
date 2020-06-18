@@ -13,11 +13,7 @@ function Side() {
                     <SubmitTime />
                 </Sidewrapper>
             )
-        } else return (
-            <Sidewrapper>
-                <Bestlist />
-            </Sidewrapper>
-        )
+        } else return null
     }
     return genSide()
 }
