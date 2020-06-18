@@ -4,6 +4,8 @@ import setTimeRed from '../../actions/setTime'
 import setGameState from '../../actions/setGameState'
 import { TimeAndMinecountWrapper, Timer, TimerNumber } from './styles/elements'
 
+
+
 function Clock({gameState, setTimeRed, setGameState}) {
 
     let [time, setTime] = useState(0)
@@ -22,6 +24,7 @@ function Clock({gameState, setTimeRed, setGameState}) {
     }, [time, gameState])
 
     const setTimeArr = () => {
+
         // Get the time into an array and unshift 0's in front of it until 3 places are filled
         let nums = time.toString().split('')
         let arr = []
@@ -72,5 +75,4 @@ const mapAcitonsToProps = {
     setGameState
 }
   
-
 export default React.memo(connect(mapStateToProps, mapAcitonsToProps)(Clock))
