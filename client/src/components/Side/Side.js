@@ -1,7 +1,7 @@
 import React from 'react'
 import Bestlist from './Bestlist'
 import SubmitTime from './SubmitTime'
-import { Sidewrapper } from '../styles/elements'
+import { Sidewrapper } from './styles/elements'
 import { useSelector } from 'react-redux'
 
 function Side() {
@@ -9,7 +9,7 @@ function Side() {
     const genSide = () => {
         if(gameState === 'win') {
             return (
-                <Sidewrapper>
+                <Sidewrapper submit>
                     <SubmitTime />
                 </Sidewrapper>
             )

@@ -2,7 +2,7 @@ import React, {useState, useEffect} from 'react'
 import { connect } from 'react-redux'
 import setTimeRed from '../../actions/setTime'
 import setGameState from '../../actions/setGameState'
-import { TimeAndMinecountWrapper, Timer, TimerNumber } from '../styles/elements'
+import { TimeAndMinecountWrapper, Timer, TimerNumber } from './styles/elements'
 
 function Clock({gameState, setTimeRed, setGameState}) {
 

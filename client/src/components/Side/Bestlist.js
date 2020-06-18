@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import { connect } from 'react-redux'
 import { getPosts } from '../../actions/posts'
 import PropTypes from 'prop-types'
@@ -13,13 +13,15 @@ import {
     RecordholderUsername,
     RecordholderDifficulty,
     NoRecordholderWrapper
-} from '../styles/elements'
+} from './styles/elements'
 
 function Bestlist({ lvl, getPosts, posts: { posts, loading }}) {
 
     useEffect(() => {
         getPosts()
     }, [getPosts])
+
+    const [survivorsExist, setSurvivorsExist] = useState(true)
 
     const generateSurvivors = () => {
         if(posts.length === 0) return
@@ -31,9 +33,14 @@ function Bestlist({ lvl, getPosts, posts: { posts, loading }}) {
         }).sort().slice(0)
 
         // If no survivors
-        if(values[0] === undefined || values[0] === null) return (
-            <NoRecordholderWrapper>No survivors yet for this difficulty</NoRecordholderWrapper>
-        )
+        if(values[0] === undefined || values[0] === null) {
+            survivorsExist !== false && setSurvivorsExist(false)
+            return (
+                <NoRecordholderWrapper>No survivors for this difficulty</NoRecordholderWrapper>
+            )
+        }
+
+        survivorsExist !== true && setSurvivorsExist(true)
 
         // Create the survivorlist 
         let survivors = []
@@ -68,11 +75,11 @@ function Bestlist({ lvl, getPosts, posts: { posts, loading }}) {
     return (
         <React.Fragment>
             <BestlistHeading>
-                <span role="img" aria-label="rock-emoji">🔥🔥🔥</span>
+                <span role="img" aria-label="fire-emoji">&#128293;&#128293;&#128293;</span>
                 <span>Survivors</span>
-                <span role="img" aria-label="rock-emoji">🔥🔥🔥</span>
+                <span role="img" aria-label="fire-emoji">&#128293;&#128293;&#128293;</span>
             </BestlistHeading>
-            <BestlistSurvivors>
+            <BestlistSurvivors survivorsExist={survivorsExist}>
                 {
                     generateSurvivors()
                 }

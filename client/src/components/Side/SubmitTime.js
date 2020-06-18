@@ -3,7 +3,7 @@ import { connect } from 'react-redux'
 import PropTypes from 'prop-types'
 import { addPost } from '../../actions/posts'
 import setGameState from '../../actions/setGameState'
-import { BestlistSubmitHeading, BestlistSubmitFormwrapper, SubmitForm, SubmitFormButtonWrapper, SubmitButton } from '../styles/elements'
+import { BestlistSubmitHeading, BestlistSubmitFormwrapper, SubmitForm, SubmitFormButtonWrapper, SubmitButton } from './styles/elements'
 
 function SubmitTime({ addPost, time, lvl, setGameState }) {
 

@@ -1,6 +1,6 @@
 import React, { useEffect, useState, useCallback } from 'react'
 import { useSelector } from 'react-redux'
-import { TimeAndMinecountWrapper, Timer, TimerNumber } from '../styles/elements'
+import { TimeAndMinecountWrapper, Timer, TimerNumber } from './styles/elements'
 
 function Counter() {
 

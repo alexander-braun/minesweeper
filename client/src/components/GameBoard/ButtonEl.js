@@ -1,5 +1,5 @@
 import React from 'react'
-import { GridelementButton } from '../styles/elements'
+import { GridelementButton } from './styles/elements'
 
 function ButtonEl(props) {
     return (

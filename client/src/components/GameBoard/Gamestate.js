@@ -5,7 +5,7 @@ import Counter from './Counter'
 import setFlagcount from '../../actions/setFlagCount'
 import { useDispatch } from 'react-redux'
 import { useSelector } from 'react-redux'
-import { GameHeader, Face } from '../styles/elements'
+import { GameHeader, Face } from './styles/elements'
 
 function Gamestat({ counter, setArr, gridL, gridH }) {
 

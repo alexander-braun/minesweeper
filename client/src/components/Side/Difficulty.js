@@ -6,7 +6,7 @@ import VolumeOffIcon from '@material-ui/icons/VolumeOff'
 import VolumeUpIcon from '@material-ui/icons/VolumeUp'
 import setSound from '../../actions/setSound'
 import GitHubIcon from '@material-ui/icons/GitHub'
-import { SelectMenueWrapper, SelectButton } from '../styles/elements'
+import { SelectMenueWrapper, SelectButton } from './styles/elements'
 
 function SelectMenue(props) {
     const [sound, switchSound] = useState(true)

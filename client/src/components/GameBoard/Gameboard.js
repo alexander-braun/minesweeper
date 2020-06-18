@@ -9,7 +9,7 @@ import setMinecount from '../../actions/setMinecount'
 import setFlagcount from '../../actions/setFlagCount'
 import { useSelector } from 'react-redux'
 import { useDispatch } from 'react-redux'
-import { GameboardWrapper, GameboardEl, Gamefield } from '../styles/elements'
+import { GameboardWrapper, GameboardEl, Gamefield } from './styles/elements'
 
 const generateGridArray = (gridL = 9, gridH = 9, minecounter = 10) => {
 
