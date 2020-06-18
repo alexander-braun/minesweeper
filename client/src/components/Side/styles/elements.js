@@ -255,7 +255,7 @@ export const Sidewrapper = styled.div`
     margin-left: 5rem;
 
     ${props => props.submit && css`
-      margin-top: -10rem;
+      margin-top: -3rem;
     `}
   }
 
@@ -265,7 +265,7 @@ export const Sidewrapper = styled.div`
     margin-bottom: 10rem;
 
     ${props => props.submit && css`
-      margin-top: -20rem;
+      margin-top: -5rem;
     `}
   }
 `

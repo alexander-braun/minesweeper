@@ -32,8 +32,11 @@ function Bestlist({ lvl, getPosts, posts: { posts, loading }}) {
             else return null
         }).sort().slice(0)
 
+        let valuesSet = new Set(values)
+        let uniqueValues = Array.from(valuesSet)
+
         // If no survivors
-        if(values[0] === undefined || values[0] === null) {
+        if(uniqueValues[0] === undefined || uniqueValues[0] === null) {
             survivorsExist !== false && setSurvivorsExist(false)
             return (
                 <NoRecordholderWrapper>No survivors for this difficulty</NoRecordholderWrapper>
@@ -42,16 +45,19 @@ function Bestlist({ lvl, getPosts, posts: { posts, loading }}) {
 
         survivorsExist !== true && setSurvivorsExist(true)
 
-        // Create the survivorlist 
+        // Create the survivorlist with one survivor/time
+        let usedUniqueTimes = []
         let survivors = []
-        for(let value of values) {
+
+        for(let value of uniqueValues) {
             Object.keys(posts).map(index => {
-                if(posts[index]['time'] === value) {
+                if(posts[index]['time'] === value && usedUniqueTimes.indexOf(value) === -1) {
+                    usedUniqueTimes.push(value)
                     survivors.push(
                         <RecordholderWrapper key={uuidv4()}>
                             <RecordholderName>
                                 <RecordholderUsername>
-                                    {values.indexOf(posts[index]['time']) + 1 + '.' + posts[index]['user']}
+                                    {uniqueValues.indexOf(posts[index]['time']) + 1 + '.' + posts[index]['user']}
                                 </RecordholderUsername>
                                 <RecordholderDifficulty>
                                     {`Lvl ${posts[index]['lvl']}`}

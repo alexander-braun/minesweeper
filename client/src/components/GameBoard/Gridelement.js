@@ -114,7 +114,7 @@ class Gridelement extends React.PureComponent {
   setDisplay = () => {
     if(this.props.gameState === 'lost' && this.props.mine) return '🦠'
     if(this.state.flag && this.props.mine && this.props.revealed[this.props.position]) return ''
-    if(this.props.gameState === 'win' && this.props.mine) return ''
+    if(this.props.gameState === 'win' && this.props.mine) return '🦠'
     if(this.props.mine && !this.state.flag) return '🦠'
     if(this.props.minesAround === 0) return ''
     if(this.props.minesAround !== 0) return this.props.minesAround    
