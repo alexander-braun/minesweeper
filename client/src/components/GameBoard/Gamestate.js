@@ -10,10 +10,10 @@ import { GameHeader, Face } from './styles/elements'
 function Gamestat({ counter, setArr, gridL, gridH }) {
 
   const faces = ['🤢','😷', '🙏']
-
   const dispatch = useDispatch()
   const gameState = useSelector(state => state.gameState)
-
+  
+  // Reset the revealed states, flagcount and restarts the game
   const restartGame = () => {
     dispatch(setGameState('start'))
     setArr(new Array(gridL * gridH).fill(false))

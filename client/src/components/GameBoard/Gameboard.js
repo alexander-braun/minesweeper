@@ -84,6 +84,7 @@ const generateGrid = (grid, gridSize) => {
 }
 
 function Gameboard(props) {
+
   // minecount set in useeffect below
   let [minecounter, setMinecounter] = useState(10)
 
@@ -114,6 +115,7 @@ function Gameboard(props) {
   let [counter, setCount] = useState(setCounter())
   let [gridSize, updateGridsize] = useState()
 
+  // First useEffect for dispatching flag- and minecount. Generates the Grid
   useEffect(() => {
     dispatch(setFlagcount(setCounter()))
     dispatch(setMinecount(setCounter()))
@@ -126,6 +128,7 @@ function Gameboard(props) {
 
   }, [difficulty, dispatch, gridL, gridH])
 
+  // Second useEffect for difficulty, gridsize and managing revealed state
   useEffect(() => {
     const windowWidth = window.innerWidth
     if(difficulty === 9) {

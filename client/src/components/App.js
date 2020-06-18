@@ -1,7 +1,7 @@
 import React from 'react'
 import Gameboard from './GameBoard/Gameboard'
 import Side from './Side/Side'
-import Difficulty from './Side/Difficulty'
+import SelectMenue from './Side/SelectMenue'
 import Bestlist from './Side/Bestlist'
 import { Header, View } from './styles/elements'
 
@@ -10,7 +10,7 @@ function Gamestat(props) {
     <React.Fragment>
       <View>
         <Header>Corona-Sweeper</Header>
-        <Difficulty />
+        <SelectMenue />
         <Gameboard />
         <Side />
         <Bestlist />

@@ -17,6 +17,7 @@ function SelectMenue(props) {
         props.setSound(!sound)
     }
 
+    // For difficulty changes
     const handleChange = (e) => {
         let difficulty
         e.target.value === 'beginner' ? difficulty = 9 :
@@ -49,10 +50,7 @@ function SelectMenue(props) {
                 Expert
             </SelectButton>
             <SelectButton 
-                value="survivors"
-                onClick={() => {
-                    props.toggleModal(!props.modal)
-                }}
+                onClick={() => props.toggleModal(!props.modal)}
             >
                 Survivors
             </SelectButton>

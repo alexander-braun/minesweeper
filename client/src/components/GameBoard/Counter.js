@@ -7,6 +7,7 @@ function Counter() {
     let flagCount = useSelector(state => state.flagCount)
     let revealed = useSelector(state => state.revealed)
 
+    // Convert counts to numbers for css background
     const setCountArr = useCallback(() => {
         let nums = flagCount.toString().split('')
         let arr = []
@@ -33,6 +34,7 @@ function Counter() {
 
     let [timeArr, setArr] = useState(setCountArr())
 
+    // Updates flagcount display
     useEffect(() => {
         setArr(setCountArr())
     }, [revealed, flagCount, setCountArr])

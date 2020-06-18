@@ -10,6 +10,7 @@ function Clock({gameState, setTimeRed, setGameState}) {
 
     let [time, setTime] = useState(0)
 
+    // Update Time and set if finnished or starting
     useEffect(() => {
         if(gameState === 'running'){
             setTimeArr ()
@@ -23,6 +24,7 @@ function Clock({gameState, setTimeRed, setGameState}) {
         }
     }, [time, gameState])
 
+    // Convert time to single numbers for css background
     const setTimeArr = () => {
 
         // Get the time into an array and unshift 0's in front of it until 3 places are filled

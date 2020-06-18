@@ -25,6 +25,7 @@ function Bestlist({modal, toggleModal, lvl, getPosts, posts: { posts, loading }}
 
     const [survivorsExist, setSurvivorsExist] = useState(true)
 
+    // Get all the unique best scores
     const generateSurvivors = () => {
         if(posts.length === 0) return
         
@@ -45,6 +46,7 @@ function Bestlist({modal, toggleModal, lvl, getPosts, posts: { posts, loading }}
             )
         }
 
+        // If survivors
         survivorsExist !== true && setSurvivorsExist(true)
 
         // Create the survivorlist with one survivor/time
