@@ -1,8 +1,8 @@
-import { SET_REVEALED_ARR } from './constants'
+import { SET_REVEALED_ARR } from './constants';
 
-const setRevealedArr = revealedArr => ({
-    type: SET_REVEALED_ARR,
-    revealedArr
-})
+const setRevealedArr = (revealedArr) => ({
+  type: SET_REVEALED_ARR,
+  revealedArr,
+});
 
-export default setRevealedArr
+export default setRevealedArr;

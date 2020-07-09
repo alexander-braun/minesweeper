@@ -1,22 +1,22 @@
 @font-face {
-  font-family: "mine-sweeper";
+  font-family: 'mine-sweeper';
   src: url(../fonts/mine-sweeper.ttf);
 }
 
 @font-face {
   font-family: 'digital';
-  src: url(../fonts/digital-7.ttf)
+  src: url(../fonts/digital-7.ttf);
 }
+
+@import url('https://fonts.googleapis.com/css2?family=Bangers&display=swap');
 
 *,
 *::after,
 *::before {
-    margin: 0;
-    padding: 0;
-    box-sizing: inherit;
+  margin: 0;
+  padding: 0;
+  box-sizing: inherit;
 }
-
-
 
 html {
   height: 100%;

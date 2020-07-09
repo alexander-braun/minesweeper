@@ -1,8 +1,8 @@
-import { SET_TIME } from "./constants"
+import { SET_TIME } from './constants';
 
-const setTime = time => ({
-    type: SET_TIME,
-    time
-})
+const setTime = (time) => ({
+  type: SET_TIME,
+  time,
+});
 
-export default setTime
+export default setTime;

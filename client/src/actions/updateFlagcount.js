@@ -1,8 +1,8 @@
-import { UPDATE_FLAGCOUNT } from "./constants"
+import { UPDATE_FLAGCOUNT } from './constants';
 
-const updateFlagcount = count => ({
-    type: UPDATE_FLAGCOUNT,
-    count
-})
+const updateFlagcount = (count) => ({
+  type: UPDATE_FLAGCOUNT,
+  count,
+});
 
-export default updateFlagcount
+export default updateFlagcount;

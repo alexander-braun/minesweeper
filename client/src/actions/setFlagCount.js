@@ -1,10 +1,10 @@
-import { SET_FLAGCOUNT } from "./constants"
+import { SET_FLAGCOUNT } from './constants';
 
-const setFlagcount = flagCount => {
-    return {
-        type: SET_FLAGCOUNT,
-        flagCount
-    }
-}
+const setFlagcount = (flagCount) => {
+  return {
+    type: SET_FLAGCOUNT,
+    flagCount,
+  };
+};
 
-export default setFlagcount
+export default setFlagcount;

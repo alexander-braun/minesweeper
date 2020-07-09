@@ -1,8 +1,8 @@
-import { SET_GAME_STATE } from './constants'
+import { SET_GAME_STATE } from './constants';
 
-const setGameState = gameState => ({
-    type: SET_GAME_STATE,
-    gameState
-})
+const setGameState = (gameState) => ({
+  type: SET_GAME_STATE,
+  gameState,
+});
 
-export default setGameState
+export default setGameState;

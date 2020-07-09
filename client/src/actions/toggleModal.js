@@ -1,8 +1,8 @@
-import { TOGGLE_MODAL } from './constants'
+import { TOGGLE_MODAL } from './constants';
 
-const toggleModal = modal => ({
-    type: TOGGLE_MODAL,
-    modal
-})
+const toggleModal = (modal) => ({
+  type: TOGGLE_MODAL,
+  modal,
+});
 
-export default toggleModal
+export default toggleModal;

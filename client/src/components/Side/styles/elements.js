@@ -1,14 +1,14 @@
-import styled, { css } from 'styled-components'
+import styled, { css } from 'styled-components';
 
 export const BestlistHeading = styled.div`
   text-align: center;
   font-weight: 400;
   font-family: 'mine-sweeper';
-  letter-spacing: .1rem;
+  letter-spacing: 0.1rem;
   cursor: context-menu;
   max-width: 100vw;
   padding-bottom: 5px;
-  letter-spacing: .3rem;
+  letter-spacing: 0.3rem;
   margin: 0 auto;
   color: white;
   margin-bottom: 5rem;
@@ -24,7 +24,7 @@ export const BestlistHeading = styled.div`
     font-size: 4.5rem;
     margin-bottom: 5rem;
   }
-`
+`;
 
 export const BestlistSurvivors = styled.div`
   width: 95vw;
@@ -35,24 +35,26 @@ export const BestlistSurvivors = styled.div`
   max-height: 50rem;
   margin-left: 20px;
 
-  ${props => props.survivorsExist === false && css`
-    overflow-y: hidden;
-  `}
+  ${(props) =>
+    props.survivorsExist === false &&
+    css`
+      overflow-y: hidden;
+    `}
 
   ::-webkit-scrollbar {
     width: 20px;
   }
 
   ::-webkit-scrollbar-track {
-    box-shadow: inset 0 0 5px white; 
+    box-shadow: inset 0 0 5px white;
   }
 
   ::-webkit-scrollbar-thumb {
-    background: white; 
+    background: white;
   }
 
   ::-webkit-scrollbar-thumb:hover {
-    background: white; 
+    background: white;
   }
 
   @media only screen and (min-width: 700px) {
@@ -69,7 +71,7 @@ export const BestlistSurvivors = styled.div`
     max-width: 40vw;
     max-height: 60rem;
   }
-`
+`;
 
 export const Modal = styled.div`
   position: fixed;
@@ -83,13 +85,13 @@ export const Modal = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
-`
+`;
 
 export const ToggleModalButton = styled.button`
   font-weight: 600;
   font-family: 'mine-sweeper';
   padding: 5px 5px;
-  letter-spacing: .2rem;
+  letter-spacing: 0.2rem;
   color: white;
   background-color: transparent;
   border: none;
@@ -113,31 +115,35 @@ export const ToggleModalButton = styled.button`
     margin-right: 3rem;
     margin-top: 3rem;
   }
-`
+`;
 
 export const BestlistSubmitHeading = styled.div`
   text-align: center;
   font-weight: 400;
-  font-size: 15px;
-  font-family: 'mine-sweeper';
-  letter-spacing: .1rem;
+  font-size: 3.5rem;
+  font-family: 'Bangers';
+  letter-spacing: 0.1rem;
   cursor: context-menu;
   max-width: 100vw;
   padding-bottom: 5px;
-  letter-spacing: .3rem;
+  letter-spacing: 0.3rem;
   margin: 0 auto;
 
-  @media only screen and (min-width: 1200px) {
-    font-size: 20px;
+  @media only screen and (min-width: 700px) {
+    font-size: 5rem;
   }
-` 
+
+  @media only screen and (min-width: 1200px) {
+    font-size: 5rem;
+  }
+`;
 
 export const BestlistSubmitFormwrapper = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-`
+`;
 
 export const RecordholderWrapper = styled.div`
   display: flex;
@@ -145,12 +151,12 @@ export const RecordholderWrapper = styled.div`
   width: 90%;
   justify-content: space-between;
   min-height: 50px;
-`
+`;
 
 export const RecordholderTime = styled.div`
   font-family: 'mine-sweeper';
   font-size: 1.5rem;
-  letter-spacing: .2rem;
+  letter-spacing: 0.2rem;
   color: #c71010;
 
   @media only screen and (min-width: 700px) {
@@ -160,11 +166,11 @@ export const RecordholderTime = styled.div`
   @media only screen and (min-width: 1200px) {
     font-size: 2rem;
   }
-`
+`;
 
 export const RecordholderTimeSign = styled.span`
-  font-size: .75rem; 
-  margin-left: 2px; 
+  font-size: 0.75rem;
+  margin-left: 2px;
 
   @media only screen and (min-width: 700px) {
     font-size: 1rem;
@@ -173,13 +179,13 @@ export const RecordholderTimeSign = styled.span`
   @media only screen and (min-width: 1200px) {
     font-size: 1.5rem;
   }
-`
+`;
 
 export const RecordholderRank = styled.div`
   font-weight: 900;
   font-family: 'mine-sweeper';
   font-size: 1.5rem;
-  letter-spacing: .2rem;
+  letter-spacing: 0.2rem;
   color: #00b600;
 
   @media only screen and (min-width: 700px) {
@@ -189,14 +195,14 @@ export const RecordholderRank = styled.div`
   @media only screen and (min-width: 1200px) {
     font-size: 2rem;
   }
-`
+`;
 
 export const RecordholderUsername = styled.div`
   margin-bottom: 0;
   font-weight: 900;
   font-family: 'mine-sweeper';
   font-size: 1.5rem;
-  letter-spacing: .2rem;
+  letter-spacing: 0.2rem;
   color: white;
 
   @media only screen and (min-width: 700px) {
@@ -206,12 +212,12 @@ export const RecordholderUsername = styled.div`
   @media only screen and (min-width: 1200px) {
     font-size: 2rem;
   }
-`
+`;
 
 export const NoRecordholderWrapper = styled.div`
   font-family: 'mine-sweeper';
   font-size: 1rem;
-  letter-spacing: .1rem;
+  letter-spacing: 0.1rem;
   text-align: center;
   color: #00b600;
 
@@ -222,7 +228,7 @@ export const NoRecordholderWrapper = styled.div`
   @media only screen and (min-width: 1200px) {
     font-size: 2rem;
   }
-`
+`;
 
 export const SelectMenueWrapper = styled.div`
   width: 100%;
@@ -234,7 +240,7 @@ export const SelectMenueWrapper = styled.div`
   margin-bottom: 10rem;
 
   * {
-    margin: .75rem 0;
+    margin: 0.75rem 0;
   }
 
   svg {
@@ -263,11 +269,11 @@ export const SelectMenueWrapper = styled.div`
       font-size: 3rem;
     }
   }
-`
+`;
 
 export const SelectButton = styled.button`
   font-family: 'mine-sweeper';
-  letter-spacing: .3rem;
+  letter-spacing: 0.3rem;
   font-size: 1.25em;
   color: white;
   background-color: transparent;
@@ -276,24 +282,29 @@ export const SelectButton = styled.button`
   padding: 0;
   text-align: center;
   transition-duration: 200ms;
+  font-family: 'Bangers';
+  font-size: 3rem;
+  letter-spacing: 0.4rem;
 
   :hover {
     color: rgb(199, 16, 16);
     cursor: pointer;
   }
 
-  ${props => props.selected && css`
-    color: #00b600;
-  `}
+  ${(props) =>
+    props.selected &&
+    css`
+      color: #00b600;
+    `}
 
   @media only screen and (min-width: 700px) {
-    font-size: 1.75rem;
+    font-size: 3.75rem;
   }
 
   @media only screen and (min-width: 1200px) {
-    font-size: 1.5rem;
+    font-size: 3.5rem;
   }
-`
+`;
 
 export const Sidewrapper = styled.div`
   width: 100%;
@@ -311,9 +322,11 @@ export const Sidewrapper = styled.div`
     margin-right: 5rem;
     margin-left: 5rem;
 
-    ${props => props.submit && css`
-      margin-top: -3rem;
-    `}
+    ${(props) =>
+      props.submit &&
+      css`
+        margin-top: -3rem;
+      `}
   }
 
   @media only screen and (min-width: 1200px) {
@@ -321,11 +334,13 @@ export const Sidewrapper = styled.div`
     margin: 0 auto;
     margin-bottom: 10rem;
 
-    ${props => props.submit && css`
-      margin-top: -5rem;
-    `}
+    ${(props) =>
+      props.submit &&
+      css`
+        margin-top: -5rem;
+      `}
   }
-`
+`;
 
 export const SubmitForm = styled.form`
   width: 30vw;
@@ -336,7 +351,7 @@ export const SubmitForm = styled.form`
   margin: 0 auto;
   margin-top: 2rem;
   width: fit-content;
-  
+
   textarea {
     width: 100%;
     padding: 0;
@@ -344,7 +359,7 @@ export const SubmitForm = styled.form`
     resize: none;
     font-size: 2rem;
   }
-`
+`;
 
 export const SubmitFormButtonWrapper = styled.div`
   margin-top: 10px;
@@ -352,7 +367,7 @@ export const SubmitFormButtonWrapper = styled.div`
   flex-direction: row;
   justify-content: space-between;
   width: 100%;
-`
+`;
 
 export const SubmitButton = styled.button`
   font-weight: 600;
@@ -367,4 +382,4 @@ export const SubmitButton = styled.button`
   :last-child {
     margin-left: 10px;
   }
-`
+`;

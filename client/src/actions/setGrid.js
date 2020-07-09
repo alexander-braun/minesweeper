@@ -1,8 +1,8 @@
-import { SET_GRID } from "./constants"
+import { SET_GRID } from './constants';
 
-const setGrid = grid => ({
-    type: SET_GRID,
-    grid
-})
+const setGrid = (grid) => ({
+  type: SET_GRID,
+  grid,
+});
 
-export default setGrid
+export default setGrid;
