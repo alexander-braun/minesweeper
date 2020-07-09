@@ -14,4 +14,4 @@
 ## Key Features
 
 - Play classic minesweeper
-- Save results to the bestlist
+- Save results to the survivorlist
