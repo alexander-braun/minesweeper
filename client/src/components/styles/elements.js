@@ -19,7 +19,7 @@ export const Header = styled.div`
   @media only screen and (min-width: 1200px) {
     font-size: 8rem;
     margin-top: 10rem;
-    margin-bottom: 0;
+    margin-bottom: 2rem;
   }
 `;
 
