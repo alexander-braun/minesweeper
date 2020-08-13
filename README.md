@@ -1,7 +1,7 @@
 <h1 align="center">
     <br>
     <a href="http://coronasweeper.herokuapp.com/">
-    Corona Sweeper 
+    Live Demo: Corona Sweeper 
     </a>
 </h1>
 
