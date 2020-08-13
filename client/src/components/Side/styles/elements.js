@@ -253,7 +253,7 @@ export const SelectMenueWrapper = styled.div`
     margin-bottom: 5rem;
 
     * {
-      margin: 1.5rem 1rem;
+      margin: 1rem 1rem;
     }
 
     svg {

@@ -8,17 +8,18 @@ export const Header = styled.div`
   letter-spacing: 0.3rem;
   align-items: center;
   text-align: center;
-  font-size: 3rem;
-  line-height: 1.5;
+  font-size: 4.5rem;
+  line-height: 1.25;
+  font-family: 'Quadrit';
 
   @media only screen and (min-width: 700px) {
-    font-size: 4rem;
+    font-size: 6rem;
     margin-top: 12rem;
   }
   @media only screen and (min-width: 1200px) {
-    font-size: 5rem;
-    margin-bottom: 1rem;
+    font-size: 8rem;
     margin-top: 10rem;
+    margin-bottom: 0;
   }
 `;
 
