@@ -272,19 +272,22 @@ export const SelectMenueWrapper = styled.div`
 `;
 
 export const SelectButton = styled.button`
-  font-family: 'mine-sweeper';
   letter-spacing: 0.3rem;
-  font-size: 1.25em;
   color: white;
   background-color: transparent;
   border: none;
   width: fit-content;
   padding: 0;
-  text-align: center;
   transition-duration: 200ms;
   font-family: 'Bangers';
-  font-size: 3rem;
   letter-spacing: 0.4rem;
+
+  font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Helvetica, Arial,
+    sans-serif, Apple Color Emoji, Segoe UI Emoji;
+  font-weight: 800;
+  line-height: 1;
+  text-align: center;
+  font-size: 2.5rem;
 
   :hover {
     color: rgb(199, 16, 16);
@@ -296,14 +299,6 @@ export const SelectButton = styled.button`
     css`
       color: #00b600;
     `}
-
-  @media only screen and (min-width: 700px) {
-    font-size: 3.75rem;
-  }
-
-  @media only screen and (min-width: 1200px) {
-    font-size: 3.5rem;
-  }
 `;
 
 export const Sidewrapper = styled.div`
