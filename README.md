@@ -1,6 +1,6 @@
 <h1 align="center">
     <br>
-    <a href="http://coronasweeper.herokuapp.com/">
+    <a href="https://corona-sweeper.herokuapp.com/">
     Live Demo: Corona Sweeper 
     </a>
 </h1>
