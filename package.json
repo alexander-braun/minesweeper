@@ -21,7 +21,7 @@
   },
   "homepage": "https://github.com/alexander-braun/minesweeper#readme",
   "dependencies": {
-    "axios": "^0.19.2",
+    "axios": "^0.21.2",
     "config": "^3.3.1",
     "core-js": "^3.6.5",
     "dotenv": "^8.2.0",
